@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { collection, query, where, getDocs } from "firebase/firestore";
 import { db } from "../config/firebase";
-import { Linkedin, Mail, Phone, ExternalLink } from "lucide-react";
+import { Linkedin, Mail, Phone } from "lucide-react";
 
 const TeamSection = () => {
   const [teamMembers, setTeamMembers] = useState([]);
@@ -74,17 +74,14 @@ const TeamSection = () => {
   }
 
   return (
-    <section id="team" className="py-32 bg-slate-50 border-b border-slate-200 relative overflow-hidden">
-      {/* Background Accents */}
-      <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-teal-500/5 rounded-full filter blur-[100px] mix-blend-multiply pointer-events-none"></div>
-
+    <section id="team" className="py-24 bg-slate-50 border-b border-slate-200 relative overflow-hidden">
       <div className="container mx-auto px-6 max-w-7xl relative z-10">
-        <div className="text-center mb-24">
+        <div className="text-center mb-16">
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
-            className="inline-flex items-center justify-center px-4 py-1.5 rounded-full bg-teal-50 border border-teal-100 text-teal-700 text-xs font-bold mb-6 tracking-widest uppercase shadow-sm"
+            className="inline-flex items-center justify-center px-4 py-1.5 rounded-full bg-teal-100 border border-teal-200 text-teal-700 text-sm font-semibold mb-4 tracking-wide uppercase"
           >
             Our People
           </motion.div>
@@ -112,55 +109,49 @@ const TeamSection = () => {
               <motion.div
                 key={member.id}
                 variants={cardVariants}
-                whileHover={{ y: -10 }}
-                className="group relative bg-white rounded-[2rem] border border-slate-100 shadow-[0_4px_20px_rgba(0,0,0,0.03)] hover:shadow-[0_20px_40px_rgba(13,148,136,0.1)] hover:border-teal-200 transition-all duration-500 flex flex-col items-center pt-10 pb-8 px-6 overflow-hidden"
+                whileHover={{ y: -5 }}
+                className="group bg-white rounded-2xl border border-slate-200 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col items-center p-8"
               >
-                {/* Accent Background on Hover */}
-                <div className="absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-teal-50/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-
-                <div className="relative w-36 h-36 rounded-full mb-6 z-10">
-                  {/* Floating Outline */}
-                  <div className="absolute -inset-2 rounded-full border border-teal-200/0 group-hover:border-teal-200 scale-90 group-hover:scale-100 transition-all duration-500"></div>
-                  
-                  <div className="w-full h-full rounded-full border-4 border-white shadow-lg overflow-hidden bg-slate-100 relative z-10">
-                    {member.imageUrl ? (
-                      <img
-                        src={member.imageUrl}
-                        alt={member.name}
-                        className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700"
-                        onError={(e) => {
-                          e.target.src = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400"%3E%3Crect fill="%23f8fafc" width="400" height="400"/%3E%3Ctext x="50%25" y="50%25" font-size="40" fill="%23cbd5e1" text-anchor="middle" dy=".3em"%3E%3F%3C/text%3E%3C/svg%3E';
-                        }}
-                      />
-                    ) : (
-                      <div className="w-full h-full flex items-center justify-center text-4xl text-slate-300 font-bold uppercase bg-slate-50">
-                        {member.name.charAt(0)}
-                      </div>
-                    )}
-                  </div>
-                  
-                  {/* Social Icons (Reveal on Hover) */}
-                  <div className="absolute -right-2 top-1/2 -translate-y-1/2 flex flex-col gap-2 translate-x-8 opacity-0 group-hover:translate-x-0 group-hover:opacity-100 transition-all duration-500 z-20 delay-100">
-                    {member.linkedin && (
-                      <a href={member.linkedin} target="_blank" rel="noreferrer" className="w-8 h-8 rounded-full bg-blue-600 text-white flex items-center justify-center shadow-lg hover:bg-blue-700 hover:scale-110 transition-all">
-                        <Linkedin size={14} fill="currentColor" />
-                      </a>
-                    )}
-                    {member.email && (
-                      <a href={`mailto:${member.email}`} className="w-8 h-8 rounded-full bg-rose-500 text-white flex items-center justify-center shadow-lg hover:bg-rose-600 hover:scale-110 transition-all">
-                        <Mail size={14} />
-                      </a>
-                    )}
-                  </div>
+                <div className="w-32 h-32 rounded-full mb-6 border-4 border-slate-100 shadow-sm overflow-hidden bg-slate-100 relative">
+                  {member.imageUrl ? (
+                    <img
+                      src={member.imageUrl}
+                      alt={member.name}
+                      className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500"
+                      onError={(e) => {
+                        e.target.src = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400"%3E%3Crect fill="%23f8fafc" width="400" height="400"/%3E%3Ctext x="50%25" y="50%25" font-size="40" fill="%23cbd5e1" text-anchor="middle" dy=".3em"%3E%3F%3C/text%3E%3C/svg%3E';
+                      }}
+                    />
+                  ) : (
+                    <div className="w-full h-full flex items-center justify-center text-3xl text-slate-400 font-bold uppercase bg-slate-50">
+                      {member.name.charAt(0)}
+                    </div>
+                  )}
                 </div>
 
-                <div className="relative z-10 text-center w-full">
-                  <h3 className="text-xl font-bold text-slate-900 mb-1 leading-tight group-hover:text-teal-700 transition-colors">{member.name}</h3>
-                  <p className="text-sm font-semibold text-teal-600/90 uppercase tracking-wider mb-4 font-['Poppins']">{member.role}</p>
+                <div className="text-center w-full mb-4">
+                  <h3 className="text-xl font-bold text-slate-900 mb-1">{member.name}</h3>
+                  <p className="text-sm font-semibold text-teal-600 uppercase tracking-wider">{member.role}</p>
                 </div>
                 
-                {/* Decorative Bottom Line */}
-                <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-12 h-1 bg-teal-200 rounded-t-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 delay-200"></div>
+                {/* Always visible Social Icons including Phone */}
+                <div className="flex items-center gap-4 mt-auto">
+                  {member.phone && (
+                    <a href={`tel:${member.phone}`} title={`Call ${member.phone}`} className="w-9 h-9 rounded-full bg-slate-100 text-slate-600 flex items-center justify-center hover:bg-green-100 hover:text-green-600 transition-colors">
+                      <Phone size={16} />
+                    </a>
+                  )}
+                  {member.email && (
+                    <a href={`mailto:${member.email}`} title={`Email ${member.email}`} className="w-9 h-9 rounded-full bg-slate-100 text-slate-600 flex items-center justify-center hover:bg-red-100 hover:text-red-600 transition-colors">
+                      <Mail size={16} />
+                    </a>
+                  )}
+                  {member.linkedin && (
+                    <a href={member.linkedin} target="_blank" rel="noreferrer" title="LinkedIn" className="w-9 h-9 rounded-full bg-slate-100 text-slate-600 flex items-center justify-center hover:bg-blue-100 hover:text-blue-600 transition-colors">
+                      <Linkedin size={16} fill="currentColor" />
+                    </a>
+                  )}
+                </div>
               </motion.div>
             ))}
           </motion.div>
