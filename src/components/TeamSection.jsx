@@ -64,24 +64,24 @@ const TeamSection = () => {
 
   if (loading) {
     return (
-      <section id="team" className="py-24 bg-slate-50 border-b border-slate-200">
-        <h2 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-slate-900 mb-12 text-center">Meet the Team</h2>
+      <section id="team" className="py-32 bg-transparent relative">
+        <h2 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-[#1e1b4b] mb-12 text-center">Meet the Team</h2>
         <div className="flex justify-center items-center h-48">
-           <div className="w-12 h-12 border-4 border-slate-200 border-t-teal-600 rounded-full animate-spin"></div>
+           <div className="w-12 h-12 border-4 border-white border-t-[#00f2fe] rounded-full animate-spin"></div>
         </div>
       </section>
     );
   }
 
   return (
-    <section id="team" className="py-24 bg-slate-50 border-b border-slate-200 relative overflow-hidden">
+    <section id="team" className="py-32 bg-transparent relative overflow-hidden">
       <div className="container mx-auto px-6 max-w-7xl relative z-10">
         <div className="text-center mb-16">
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
-            className="inline-flex items-center justify-center px-4 py-1.5 rounded-full bg-teal-100 border border-teal-200 text-teal-700 text-sm font-semibold mb-4 tracking-wide uppercase"
+            className="inline-flex items-center justify-center px-6 py-2 rounded-full bg-cyan-100 border border-cyan-200 text-cyan-600 text-sm font-bold mb-6 tracking-widest uppercase shadow-sm"
           >
             Our People
           </motion.div>
@@ -89,9 +89,9 @@ const TeamSection = () => {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-slate-900 tracking-tight"
+            className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-[#1e1b4b] tracking-tight"
           >
-            Meet the Team
+            Meet the <span className="gradient-text">Team</span>
           </motion.h2>
         </div>
 
@@ -110,9 +110,9 @@ const TeamSection = () => {
                 key={member.id}
                 variants={cardVariants}
                 whileHover={{ y: -5 }}
-                className="group bg-white rounded-2xl border border-slate-200 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col items-center p-8"
+                className="group bg-white/60 backdrop-blur-xl rounded-[2rem] border border-white shadow-sm hover:shadow-[0_20px_40px_rgba(0,242,254,0.3)] transition-all duration-300 flex flex-col items-center p-8 hover-lift"
               >
-                <div className="w-32 h-32 rounded-full mb-6 border-4 border-slate-100 shadow-sm overflow-hidden bg-slate-100 relative">
+                <div className="w-32 h-32 rounded-full mb-6 border-4 border-white shadow-lg overflow-hidden bg-slate-100 relative">
                   {member.imageUrl ? (
                     <img
                       src={member.imageUrl}
@@ -130,8 +130,8 @@ const TeamSection = () => {
                 </div>
 
                 <div className="text-center w-full mb-4">
-                  <h3 className="text-xl font-bold text-slate-900 mb-1">{member.name}</h3>
-                  <p className="text-sm font-semibold text-teal-600 uppercase tracking-wider">{member.role}</p>
+                  <h3 className="text-xl font-bold text-[#1e1b4b] mb-1">{member.name}</h3>
+                  <p className="text-sm font-bold text-[#00f2fe] uppercase tracking-wider">{member.role}</p>
                 </div>
                 
                 {/* Always visible Social Icons including Phone */}

@@ -40,7 +40,7 @@ const HeroImageSection = () => {
     };
 
     return (
-        <div id="hero-image-section" className="relative h-screen overflow-hidden bg-slate-50 flex items-center justify-center">
+        <div id="hero-image-section" className="relative h-screen overflow-hidden bg-transparent flex items-center justify-center">
             
             {/* The Video Background */}
             <div className="absolute inset-0 z-0">
@@ -54,7 +54,7 @@ const HeroImageSection = () => {
                 >
                     <source src={cukVideo} type="video/mp4" />
                 </video>
-                <div className="absolute inset-0 bg-gradient-to-b from-white/90 via-white/70 to-slate-50"></div>
+                <div className="absolute inset-0 bg-white/70"></div>
             </div>
             
             <div ref={scrollRef} className="relative z-20 container mx-auto px-6 h-full flex flex-col items-center justify-center">
@@ -63,40 +63,40 @@ const HeroImageSection = () => {
                 <motion.div 
                     animate={{ y: [0, -30, 0], rotate: [0, 10, 0], scale: [1, 1.1, 1] }} 
                     transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }} 
-                    className="absolute top-1/4 left-[10%] md:left-[20%] z-0 opacity-80"
+                    className="absolute top-1/4 left-[10%] md:left-[20%] z-0 opacity-90"
                 >
-                    <div className="bg-white/80 backdrop-blur-md p-4 rounded-2xl shadow-[0_10px_30px_rgba(236,72,153,0.3)] border border-white/50">
-                        <Rocket className="w-10 h-10 md:w-16 md:h-16 text-pink-500" strokeWidth={1.5} />
+                    <div className="bg-white/60 backdrop-blur-md p-4 rounded-[2rem] shadow-[0_20px_40px_rgba(255,0,127,0.3)] border border-white">
+                        <Rocket className="w-12 h-12 md:w-16 md:h-16 text-[#ff007f]" strokeWidth={2} />
                     </div>
                 </motion.div>
 
                 <motion.div 
                     animate={{ y: [0, 40, 0], rotate: [0, -15, 0], scale: [1, 1.2, 1] }} 
                     transition={{ duration: 7, repeat: Infinity, ease: "easeInOut", delay: 1 }} 
-                    className="absolute top-1/3 right-[10%] md:right-[15%] z-0 opacity-80"
+                    className="absolute top-1/3 right-[10%] md:right-[15%] z-0 opacity-90"
                 >
-                    <div className="bg-white/80 backdrop-blur-md p-5 rounded-full shadow-[0_10px_30px_rgba(168,85,247,0.3)] border border-white/50">
-                        <Zap className="w-12 h-12 md:w-20 md:h-20 text-purple-500" strokeWidth={1.5} />
+                    <div className="bg-white/60 backdrop-blur-md p-5 rounded-full shadow-[0_20px_40px_rgba(0,242,254,0.3)] border border-white">
+                        <Zap className="w-14 h-14 md:w-20 md:h-20 text-[#00f2fe]" strokeWidth={2} />
                     </div>
                 </motion.div>
 
                 <motion.div 
                     animate={{ y: [0, -20, 0], rotate: [0, 20, 0], scale: [1, 1.1, 1] }} 
                     transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 2 }} 
-                    className="absolute bottom-1/4 left-[15%] md:left-[25%] z-0 opacity-70 hidden md:block"
+                    className="absolute bottom-1/4 left-[15%] md:left-[25%] z-0 opacity-90 hidden md:block"
                 >
-                    <div className="bg-white/80 backdrop-blur-md p-4 rounded-xl shadow-[0_10px_30px_rgba(59,130,246,0.3)] border border-white/50 transform -rotate-12">
-                        <Code className="w-10 h-10 md:w-14 md:h-14 text-blue-500" strokeWidth={1.5} />
+                    <div className="bg-white/60 backdrop-blur-md p-4 rounded-3xl shadow-[0_20px_40px_rgba(255,153,51,0.3)] border border-white transform -rotate-12">
+                        <Code className="w-12 h-12 md:w-16 md:h-16 text-[#ff9933]" strokeWidth={2} />
                     </div>
                 </motion.div>
 
                 <motion.div 
                     animate={{ y: [0, 30, 0], rotate: [0, -10, 0], scale: [1, 1.15, 1] }} 
                     transition={{ duration: 8, repeat: Infinity, ease: "easeInOut", delay: 3 }} 
-                    className="absolute bottom-1/3 right-[20%] md:right-[25%] z-0 opacity-70 hidden md:block"
+                    className="absolute bottom-1/3 right-[20%] md:right-[25%] z-0 opacity-90 hidden md:block"
                 >
-                    <div className="bg-white/80 backdrop-blur-md p-4 rounded-2xl shadow-[0_10px_30px_rgba(234,179,8,0.3)] border border-white/50 transform rotate-12">
-                        <Lightbulb className="w-10 h-10 md:w-12 md:h-12 text-yellow-500" strokeWidth={1.5} />
+                    <div className="bg-white/60 backdrop-blur-md p-4 rounded-[2rem] shadow-[0_20px_40px_rgba(79,172,254,0.3)] border border-white transform rotate-12">
+                        <Lightbulb className="w-12 h-12 md:w-16 md:h-16 text-[#4facfe]" strokeWidth={2} />
                     </div>
                 </motion.div>
                 <motion.div 
@@ -116,13 +116,13 @@ const HeroImageSection = () => {
                             initial={{ opacity: 0, y: 30 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
-                            className="font-extrabold text-white leading-tight tracking-tight mb-6 drop-shadow-2xl"
+                            className="font-extrabold text-[#1e1b4b] leading-tight tracking-tight mb-6"
                         >
-                            <span className='block text-4xl sm:text-5xl md:text-7xl lg:text-[90px] drop-shadow-xl leading-tight text-slate-900'>
+                            <span className='block text-5xl sm:text-6xl md:text-8xl lg:text-[100px] leading-tight'>
                                 Innovate. <br className="sm:hidden" />
-                                <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-600 via-fuchsia-600 to-pink-600">Incubate.</span>
+                                <span className="gradient-text">Incubate.</span>
                             </span>
-                            <span className='block text-4xl sm:text-5xl md:text-7xl lg:text-[90px] mt-2 drop-shadow-xl text-slate-900'>
+                            <span className='block text-5xl sm:text-6xl md:text-8xl lg:text-[100px] mt-2'>
                                 Inspire.
                             </span>
                         </motion.h1>
@@ -145,9 +145,8 @@ const HeroImageSection = () => {
                         >
                             <button 
                                 onClick={scrollToEvents}
-                                className="group relative px-8 py-4 bg-gradient-to-r from-purple-600 to-pink-600 rounded-full font-bold text-white shadow-[0_0_40px_rgba(168,85,247,0.4)] hover:shadow-[0_0_60px_rgba(236,72,153,0.6)] transition-all overflow-hidden"
+                                className="gradient-button px-10 py-5 rounded-full font-bold text-white text-lg transition-all overflow-hidden"
                             >
-                                <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-in-out"></div>
                                 <span className="relative flex items-center justify-center gap-2">
                                     Explore Events
                                 </span>
@@ -155,10 +154,10 @@ const HeroImageSection = () => {
                             
                             <button 
                                 onClick={scrollToAbout}
-                                className="group px-8 py-4 bg-white/60 hover:bg-white/80 border border-slate-300 rounded-full font-bold text-slate-900 backdrop-blur-md shadow-md transition-all flex items-center justify-center gap-2"
+                                className="group px-10 py-5 bg-white/60 hover:bg-white border-2 border-transparent hover:border-pink-300 rounded-full font-bold text-[#1e1b4b] text-lg backdrop-blur-xl shadow-[0_10px_30px_rgba(0,0,0,0.05)] transition-all flex items-center justify-center gap-2"
                             >
                                 Learn More
-                                <ChevronDown className="w-5 h-5 group-hover:translate-y-1 transition-transform" />
+                                <ChevronDown className="w-6 h-6 group-hover:translate-y-1 transition-transform text-pink-500" />
                             </button>
                         </motion.div>
 

@@ -31,9 +31,9 @@ const ContactSection = () => {
                         whileInView={{ opacity: 1, x: 0 }}
                         viewport={{ once: true, amount: 0.3 }}
                         transition={{ duration: 0.6 }}
-                        className="glass-card bg-white/80 backdrop-blur-xl border border-slate-200 p-8 rounded-2xl shadow-xl relative overflow-hidden group"
+                        className="glass-card bg-white/60 backdrop-blur-xl border border-white p-8 rounded-[2rem] shadow-[0_20px_40px_rgba(255,0,127,0.1)] relative overflow-hidden group"
                     >
-                        <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-purple-500 to-pink-500 opacity-50 group-hover:opacity-100 transition-opacity"></div>
+                        <div className="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-[#ff007f] to-[#ff9933] opacity-50 group-hover:opacity-100 transition-opacity"></div>
                         
                         <form onSubmit={handleSubmit} className="space-y-6">
                             <div className="space-y-1">
@@ -66,7 +66,7 @@ const ContactSection = () => {
                             {error && <p className="text-red-400 text-sm font-medium">{error}</p>}
                             {success && <p className="text-emerald-400 text-sm font-medium p-3 bg-emerald-500/10 rounded-lg border border-emerald-500/20 text-center">✅ Message sent successfully! We'll get back to you soon.</p>}
 
-                            <button type="submit" disabled={loading} className="w-full bg-gradient-to-r from-purple-600 to-pink-600 text-white font-bold py-3.5 rounded-lg hover:opacity-90 transition-all shadow-[0_0_20px_rgba(168,85,247,0.3)] disabled:opacity-50 flex justify-center items-center gap-2">
+                            <button type="submit" disabled={loading} className="w-full gradient-button text-white font-bold py-4 rounded-xl shadow-[0_10px_20px_rgba(255,0,127,0.3)] hover:shadow-[0_15px_30px_rgba(255,94,98,0.5)] disabled:opacity-50 flex justify-center items-center gap-2">
                                 {loading ? 'Sending...' : 'Send Message'}
                             </button>
                         </form>
@@ -81,22 +81,22 @@ const ContactSection = () => {
                         className="flex flex-col items-center md:items-start space-y-8"
                     >
                         <div className="text-center md:text-left">
-                            <h2 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-pink-600 mb-4 tracking-tight">Get Involved!</h2>
-                            <p className="text-slate-700 text-lg mb-8">
+                            <h2 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-[#1e1b4b] mb-4 tracking-tight">Get <span className="gradient-text">Involved!</span></h2>
+                            <p className="text-[#1e1b4b]/80 text-lg mb-8 font-['Poppins']">
                                 Have an idea? Want to join our team? Or just curious? We'd love to hear from you. Fill out the form or follow us on our social channels!
                             </p>
                         </div>
                         
                         <div className="text-center md:text-left">
-                            <h3 className="text-2xl font-bold text-slate-900 mb-2">Connect With Us</h3>
-                            <p className="text-slate-600">Follow us on our social media channels to stay updated with our latest events and announcements.</p>
+                            <h3 className="text-2xl font-bold text-[#1e1b4b] mb-2">Connect With Us</h3>
+                            <p className="text-[#1e1b4b]/70 font-['Poppins']">Follow us on our social media channels to stay updated with our latest events and announcements.</p>
                         </div>
                         
                         <div className="flex justify-center md:justify-start space-x-6">
-                            <a href='http://www.instagram.com/iedc_cuk' target="_blank" rel="noreferrer" className="w-14 h-14 bg-white rounded-2xl flex items-center justify-center text-slate-500 hover:text-pink-600 hover:bg-slate-50 border border-slate-200 hover:border-pink-500/50 transition-all duration-300 hover:scale-110 shadow-md hover:shadow-pink-500/20">
+                            <a href='http://www.instagram.com/iedc_cuk' target="_blank" rel="noreferrer" className="w-16 h-16 bg-white/60 backdrop-blur-md rounded-2xl flex items-center justify-center text-[#ff007f] hover:bg-white border border-white hover:border-pink-300 transition-all duration-300 hover:scale-110 shadow-sm hover:shadow-[0_10px_25px_rgba(255,0,127,0.3)]">
                                 <Instagram size={28} />
                             </a>
-                            <a href='https://www.linkedin.com/in/iedc-cuk-56b73b259/' target="_blank" rel="noreferrer" className="w-14 h-14 bg-white rounded-2xl flex items-center justify-center text-slate-500 hover:text-blue-600 hover:bg-slate-50 border border-slate-200 hover:border-blue-500/50 transition-all duration-300 hover:scale-110 shadow-md hover:shadow-blue-500/20">
+                            <a href='https://www.linkedin.com/in/iedc-cuk-56b73b259/' target="_blank" rel="noreferrer" className="w-16 h-16 bg-white/60 backdrop-blur-md rounded-2xl flex items-center justify-center text-[#00f2fe] hover:bg-white border border-white hover:border-cyan-300 transition-all duration-300 hover:scale-110 shadow-sm hover:shadow-[0_10px_25px_rgba(0,242,254,0.3)]">
                                 <Linkedin size={28} />
                             </a>
                         </div>
