@@ -32,8 +32,8 @@ const Footer = () => {
             </div>
 
             <div className="container mx-auto px-6 py-12">
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center md:text-left">
-                    <div className='flex flex-col justify-center items-center md:items-start'>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+                    <div className='flex flex-col items-center'>
                         <a href="#" className="text-2xl font-bold text-slate-900 z-10 flex items-center">
                         <img src="./iedc_logo.png" alt="IEDC Logo" className="inline-block h-6 mr-2 filter brightness-0" />
                         IEDC <span className="gradient-text ml-2">CUK</span>
@@ -41,9 +41,9 @@ const Footer = () => {
                         <p className="text-slate-600 mt-2">Innovate. Incubate. Inspire.</p>
                     </div>
 
-                    <div className='flex flex-col items-center md:items-start'>
+                    <div className='flex flex-col items-center'>
                         <h3 className="text-lg font-semibold text-slate-900 mb-4">Quick Links</h3>
-                        <ul className="space-y-2 text-center md:text-left">
+                        <ul className="space-y-2 text-center">
                             {navLinks.map(link => (
                                 <li key={link.name}>
                                     <a 
@@ -59,9 +59,9 @@ const Footer = () => {
                         </ul>
                     </div>
 
-                    <div className='flex flex-col items-center md:items-start'>
+                    <div className='flex flex-col items-center'>
                         <h3 className="text-lg font-semibold text-slate-900 mb-4">Connect With Us</h3>
-                        <div className="flex justify-center md:justify-start space-x-4">
+                        <div className="flex justify-center space-x-4">
                             {socialLinks.map((social, index) => (
                                 <a 
                                     key={index} 
