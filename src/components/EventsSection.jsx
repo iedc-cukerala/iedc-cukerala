@@ -32,25 +32,23 @@ const EventsSection = () => {
   return (
     <section id="events" className="py-32 bg-transparent relative overflow-hidden">
       <div className="container mx-auto px-6 max-w-7xl relative z-10">
-        <div className="flex flex-col md:flex-row justify-between items-end mb-16">
-          <div className="max-w-2xl">
-            <motion.div
-              initial={{ opacity: 0, scale: 0.9 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              className="inline-flex items-center justify-center px-6 py-2 rounded-full bg-pink-100 border border-pink-200 text-pink-600 text-sm font-bold mb-6 tracking-widest uppercase shadow-sm"
-            >
-              What's Happening
-            </motion.div>
-            <motion.h2 
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-[#1e1b4b] tracking-tight mb-4"
-            >
-              Upcoming <span className="gradient-text text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-indigo-600">Events</span>
-            </motion.h2>
-          </div>
+        <div className="text-center mb-16">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            className="inline-flex items-center justify-center px-6 py-2 rounded-full bg-pink-100 border border-pink-200 text-pink-600 text-sm font-bold mb-6 tracking-widest uppercase shadow-sm"
+          >
+            What's Happening
+          </motion.div>
+          <motion.h2 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-[#1e1b4b] tracking-tight mb-4"
+          >
+            Upcoming <span className="gradient-text text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-indigo-600">Events</span>
+          </motion.h2>
         </div>
 
         {validEvents.length === 0 ? (
