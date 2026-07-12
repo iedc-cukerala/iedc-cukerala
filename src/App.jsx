@@ -70,8 +70,8 @@ function PublicHome() {
               <ContactSection />
             </section>
           </main>
-          <Footer />
         </div>
+        <Footer />
       </div>
     </div>
   );
