@@ -134,71 +134,75 @@ const AdminLogin = () => {
   }, []);
 
   return (
-    <div className="min-h-screen bg-slate-50 flex items-center justify-center px-4 relative overflow-hidden">
+    <div className="min-h-screen bg-transparent flex items-center justify-center px-4 relative overflow-hidden">
 
-      {/* Background Decorative Gradients */}
-      <div className="absolute top-[-10%] left-[-10%] w-96 h-96 bg-purple-600 rounded-full mix-blend-multiply filter blur-[128px] opacity-40 animate-blob"></div>
-      <div className="absolute bottom-[-10%] right-[-10%] w-96 h-96 bg-pink-600 rounded-full mix-blend-multiply filter blur-[128px] opacity-40 animate-blob animation-delay-2000"></div>
+      {/* --- DYNAMIC GRAPHICAL BACKGROUND --- */}
+      <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
+        <div className="absolute inset-0 bg-grid-pattern opacity-60"></div>
+        {/* Vibrant Floating Blobs */}
+        <div className="blob bg-[#ff007f] w-[600px] h-[600px] top-[-20%] left-[-10%] opacity-50"></div>
+        <div className="blob bg-[#ff9933] w-[700px] h-[700px] top-[20%] right-[-15%] opacity-40" style={{ animationDelay: '3s', animationDuration: '20s' }}></div>
+        <div className="blob bg-[#00f2fe] w-[500px] h-[500px] bottom-[-10%] left-[20%] opacity-50" style={{ animationDelay: '5s', animationDuration: '18s' }}></div>
+      </div>
 
       <motion.div 
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, ease: "easeOut" }}
-        className="glass-card bg-white/80 backdrop-blur-xl border border-slate-200 p-8 rounded-2xl shadow-xl max-w-md w-full relative z-10"
+        initial={{ opacity: 0, y: 30, scale: 0.95 }}
+        animate={{ opacity: 1, y: 0, scale: 1 }}
+        transition={{ duration: 0.6, type: "spring", stiffness: 300, damping: 24 }}
+        className="bg-white/80 backdrop-blur-2xl border border-white p-10 rounded-[2.5rem] shadow-[0_20px_60px_-15px_rgba(0,0,0,0.1)] hover:shadow-[0_30px_70px_-20px_rgba(255,0,127,0.3)] max-w-md w-full relative z-10 transition-all duration-500"
       >
         <div className="flex justify-center items-center gap-6 mb-8">
           {/* IEDC Logo */}
-          <div className="relative w-24 h-24 flex items-center justify-center transition-transform hover:scale-105 duration-300">
+          <div className="relative w-24 h-24 flex items-center justify-center transition-transform hover:scale-110 hover:-rotate-3 duration-500">
             <img src="/iedc_logo.png" alt="IEDC Logo" className="w-full h-full object-contain relative z-10" />
           </div>
 
           {/* CUK Logo */}
-          <div className="relative w-24 h-24 bg-white rounded-full flex items-center justify-center border-4 border-slate-200 shadow-[0_0_40px_rgba(168,85,247,0.2)] group-hover:shadow-[0_0_60px_rgba(168,85,247,0.4)] transition-all duration-500 p-1.5 overflow-hidden">
-            <div className="absolute inset-0 rounded-full border-t-4 border-purple-500 animate-spin-slow opacity-50"></div>
-            <img src="https://www.cukerala.ac.in/assets/img/CUKLOGO.png" alt="CUK Logo" className="w-full h-full object-contain relative z-10" />
+          <div className="relative w-24 h-24 bg-white rounded-full flex items-center justify-center border-4 border-white shadow-[0_0_30px_rgba(255,153,51,0.3)] hover:shadow-[0_0_50px_rgba(255,153,51,0.6)] hover:rotate-3 transition-all duration-500 p-1.5 overflow-hidden">
+            <img src="https://www.cukerala.ac.in/assets/img/CUKLOGO.png" alt="CUK Logo" className="w-full h-full object-contain relative z-10 transform scale-110" />
           </div>
         </div>
         
-        <h2 className="text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-pink-600 mb-2 text-center tracking-tight">
-          Admin & Lead Login
+        <h2 className="text-3xl font-extrabold text-[#1e1b4b] mb-2 text-center tracking-tight">
+          Admin <span className="gradient-text">Login</span>
         </h2>
-        <p className="text-slate-600 text-center mb-10 font-medium">IEDC Central University of Kerala</p>
+        <p className="text-[#1e1b4b]/70 text-center mb-10 font-medium">IEDC Central University of Kerala</p>
 
         {error && (
           <motion.div 
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="bg-red-100 border border-red-200 text-red-700 p-3 rounded-lg mb-6 text-sm flex items-center"
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            className="bg-red-500/10 backdrop-blur-md border border-red-500/20 text-red-700 p-4 rounded-2xl mb-6 text-sm flex items-center shadow-inner"
           >
-            <span className="mr-2">⚠️</span> {error}
+            <span className="mr-3 text-red-500 text-xl">⚠️</span> <span className="font-medium">{error}</span>
           </motion.div>
         )}
 
         <button
           onClick={handleGoogleLogin}
           disabled={loading}
-          className="w-full relative group overflow-hidden bg-white border border-slate-200 text-slate-900 font-bold py-4 rounded-xl transition-all duration-300 shadow-sm disabled:opacity-50 flex items-center justify-center space-x-3 hover:bg-slate-50 hover:border-purple-300 hover:shadow-[0_0_15px_rgba(168,85,247,0.2)]"
+          className="w-full relative group overflow-hidden bg-white border border-white text-[#1e1b4b] font-bold py-4 rounded-2xl transition-all duration-300 shadow-[0_5px_20px_rgba(0,0,0,0.05)] disabled:opacity-50 flex items-center justify-center space-x-3 hover:border-pink-300 hover:shadow-[0_10px_30px_rgba(255,0,127,0.2)] hover:-translate-y-1"
         >
-          <div className="absolute inset-0 bg-gradient-to-r from-purple-600/5 to-pink-600/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+          <div className="absolute inset-0 bg-gradient-to-r from-pink-500/10 to-orange-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
           <img src="https://www.svgrepo.com/show/475656/google-color.svg" alt="Google" className="w-6 h-6 transition-transform group-hover:scale-110 relative z-10" />
           <span className="text-lg tracking-wide relative z-10">{loading ? 'Verifying Credentials...' : 'Sign in with Google'}</span>
         </button>
 
-        <p className="text-slate-500 text-xs text-center mt-6">
-          *Must use your official <strong className="text-slate-900">@cukerala.ac.in</strong> email address.
+        <p className="text-[#1e1b4b]/50 text-xs text-center mt-6 font-medium">
+          *Must use your official <strong className="text-pink-600 font-bold">@cukerala.ac.in</strong> email address.
         </p>
 
-        <div className="mt-8 pt-6 border-t border-slate-200 flex flex-col items-center gap-5">
+        <div className="mt-8 pt-6 border-t border-[#1e1b4b]/10 flex flex-col items-center gap-5">
           <Link 
             to="/" 
-            className="text-slate-600 hover:text-slate-900 flex items-center justify-center gap-2 font-semibold bg-white px-6 py-2.5 rounded-full border border-slate-200 transition-all hover:bg-slate-50 hover:border-purple-300 group w-fit shadow-sm hover:shadow-md"
+            className="text-[#1e1b4b]/70 hover:text-pink-600 flex items-center justify-center gap-2 font-bold bg-white/50 backdrop-blur-sm px-6 py-2.5 rounded-full border border-white transition-all hover:bg-white hover:shadow-md group w-fit"
           >
             <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
             Return to Main Site
           </Link>
 
-          <p className="text-slate-600 text-xs text-center">
-            Contact <a href="mailto:tathagata.2500705021@cukerala.ac.in" className="text-purple-600 hover:text-purple-500 transition-colors font-medium">
+          <p className="text-[#1e1b4b]/60 text-xs text-center">
+            Contact <a href="mailto:tathagata.2500705021@cukerala.ac.in" className="text-pink-600 hover:text-orange-500 transition-colors font-bold underline decoration-pink-600/30 underline-offset-4">
               tathagata.2500705021@cukerala.ac.in
             </a> for support.
           </p>
