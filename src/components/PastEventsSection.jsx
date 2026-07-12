@@ -1,79 +1,176 @@
 import React, { useState } from 'react';
-import { usePastEvents } from '../hooks/usePastEvents';
+import { useEvents } from '../hooks/useEvents';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Calendar, ArrowRight, CheckCircle2, X, Image as ImageIcon } from 'lucide-react';
 
 const PastEventsSection = () => {
-  const { pastEvents, loading } = usePastEvents();
+  const { pastEvents, loading } = useEvents();
   const [selectedEvent, setSelectedEvent] = useState(null);
 
-  if (loading) return null; // Don't show anything while loading
-  if (pastEvents.length === 0) return null; // Hide section if no past events
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    show: {
+      opacity: 1,
+      transition: { staggerChildren: 0.15 }
+    }
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 30 },
+    show: { opacity: 1, y: 0, transition: { type: "spring", stiffness: 300, damping: 24 } }
+  };
+
+  if (loading) {
+    return (
+      <section className="py-24 border-b border-slate-200 bg-slate-50 relative">
+        <h2 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-slate-900 mb-12 text-center">Past Events</h2>
+        <div className="flex justify-center items-center h-48">
+           <div className="w-12 h-12 border-4 border-slate-200 border-t-pink-600 rounded-full animate-spin"></div>
+        </div>
+      </section>
+    );
+  }
+
+  if (pastEvents.length === 0) return null;
 
   return (
-    <section className="py-20 border-b border-slate-200">
-      <div className="text-center mb-16">
-        <div className="inline-flex items-center justify-center px-4 py-1.5 rounded-full bg-pink-100 border border-pink-200 text-pink-700 text-sm font-semibold mb-4 tracking-wide uppercase">
-          Our Legacy
+    <section className="py-24 border-b border-slate-200 bg-slate-50 relative">
+      <div className="container mx-auto px-6 max-w-7xl">
+        <div className="text-center mb-20">
+          <motion.div 
+            initial={{ opacity: 0, scale: 0.9 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            className="inline-flex items-center justify-center px-4 py-1.5 rounded-full bg-pink-100 border border-pink-200 text-pink-700 text-xs font-bold mb-4 tracking-widest uppercase shadow-sm"
+          >
+            Our Legacy
+          </motion.div>
+          <motion.h2 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-slate-900 tracking-tight"
+          >
+            Past Events
+          </motion.h2>
         </div>
-        <h2 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-slate-900">
-          Past Events & Gallery
-        </h2>
+
+        <motion.div 
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, margin: "-100px" }}
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+        >
+          {pastEvents.map(event => (
+            <motion.div 
+              key={event.id}
+              variants={itemVariants}
+              whileHover={{ y: -10 }}
+              onClick={() => setSelectedEvent(event)}
+              className="group relative bg-white rounded-3xl overflow-hidden shadow-[0_4px_20px_rgba(0,0,0,0.03)] border border-slate-100 hover:shadow-[0_20px_40px_rgba(236,72,153,0.15)] hover:border-pink-200 transition-all duration-500 flex flex-col h-full cursor-pointer"
+            >
+              <div className="relative h-72 overflow-hidden bg-slate-100 shrink-0">
+                {event.imageUrl ? (
+                  <img
+                    src={event.imageUrl}
+                    alt={event.title}
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 grayscale-[20%] group-hover:grayscale-0"
+                    onError={(e) => {
+                      e.target.src = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300"%3E%3Crect fill="%23f8fafc" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" font-size="20" fill="%23cbd5e1" text-anchor="middle" dy=".3em"%3EImage not available%3C/text%3E%3C/svg%3E';
+                    }}
+                  />
+                ) : (
+                  <div className="w-full h-full flex items-center justify-center bg-slate-100">
+                      <Calendar className="w-16 h-16 text-slate-300" />
+                  </div>
+                )}
+                
+                <div className="absolute inset-0 bg-gradient-to-t from-slate-900/95 via-slate-900/40 to-transparent opacity-80 group-hover:opacity-90 transition-opacity duration-500"></div>
+                
+                <div className="absolute top-4 right-4 z-10 flex items-center gap-1.5 bg-green-500/90 backdrop-blur-md text-white text-[10px] font-bold px-2.5 py-1 rounded-full uppercase tracking-wider shadow-sm">
+                  <CheckCircle2 className="w-3.5 h-3.5" /> Completed
+                </div>
+
+                <div className="absolute bottom-6 left-6 right-6 z-10 text-white transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
+                   <h3 className="text-2xl font-bold mb-3 leading-tight text-white shadow-sm">{event.title}</h3>
+                   <div className="flex items-center gap-4 text-sm font-medium text-pink-200">
+                      <span className="flex items-center gap-1.5"><Calendar className="w-4 h-4" /> {new Date(event.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}</span>
+                   </div>
+                </div>
+              </div>
+            </motion.div>
+          ))}
+        </motion.div>
       </div>
 
-      <div className="flex flex-wrap justify-center gap-8 max-w-6xl mx-auto">
-        {pastEvents.map(event => (
-          <div 
-            key={event.id} 
-            onClick={() => setSelectedEvent(event)}
-            className="w-full md:w-[calc(50%-2rem)] max-w-xl group relative overflow-hidden rounded-2xl glass-card cursor-pointer hover:shadow-2xl hover:shadow-purple-500/20 transition-all duration-500"
+      {/* Popup Modal */}
+      <AnimatePresence>
+        {selectedEvent && (
+          <motion.div 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center p-4 sm:p-6"
+            onClick={() => setSelectedEvent(null)}
           >
-            {/* CHANGED: Increased image height to h-72 (much taller!) */}
-            <div className="h-72 overflow-hidden">
-              <img src={event.imageUrl} alt={event.title} className="w-full h-full object-cover group-hover:scale-110 transition duration-500" />
-              <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/40 to-transparent opacity-90"></div>
-            </div>
-            
-            <div className="absolute bottom-0 left-0 p-6 w-full">
-              {/* CHANGED: Made the text larger (text-2xl) */}
-              <h3 className="text-2xl font-bold text-white mb-2">{event.title}</h3>
-              <p className="text-base text-blue-300 font-semibold">📅 {event.date}</p>
-            </div>
-          </div>
-        ))}
-      </div>
-
-      {/* --- POPUP MODAL --- */}
-      {selectedEvent && (
-        <div className="fixed inset-0 bg-slate-900/80 z-50 flex items-center justify-center p-4" onClick={() => setSelectedEvent(null)}>
-          <div 
-            className="bg-white border border-slate-200 rounded-xl max-w-2xl w-full overflow-hidden shadow-2xl transform transition-all"
-            onClick={(e) => e.stopPropagation()} 
-          >
-            <img src={selectedEvent.imageUrl} alt="Cover" className="w-full h-72 object-cover" />
-            <div className="p-6 md:p-8">
-              <h2 className="text-3xl font-bold text-slate-900 mb-2">{selectedEvent.title}</h2>
-              <p className="text-slate-500 mb-6">📅 Conducted on: {selectedEvent.date}</p>
-              <p className="text-slate-600 mb-8 whitespace-pre-line leading-relaxed">{selectedEvent.description}</p>
-              
-              <div className="flex gap-4">
-                <a 
-                  href={selectedEvent.link} 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="flex-1 bg-blue-600 text-white text-center font-bold py-3 rounded-lg hover:bg-blue-500 transition shadow-lg"
-                >
-                  📸 View Full Photo Gallery
-                </a>
+            <motion.div 
+              initial={{ opacity: 0, scale: 0.95, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.95, y: 20 }}
+              transition={{ type: "spring", duration: 0.5 }}
+              className="bg-white border border-slate-200 rounded-3xl max-w-2xl w-full overflow-hidden shadow-2xl flex flex-col max-h-[90vh]"
+              onClick={(e) => e.stopPropagation()} 
+            >
+              <div className="relative h-64 sm:h-80 shrink-0">
+                <img src={selectedEvent.imageUrl} alt={selectedEvent.title} className="w-full h-full object-cover" />
                 <button 
                   onClick={() => setSelectedEvent(null)}
-                  className="px-6 bg-slate-100 text-slate-600 font-bold rounded-lg hover:bg-slate-200 transition"
+                  className="absolute top-4 right-4 bg-black/40 hover:bg-black/60 text-white p-2 rounded-full backdrop-blur-md transition-colors"
                 >
-                  Close
+                  <X className="w-6 h-6" />
                 </button>
+                <div className="absolute bottom-4 left-4">
+                  <span className="bg-white/90 backdrop-blur-md text-slate-900 text-xs font-bold px-3 py-1.5 rounded-full uppercase tracking-wider shadow-sm">
+                    {selectedEvent.category || 'Event'}
+                  </span>
+                </div>
               </div>
-            </div>
-          </div>
-        </div>
-      )}
+
+              <div className="p-6 md:p-8 overflow-y-auto custom-scrollbar">
+                <h2 className="text-3xl font-extrabold text-slate-900 mb-3">{selectedEvent.title}</h2>
+                <p className="text-pink-600 font-semibold mb-6 flex items-center gap-2">
+                  <Calendar className="w-5 h-5" /> 
+                  Conducted on: {new Date(selectedEvent.date).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}
+                </p>
+                <p className="text-slate-600 mb-8 whitespace-pre-line leading-relaxed font-['Poppins'] text-lg">
+                  {selectedEvent.description}
+                </p>
+                
+                <div className="flex flex-col sm:flex-row gap-4 mt-auto">
+                  {selectedEvent.link && (
+                    <a 
+                      href={selectedEvent.link} 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="flex-1 bg-gradient-to-r from-pink-600 to-purple-600 text-white text-center font-bold py-3.5 px-6 rounded-xl hover:opacity-90 transition shadow-lg flex items-center justify-center gap-2 group"
+                    >
+                      <ImageIcon className="w-5 h-5 group-hover:scale-110 transition-transform" />
+                      View Full Photo Gallery
+                    </a>
+                  )}
+                  <button 
+                    onClick={() => setSelectedEvent(null)}
+                    className="px-8 py-3.5 bg-slate-100 text-slate-700 font-bold rounded-xl hover:bg-slate-200 transition"
+                  >
+                    Close
+                  </button>
+                </div>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </section>
   );
 };
