@@ -9,12 +9,12 @@ const PastEventsSection = () => {
   if (pastEvents.length === 0) return null; // Hide section if no past events
 
   return (
-    <section className="py-20 border-b border-slate-800">
+    <section className="py-20 border-b border-slate-200">
       <div className="text-center mb-16">
-        <div className="inline-flex items-center justify-center px-4 py-1.5 rounded-full bg-pink-900/30 border border-pink-500/30 text-pink-300 text-sm font-semibold mb-4 tracking-wide uppercase">
+        <div className="inline-flex items-center justify-center px-4 py-1.5 rounded-full bg-pink-100 border border-pink-200 text-pink-700 text-sm font-semibold mb-4 tracking-wide uppercase">
           Our Legacy
         </div>
-        <h2 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-white via-slate-200 to-slate-400">
+        <h2 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-slate-900">
           Past Events & Gallery
         </h2>
       </div>
@@ -41,18 +41,18 @@ const PastEventsSection = () => {
         ))}
       </div>
 
-      {/* --- POPUP MODAL (Kept exactly the same) --- */}
+      {/* --- POPUP MODAL --- */}
       {selectedEvent && (
-        <div className="fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4" onClick={() => setSelectedEvent(null)}>
+        <div className="fixed inset-0 bg-slate-900/80 z-50 flex items-center justify-center p-4" onClick={() => setSelectedEvent(null)}>
           <div 
-            className="bg-slate-900 border border-slate-700 rounded-xl max-w-2xl w-full overflow-hidden shadow-2xl transform transition-all"
+            className="bg-white border border-slate-200 rounded-xl max-w-2xl w-full overflow-hidden shadow-2xl transform transition-all"
             onClick={(e) => e.stopPropagation()} 
           >
             <img src={selectedEvent.imageUrl} alt="Cover" className="w-full h-72 object-cover" />
             <div className="p-6 md:p-8">
-              <h2 className="text-3xl font-bold text-white mb-2">{selectedEvent.title}</h2>
-              <p className="text-slate-400 mb-6">📅 Conducted on: {selectedEvent.date}</p>
-              <p className="text-slate-300 mb-8 whitespace-pre-line leading-relaxed">{selectedEvent.description}</p>
+              <h2 className="text-3xl font-bold text-slate-900 mb-2">{selectedEvent.title}</h2>
+              <p className="text-slate-500 mb-6">📅 Conducted on: {selectedEvent.date}</p>
+              <p className="text-slate-600 mb-8 whitespace-pre-line leading-relaxed">{selectedEvent.description}</p>
               
               <div className="flex gap-4">
                 <a 
@@ -65,7 +65,7 @@ const PastEventsSection = () => {
                 </a>
                 <button 
                   onClick={() => setSelectedEvent(null)}
-                  className="px-6 bg-slate-800 text-slate-300 font-bold rounded-lg hover:bg-slate-700 transition"
+                  className="px-6 bg-slate-100 text-slate-600 font-bold rounded-lg hover:bg-slate-200 transition"
                 >
                   Close
                 </button>

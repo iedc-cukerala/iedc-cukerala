@@ -33,16 +33,16 @@ const ManageContacts = () => {
   return (
     <div className="space-y-6 mt-6">
       <div>
-        <h2 className="text-2xl font-extrabold text-white flex items-center gap-2 mb-1">
-          <MessageSquare className="text-purple-400 w-6 h-6" />
+        <h2 className="text-2xl font-extrabold text-slate-900 flex items-center gap-2 mb-1">
+          <MessageSquare className="text-purple-600 w-6 h-6" />
           Messages & Inquiries
         </h2>
-        <p className="text-slate-400 text-sm">Read and manage messages sent from the public Contact form.</p>
+        <p className="text-slate-600 text-sm">Read and manage messages sent from the public Contact form.</p>
       </div>
 
       <div className="relative">
         {contacts.length === 0 ? (
-          <div className="flex flex-col items-center justify-center py-20 text-slate-500 bg-slate-900/50 border border-slate-800/60 rounded-3xl shadow-xl">
+          <div className="flex flex-col items-center justify-center py-20 text-slate-500 bg-slate-50 border border-slate-200 rounded-3xl shadow-sm">
             <MessageSquare className="w-16 h-16 mb-4 opacity-20" />
             <p className="text-lg font-medium">Your inbox is empty.</p>
           </div>
@@ -53,44 +53,44 @@ const ManageContacts = () => {
                 key={msg.id} 
                 className={`p-6 rounded-2xl transition-all duration-300 relative group overflow-hidden ${
                   msg.status === 'read' 
-                  ? 'bg-slate-900/40 border border-slate-800/80 opacity-75 hover:opacity-100' 
-                  : 'bg-slate-900/80 border border-purple-500/40 shadow-[0_0_20px_rgba(168,85,247,0.1)] hover:shadow-[0_0_30px_rgba(168,85,247,0.2)]'
+                  ? 'bg-white border border-slate-200 opacity-80 hover:opacity-100 shadow-sm' 
+                  : 'bg-white border border-purple-200 shadow-[0_0_20px_rgba(168,85,247,0.1)] hover:shadow-[0_0_30px_rgba(168,85,247,0.15)]'
                 }`}
               >
                 {/* Side glow for unread */}
                 {msg.status !== 'read' && (
-                  <div className="absolute top-0 left-0 w-1 h-full bg-gradient-to-b from-purple-500 to-pink-500 shadow-[0_0_10px_rgba(168,85,247,0.5)]"></div>
+                  <div className="absolute top-0 left-0 w-1 h-full bg-gradient-to-b from-purple-500 to-pink-500 shadow-[0_0_10px_rgba(168,85,247,0.3)]"></div>
                 )}
 
                 <div className="flex flex-col lg:flex-row justify-between items-start mb-5 pl-2 gap-4">
                   <div className="flex items-center gap-4">
                     {/* Avatar */}
                     <div className={`w-14 h-14 rounded-full flex shrink-0 items-center justify-center font-extrabold text-xl shadow-inner border ${
-                      msg.status === 'read' ? 'bg-slate-800 text-slate-400 border-slate-700' : 'bg-gradient-to-br from-purple-500 to-pink-500 text-white border-purple-400/50 shadow-purple-500/30'
+                      msg.status === 'read' ? 'bg-slate-100 text-slate-500 border-slate-200' : 'bg-gradient-to-br from-purple-500 to-pink-500 text-white border-purple-400/50 shadow-purple-500/30'
                     }`}>
                       {msg.name?.charAt(0).toUpperCase() || '?'}
                     </div>
                     
                     <div>
-                      <h3 className="text-xl font-extrabold text-white flex items-center gap-3">
+                      <h3 className="text-xl font-extrabold text-slate-900 flex items-center gap-3">
                         {msg.name}
                         {msg.status !== 'read' && (
-                           <span className="bg-purple-500/20 text-purple-400 text-[10px] uppercase font-bold px-2.5 py-0.5 rounded-full border border-purple-500/30 flex items-center gap-1.5 shadow-[0_0_10px_rgba(168,85,247,0.2)]">
-                             <span className="w-1.5 h-1.5 rounded-full bg-purple-400 animate-ping"></span>
+                           <span className="bg-purple-100 text-purple-700 text-[10px] uppercase font-bold px-2.5 py-0.5 rounded-full border border-purple-200 flex items-center gap-1.5 shadow-sm">
+                             <span className="w-1.5 h-1.5 rounded-full bg-purple-500 animate-ping"></span>
                              New Message
                            </span>
                         )}
                       </h3>
-                      <div className="flex flex-wrap gap-2 mt-2 text-xs text-slate-400 font-medium">
-                        <a href={`mailto:${msg.email}`} className="flex items-center gap-1.5 hover:text-purple-400 transition-colors bg-slate-950/50 px-3 py-1.5 rounded-lg border border-slate-800/80 shadow-sm">
+                      <div className="flex flex-wrap gap-2 mt-2 text-xs text-slate-600 font-medium">
+                        <a href={`mailto:${msg.email}`} className="flex items-center gap-1.5 hover:text-purple-600 transition-colors bg-slate-50 px-3 py-1.5 rounded-lg border border-slate-200 shadow-sm text-slate-700">
                           <Mail className="w-3.5 h-3.5" /> {msg.email}
                         </a>
                         {msg.phone && (
-                          <a href={`tel:${msg.phone}`} className="flex items-center gap-1.5 hover:text-purple-400 transition-colors bg-slate-950/50 px-3 py-1.5 rounded-lg border border-slate-800/80 shadow-sm">
+                          <a href={`tel:${msg.phone}`} className="flex items-center gap-1.5 hover:text-purple-600 transition-colors bg-slate-50 px-3 py-1.5 rounded-lg border border-slate-200 shadow-sm text-slate-700">
                             <Phone className="w-3.5 h-3.5" /> {msg.phone}
                           </a>
                         )}
-                        <span className="flex items-center gap-1.5 bg-slate-950/50 px-3 py-1.5 rounded-lg border border-slate-800/80 shadow-sm">
+                        <span className="flex items-center gap-1.5 bg-slate-50 px-3 py-1.5 rounded-lg border border-slate-200 shadow-sm text-slate-700">
                           <Clock className="w-3.5 h-3.5" /> {msg.createdAt?.toDate().toLocaleString() || 'Recent'}
                         </span>
                       </div>
@@ -110,7 +110,7 @@ const ManageContacts = () => {
                 </div>
 
                 <div className={`ml-2 lg:ml-20 p-5 rounded-2xl border whitespace-pre-wrap text-[15px] leading-relaxed ${
-                  msg.status === 'read' ? 'bg-slate-950/50 border-slate-800/60 text-slate-400' : 'bg-slate-950/80 border-slate-700/50 text-slate-200 shadow-inner'
+                  msg.status === 'read' ? 'bg-slate-50 border-slate-200 text-slate-600' : 'bg-slate-50 border-slate-300 text-slate-800 shadow-inner'
                 }`}>
                   {msg.message}
                 </div>

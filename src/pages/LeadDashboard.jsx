@@ -150,21 +150,21 @@ const LeadDashboard = () => {
     }
   };
 
-  if (loading) return <div className="min-h-screen bg-slate-950 flex items-center justify-center text-white">Loading...</div>;
-  if (!leadData) return <div className="min-h-screen bg-slate-950 flex items-center justify-center text-white">No Profile Found.</div>;
+  if (loading) return <div className="min-h-screen bg-slate-50 flex items-center justify-center text-slate-900">Loading...</div>;
+  if (!leadData) return <div className="min-h-screen bg-slate-50 flex items-center justify-center text-slate-900">No Profile Found.</div>;
 
   return (
-    <div className="min-h-screen bg-slate-950 p-6 relative overflow-hidden flex items-center justify-center">
+    <div className="min-h-screen bg-slate-50 p-6 relative overflow-hidden flex items-center justify-center">
       {/* Background glowing orbs */}
       <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-purple-600/10 rounded-full filter blur-[120px] mix-blend-screen pointer-events-none"></div>
       <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-pink-600/10 rounded-full filter blur-[120px] mix-blend-screen pointer-events-none"></div>
 
       {/* Cropper Modal */}
       {showCropper && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/90 backdrop-blur-md p-4">
-          <div className="bg-slate-900/80 p-8 rounded-3xl w-full max-w-md border border-white/10 shadow-2xl">
-            <h3 className="text-xl font-bold text-white mb-6 text-center">Adjust Profile Photo</h3>
-            <div className="relative w-full h-64 mb-6 rounded-xl overflow-hidden bg-black/50 border border-white/5">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-white/90 backdrop-blur-md p-4">
+          <div className="bg-white/90 p-8 rounded-3xl w-full max-w-md border border-slate-200 shadow-2xl">
+            <h3 className="text-xl font-bold text-slate-900 mb-6 text-center">Adjust Profile Photo</h3>
+            <div className="relative w-full h-64 mb-6 rounded-xl overflow-hidden bg-slate-100 border border-slate-200">
               <Cropper
                 image={imageSrc}
                 crop={crop}
@@ -178,7 +178,7 @@ const LeadDashboard = () => {
               />
             </div>
             <div className="mb-8">
-              <label className="text-slate-400 text-sm mb-3 block text-center font-medium">Zoom: {Math.round(zoom * 100)}%</label>
+              <label className="text-slate-600 text-sm mb-3 block text-center font-medium">Zoom: {Math.round(zoom * 100)}%</label>
               <input 
                 type="range" value={zoom} min={1} max={3} step={0.1} 
                 onChange={(e) => setZoom(e.target.value)} 
@@ -189,7 +189,7 @@ const LeadDashboard = () => {
               <button 
                 type="button" 
                 onClick={() => { setShowCropper(false); setImageSrc(null); setFinalBase64(null); }} 
-                className="w-1/2 py-3.5 bg-white/5 rounded-xl text-slate-300 font-bold hover:bg-white/10 transition border border-white/10"
+                className="w-1/2 py-3.5 bg-slate-100 rounded-xl text-slate-600 font-bold hover:bg-slate-200 transition border border-slate-200"
               >
                 Cancel
               </button>
@@ -205,13 +205,13 @@ const LeadDashboard = () => {
         </div>
       )}
 
-      <div className="w-full max-w-4xl relative z-10 glass-card bg-slate-900/40 backdrop-blur-2xl border border-white/10 p-8 md:p-12 rounded-[2.5rem] shadow-2xl">
-        <div className="flex flex-col md:flex-row justify-between items-center mb-10 border-b border-white/10 pb-6 gap-6">
+      <div className="w-full max-w-4xl relative z-10 glass-card bg-white/80 backdrop-blur-2xl border border-slate-200 p-8 md:p-12 rounded-[2.5rem] shadow-xl">
+        <div className="flex flex-col md:flex-row justify-between items-center mb-10 border-b border-slate-200 pb-6 gap-6">
           <div className="text-center md:text-left">
-              <div className="inline-flex items-center justify-center px-4 py-1.5 rounded-full bg-purple-900/30 border border-purple-500/30 text-purple-300 text-xs font-semibold mb-3 tracking-wider uppercase">
+              <div className="inline-flex items-center justify-center px-4 py-1.5 rounded-full bg-purple-100 border border-purple-200 text-purple-700 text-xs font-semibold mb-3 tracking-wider uppercase">
                   Lead Portal
               </div>
-              <h2 className="text-3xl md:text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-white to-slate-400">
+              <h2 className="text-3xl md:text-4xl font-extrabold text-slate-900">
                   Lead Dashboard
               </h2>
           </div>
@@ -233,9 +233,9 @@ const LeadDashboard = () => {
           <div className="grid grid-cols-1 md:grid-cols-[1fr_2fr] gap-10 items-start">
             
             {/* Left Col: Image */}
-            <div className="flex flex-col items-center justify-center space-y-4 p-8 border border-white/5 rounded-3xl bg-slate-950/30 shadow-inner">
+            <div className="flex flex-col items-center justify-center space-y-4 p-8 border border-slate-200 rounded-3xl bg-slate-50 shadow-sm">
               <div 
-                className={`relative w-48 h-48 rounded-full overflow-hidden border-4 border-slate-800 bg-slate-900 shadow-xl flex items-center justify-center transition-all duration-300 ${isEditing ? 'cursor-pointer group hover:border-purple-500' : ''}`}
+                className={`relative w-48 h-48 rounded-full overflow-hidden border-4 border-slate-200 bg-slate-100 shadow-sm flex items-center justify-center transition-all duration-300 ${isEditing ? 'cursor-pointer group hover:border-purple-300' : ''}`}
                 onClick={() => isEditing && fileInputRef.current?.click()}
               >
                 {finalBase64 ? (
@@ -243,12 +243,12 @@ const LeadDashboard = () => {
                 ) : leadData.imageUrl ? (
                   <img src={leadData.imageUrl} alt="Profile" className="w-full h-full object-cover" />
                 ) : (
-                  <div className="w-full h-full bg-gradient-to-br from-slate-800 to-slate-900 flex items-center justify-center text-slate-600 text-sm">No Image</div>
+                  <div className="w-full h-full bg-slate-100 flex items-center justify-center text-slate-400 text-sm">No Image</div>
                 )}
                 
                 {isEditing && (
-                  <div className="absolute inset-0 bg-purple-900/60 backdrop-blur-sm flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    <span className="text-white text-sm font-bold tracking-wider">Change Photo</span>
+                  <div className="absolute inset-0 bg-purple-100/80 backdrop-blur-sm flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <span className="text-purple-700 text-sm font-bold tracking-wider">Change Photo</span>
                   </div>
                 )}
               </div>
@@ -260,54 +260,54 @@ const LeadDashboard = () => {
                 className="hidden"
               />
               {!isEditing && leadData.imageUrl === '' && (
-                <p className="text-xs text-slate-500 font-medium">No profile picture set.</p>
+                <p className="text-xs text-slate-600 font-medium">No profile picture set.</p>
               )}
             </div>
 
             {/* Right Col: Basic Info */}
             <div className="space-y-6">
               <div className="space-y-2">
-                <label className="text-xs font-semibold text-slate-400 uppercase tracking-wider pl-1">Full Name</label>
+                <label className="text-xs font-semibold text-slate-600 uppercase tracking-wider pl-1">Full Name</label>
                 <input 
                   type="text" name="name" value={leadData.name} onChange={handleChange} required disabled={!isEditing}
-                  className="w-full bg-slate-950/50 text-white p-4 rounded-xl border border-white/10 outline-none focus:border-purple-500/50 focus:ring-1 focus:ring-purple-500/50 transition-all disabled:opacity-50 disabled:bg-slate-900/50" 
+                  className="w-full bg-white text-slate-900 p-4 rounded-xl border border-slate-200 outline-none focus:border-purple-500/50 focus:ring-1 focus:ring-purple-500/50 transition-all disabled:opacity-50 disabled:bg-slate-100 shadow-sm" 
                 />
               </div>
               <div className="space-y-2">
-                <label className="text-xs font-semibold text-slate-400 uppercase tracking-wider pl-1">Designation / Role</label>
+                <label className="text-xs font-semibold text-slate-600 uppercase tracking-wider pl-1">Designation / Role</label>
                 <input 
                   type="text" name="role" value={leadData.role} onChange={handleChange} required disabled={!isEditing}
-                  className="w-full bg-slate-950/50 text-white p-4 rounded-xl border border-white/10 outline-none focus:border-purple-500/50 focus:ring-1 focus:ring-purple-500/50 transition-all disabled:opacity-50 disabled:bg-slate-900/50" 
+                  className="w-full bg-white text-slate-900 p-4 rounded-xl border border-slate-200 outline-none focus:border-purple-500/50 focus:ring-1 focus:ring-purple-500/50 transition-all disabled:opacity-50 disabled:bg-slate-100 shadow-sm" 
                 />
               </div>
             </div>
           </div>
 
-          <div className="pt-8 border-t border-white/5">
-            <h3 className="text-xl font-bold text-white mb-6 pl-1">Contact & Social</h3>
+          <div className="pt-8 border-t border-slate-200">
+            <h3 className="text-xl font-bold text-slate-900 mb-6 pl-1">Contact & Social</h3>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               <div className="space-y-2">
-                <label className="text-xs font-semibold text-slate-400 uppercase tracking-wider pl-1">LinkedIn URL</label>
+                <label className="text-xs font-semibold text-slate-600 uppercase tracking-wider pl-1">LinkedIn URL</label>
                 <input 
                   type="url" name="linkedin" value={leadData.linkedin} onChange={handleChange} disabled={!isEditing}
                   placeholder="https://linkedin.com/in/..."
-                  className="w-full bg-slate-950/50 text-white p-4 rounded-xl border border-white/10 outline-none focus:border-blue-500/50 focus:ring-1 focus:ring-blue-500/50 transition-all disabled:opacity-50 disabled:bg-slate-900/50" 
+                  className="w-full bg-white text-slate-900 p-4 rounded-xl border border-slate-200 outline-none focus:border-blue-500/50 focus:ring-1 focus:ring-blue-500/50 transition-all disabled:opacity-50 disabled:bg-slate-100 shadow-sm" 
                 />
               </div>
               <div className="space-y-2">
-                <label className="text-xs font-semibold text-slate-400 uppercase tracking-wider pl-1">Email Address</label>
+                <label className="text-xs font-semibold text-slate-600 uppercase tracking-wider pl-1">Email Address</label>
                 <input 
                   type="email" name="email" value={leadData.email} onChange={handleChange} disabled={!isEditing}
                   placeholder="contact@example.com"
-                  className="w-full bg-slate-950/50 text-white p-4 rounded-xl border border-white/10 outline-none focus:border-purple-500/50 focus:ring-1 focus:ring-purple-500/50 transition-all disabled:opacity-50 disabled:bg-slate-900/50" 
+                  className="w-full bg-white text-slate-900 p-4 rounded-xl border border-slate-200 outline-none focus:border-purple-500/50 focus:ring-1 focus:ring-purple-500/50 transition-all disabled:opacity-50 disabled:bg-slate-100 shadow-sm" 
                 />
               </div>
               <div className="space-y-2">
-                <label className="text-xs font-semibold text-slate-400 uppercase tracking-wider pl-1">Phone Number</label>
+                <label className="text-xs font-semibold text-slate-600 uppercase tracking-wider pl-1">Phone Number</label>
                 <input 
                   type="tel" name="phone" value={leadData.phone} onChange={handleChange} disabled={!isEditing}
                   placeholder="+1 234 567 890"
-                  className="w-full bg-slate-950/50 text-white p-4 rounded-xl border border-white/10 outline-none focus:border-green-500/50 focus:ring-1 focus:ring-green-500/50 transition-all disabled:opacity-50 disabled:bg-slate-900/50" 
+                  className="w-full bg-white text-slate-900 p-4 rounded-xl border border-slate-200 outline-none focus:border-green-500/50 focus:ring-1 focus:ring-green-500/50 transition-all disabled:opacity-50 disabled:bg-slate-100 shadow-sm" 
                 />
               </div>
             </div>
@@ -318,7 +318,7 @@ const LeadDashboard = () => {
               <button 
                 type="button"
                 onClick={(e) => { e.preventDefault(); setIsEditing(true); setMessage(''); }}
-                className="w-full bg-white/5 border border-white/10 text-white font-bold py-4 rounded-xl hover:bg-white/10 transition-all text-lg shadow-lg"
+                className="w-full bg-white border border-slate-200 text-slate-900 font-bold py-4 rounded-xl hover:bg-slate-50 transition-all text-lg shadow-sm"
               >
                 Edit Profile
               </button>
@@ -327,7 +327,7 @@ const LeadDashboard = () => {
                 <button 
                   type="button"
                   onClick={() => { setIsEditing(false); setFinalBase64(null); setImageSrc(null); setMessage(''); }}
-                  className="w-1/3 bg-white/5 border border-white/10 text-slate-300 font-bold py-4 rounded-xl hover:bg-red-500/10 hover:text-red-400 transition-all text-lg shadow-lg"
+                  className="w-1/3 bg-white border border-slate-200 text-slate-600 font-bold py-4 rounded-xl hover:bg-red-50 hover:text-red-500 transition-all text-lg shadow-sm"
                 >
                   Cancel
                 </button>

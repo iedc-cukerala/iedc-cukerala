@@ -6,26 +6,26 @@ const EventsSection = () => {
 
   if (loading) {
     return (
-      <section className="py-20 border-b border-slate-800">
-        <h2 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-white via-slate-200 to-slate-400 mb-12 text-center">Upcoming Events</h2>
-        <div className="text-center text-slate-400">Loading events...</div>
+      <section className="py-20 border-b border-slate-200">
+        <h2 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-slate-900 mb-12 text-center">Upcoming Events</h2>
+        <div className="text-center text-slate-600">Loading events...</div>
       </section>
     );
   }
 
   return (
-    <section className="py-20 border-b border-slate-800">
+    <section className="py-20 border-b border-slate-200">
       <div className="text-center mb-16">
-        <div className="inline-flex items-center justify-center px-4 py-1.5 rounded-full bg-purple-900/30 border border-purple-500/30 text-purple-300 text-sm font-semibold mb-4 tracking-wide uppercase">
+        <div className="inline-flex items-center justify-center px-4 py-1.5 rounded-full bg-purple-100 border border-purple-200 text-purple-700 text-sm font-semibold mb-4 tracking-wide uppercase">
           What's Next
         </div>
-        <h2 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-white via-slate-200 to-slate-400">
+        <h2 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-slate-900">
           Upcoming Events
         </h2>
       </div>
 
       {events.length === 0 ? (
-        <div className="text-center text-slate-400">
+        <div className="text-center text-slate-600">
           <p>No upcoming events. Check back soon for exciting opportunities!</p>
         </div>
       ) : (
@@ -46,12 +46,12 @@ const EventsSection = () => {
               )}
               <div className="p-6 flex flex-col flex-grow">
                 <div className="flex justify-between items-start mb-3 gap-2">
-                  <h3 className="text-xl font-bold text-purple-400 flex-1">{event.title}</h3>
-                  <span className="bg-purple-500/20 text-purple-300 text-xs px-2 py-1 rounded whitespace-nowrap">
+                  <h3 className="text-xl font-bold text-purple-600 flex-1">{event.title}</h3>
+                  <span className="bg-purple-100 text-purple-700 text-xs px-2 py-1 rounded whitespace-nowrap">
                     {event.category}
                   </span>
                 </div>
-                <div className="flex items-center gap-4 text-sm text-slate-400 mb-3">
+                <div className="flex items-center gap-4 text-sm text-slate-500 mb-3">
                   <span>📅 {new Date(event.date).toLocaleDateString('en-US', { 
                     month: 'short', 
                     day: 'numeric' 
@@ -59,7 +59,7 @@ const EventsSection = () => {
                   <span>🕐 {event.time}</span>
                 </div>
                 
-                <p className="text-slate-300 line-clamp-3 mb-6 flex-grow">{event.description}</p>
+                <p className="text-slate-600 line-clamp-3 mb-6 flex-grow">{event.description}</p>
                 
                 {/* --- BUTTON RENDERED IF LINK EXISTS --- */}
                 {event.link && (

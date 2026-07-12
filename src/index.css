@@ -8,8 +8,7 @@ html {
 
 body {
   font-family: "Space Grotesk", sans-serif;
-  /* background-color: #020617;  */
-  color: #e2e8f0; /* slate-200 */
+  color: #0f172a; /* slate-900 */
   overflow-x: hidden; /* Prevent horizontal scrollbar from animations */
 }
 
@@ -21,7 +20,7 @@ body {
 
 /* Custom Gradient Text */
 .gradient-text {
-  background: linear-gradient(to right, #a855f7, #ec4899);
+  background: linear-gradient(to right, #9333ea, #db2777); /* Slightly darker purple/pink for contrast */
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -39,10 +38,11 @@ body {
 
 /* Glassmorphism Card Style */
 .glass-card {
-  background: rgba(15, 23, 42, 0.6); /* slate-900 with opacity */
-  backdrop-filter: blur(10px) saturate(120%);
-  -webkit-backdrop-filter: blur(10px) saturate(120%);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.8); /* white with opacity */
+  backdrop-filter: blur(12px) saturate(140%);
+  -webkit-backdrop-filter: blur(12px) saturate(140%);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
 }
 
 /* Mouse Follower Spotlight Effect */

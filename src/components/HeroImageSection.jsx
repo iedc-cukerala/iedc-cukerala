@@ -40,7 +40,7 @@ const HeroImageSection = () => {
     };
 
     return (
-        <div id="hero-image-section" className="relative h-screen overflow-hidden bg-slate-950 flex items-center justify-center">
+        <div id="hero-image-section" className="relative h-screen overflow-hidden bg-slate-50 flex items-center justify-center">
             
             {/* The Video Background */}
             <div className="absolute inset-0 z-0">
@@ -54,7 +54,7 @@ const HeroImageSection = () => {
                 >
                     <source src={cukVideo} type="video/mp4" />
                 </video>
-                <div className="absolute inset-0 bg-gradient-to-b from-slate-950/80 via-slate-900/60 to-slate-950"></div>
+                <div className="absolute inset-0 bg-gradient-to-b from-white/90 via-white/70 to-slate-50"></div>
             </div>
             
             <div ref={scrollRef} className="relative z-20 container mx-auto px-6 h-full flex flex-col items-center justify-center">
@@ -77,11 +77,11 @@ const HeroImageSection = () => {
                             transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
                             className="font-extrabold text-white leading-tight tracking-tight mb-6 drop-shadow-2xl"
                         >
-                            <span className='block text-4xl sm:text-5xl md:text-7xl lg:text-[90px] drop-shadow-xl leading-tight'>
+                            <span className='block text-4xl sm:text-5xl md:text-7xl lg:text-[90px] drop-shadow-xl leading-tight text-slate-900'>
                                 Innovate. <br className="sm:hidden" />
-                                <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-fuchsia-500 to-pink-500">Incubate.</span>
+                                <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-600 via-fuchsia-600 to-pink-600">Incubate.</span>
                             </span>
-                            <span className='block text-4xl sm:text-5xl md:text-7xl lg:text-[90px] mt-2 drop-shadow-xl'>
+                            <span className='block text-4xl sm:text-5xl md:text-7xl lg:text-[90px] mt-2 drop-shadow-xl text-slate-900'>
                                 Inspire.
                             </span>
                         </motion.h1>
@@ -90,10 +90,10 @@ const HeroImageSection = () => {
                             initial={{ opacity: 0, y: 30 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.8, delay: 0.4, ease: "easeOut" }}
-                            className="text-slate-200 max-w-2xl mx-auto mb-10 text-lg md:text-2xl font-['Poppins'] font-light drop-shadow-lg"
+                            className="text-slate-600 max-w-2xl mx-auto mb-10 text-lg md:text-2xl font-['Poppins'] font-light drop-shadow-sm"
                         >
                             Innovation and Entrepreneurship Development Centre <br/>
-                            <strong className="font-semibold text-white">Central University of Kerala</strong>
+                            <strong className="font-semibold text-slate-900">Central University of Kerala</strong>
                         </motion.p>
 
                         <motion.div 
@@ -114,7 +114,7 @@ const HeroImageSection = () => {
                             
                             <button 
                                 onClick={scrollToAbout}
-                                className="group px-8 py-4 bg-slate-900/40 hover:bg-slate-900/60 border border-white/20 rounded-full font-bold text-white backdrop-blur-md transition-all flex items-center justify-center gap-2"
+                                className="group px-8 py-4 bg-white/60 hover:bg-white/80 border border-slate-300 rounded-full font-bold text-slate-900 backdrop-blur-md shadow-md transition-all flex items-center justify-center gap-2"
                             >
                                 Learn More
                                 <ChevronDown className="w-5 h-5 group-hover:translate-y-1 transition-transform" />
@@ -133,8 +133,8 @@ const HeroImageSection = () => {
                 className="absolute bottom-10 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center gap-2 cursor-pointer"
                 onClick={scrollToAbout}
             >
-                <span className="text-xs uppercase tracking-widest text-slate-400 font-bold">Scroll</span>
-                <div className="w-6 h-10 border-2 border-slate-600 rounded-full flex justify-center p-1">
+                <span className="text-xs uppercase tracking-widest text-slate-500 font-bold">Scroll</span>
+                <div className="w-6 h-10 border-2 border-slate-400 rounded-full flex justify-center p-1">
                     <motion.div 
                         animate={{ y: [0, 12, 0] }}
                         transition={{ repeat: Infinity, duration: 1.5, ease: "easeInOut" }}

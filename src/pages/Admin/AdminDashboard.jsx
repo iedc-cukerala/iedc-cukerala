@@ -29,34 +29,34 @@ const AdminDashboard = () => {
   const isRoot = location.pathname === '/admin/dashboard' || location.pathname === '/admin/dashboard/';
 
   return (
-    <div className="min-h-screen bg-slate-950 text-white relative overflow-hidden">
+    <div className="min-h-screen bg-slate-50 text-slate-900 relative overflow-hidden">
       {/* Background Glows */}
       <div className="absolute top-0 left-1/4 w-96 h-96 bg-purple-600/20 rounded-full mix-blend-screen filter blur-[120px] pointer-events-none"></div>
       <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-pink-600/10 rounded-full mix-blend-screen filter blur-[120px] pointer-events-none"></div>
 
       {/* Header */}
-      <div className="bg-slate-900/60 backdrop-blur-xl border-b border-slate-800/60 sticky top-0 z-50 shadow-lg">
+      <div className="bg-white/80 backdrop-blur-xl border-b border-slate-200 sticky top-0 z-50 shadow-sm">
         <div className="max-w-7xl mx-auto px-6 py-4 flex flex-col md:flex-row justify-between items-center gap-4">
           <div className="flex items-center gap-4">
             <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center shadow-lg shadow-purple-500/30">
               <LayoutDashboard className="text-white w-6 h-6" />
             </div>
             <div>
-              <h1 className="text-2xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-white to-slate-400 tracking-tight">Admin Control</h1>
-              <p className="text-purple-400 text-xs font-semibold uppercase tracking-wider">IEDC CUK Portal</p>
+              <h1 className="text-2xl font-extrabold text-slate-900 tracking-tight">Admin Control</h1>
+              <p className="text-purple-600 text-xs font-semibold uppercase tracking-wider">IEDC CUK Portal</p>
             </div>
           </div>
-          <div className="flex items-center gap-6 bg-slate-800/50 py-2 px-4 rounded-full border border-slate-700/50">
+          <div className="flex items-center gap-6 bg-slate-100 py-2 px-4 rounded-full border border-slate-200 shadow-sm">
             <div className="flex items-center gap-3">
-              <div className="w-8 h-8 rounded-full bg-slate-700 flex items-center justify-center text-sm font-bold border border-slate-600">
+              <div className="w-8 h-8 rounded-full bg-slate-200 flex items-center justify-center text-sm font-bold border border-slate-300 text-slate-700">
                 {user?.email?.charAt(0).toUpperCase()}
               </div>
-              <p className="text-slate-300 text-sm hidden sm:block font-medium">{user?.email}</p>
+              <p className="text-slate-700 text-sm hidden sm:block font-medium">{user?.email}</p>
             </div>
-            <div className="w-px h-6 bg-slate-700"></div>
+            <div className="w-px h-6 bg-slate-300"></div>
             <button
               onClick={handleLogout}
-              className="text-slate-400 hover:text-red-400 transition flex items-center gap-2 text-sm font-bold group"
+              className="text-slate-600 hover:text-red-500 transition flex items-center gap-2 text-sm font-bold group"
             >
               <LogOut className="w-4 h-4 group-hover:scale-110 transition-transform" />
               <span className="hidden sm:block">Logout</span>
@@ -72,51 +72,51 @@ const AdminDashboard = () => {
             
             <Link to="/admin/dashboard/events" className="group relative">
               <div className="absolute -inset-0.5 bg-gradient-to-r from-purple-500 to-indigo-500 rounded-2xl blur opacity-20 group-hover:opacity-100 transition duration-500"></div>
-              <div className="relative h-full bg-slate-900/80 backdrop-blur-sm border border-slate-700/50 p-6 rounded-2xl flex flex-col items-start hover:bg-slate-800/80 transition">
+              <div className="relative h-full bg-white backdrop-blur-sm border border-slate-200 p-6 rounded-2xl flex flex-col items-start hover:bg-slate-50 shadow-sm transition">
                 <div className="w-12 h-12 rounded-lg bg-purple-500/20 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
                   <Calendar className="text-purple-400 w-6 h-6" />
                 </div>
-                <h2 className="text-xl font-bold text-white mb-2">Manage Events</h2>
-                <p className="text-slate-400 text-sm">Create and edit upcoming events and registrations.</p>
+                <h2 className="text-xl font-bold text-slate-900 mb-2">Manage Events</h2>
+                <p className="text-slate-600 text-sm">Create and edit upcoming events and registrations.</p>
               </div>
             </Link>
 
             <Link to="/admin/dashboard/past-events" className="group relative">
               <div className="absolute -inset-0.5 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-2xl blur opacity-20 group-hover:opacity-100 transition duration-500"></div>
-              <div className="relative h-full bg-slate-900/80 backdrop-blur-sm border border-slate-700/50 p-6 rounded-2xl flex flex-col items-start hover:bg-slate-800/80 transition">
+              <div className="relative h-full bg-white backdrop-blur-sm border border-slate-200 p-6 rounded-2xl flex flex-col items-start hover:bg-slate-50 shadow-sm transition">
                 <div className="w-12 h-12 rounded-lg bg-blue-500/20 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
                   <ImageIcon className="text-blue-400 w-6 h-6" />
                 </div>
-                <h2 className="text-xl font-bold text-white mb-2">Past Events</h2>
-                <p className="text-slate-400 text-sm">Archive events with galleries and summaries.</p>
+                <h2 className="text-xl font-bold text-slate-900 mb-2">Past Events</h2>
+                <p className="text-slate-600 text-sm">Archive events with galleries and summaries.</p>
               </div>
             </Link>
 
             <Link to="/admin/dashboard/announcements" className="group relative">
               <div className="absolute -inset-0.5 bg-gradient-to-r from-pink-500 to-rose-500 rounded-2xl blur opacity-20 group-hover:opacity-100 transition duration-500"></div>
-              <div className="relative h-full bg-slate-900/80 backdrop-blur-sm border border-slate-700/50 p-6 rounded-2xl flex flex-col items-start hover:bg-slate-800/80 transition">
+              <div className="relative h-full bg-white backdrop-blur-sm border border-slate-200 p-6 rounded-2xl flex flex-col items-start hover:bg-slate-50 shadow-sm transition">
                 <div className="w-12 h-12 rounded-lg bg-pink-500/20 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
                   <Megaphone className="text-pink-400 w-6 h-6" />
                 </div>
-                <h2 className="text-xl font-bold text-white mb-2">Announcements</h2>
-                <p className="text-slate-400 text-sm">Broadcast important news to the homepage.</p>
+                <h2 className="text-xl font-bold text-slate-900 mb-2">Announcements</h2>
+                <p className="text-slate-600 text-sm">Broadcast important news to the homepage.</p>
               </div>
             </Link>
 
             <Link to="/admin/dashboard/team" className="group relative">
               <div className="absolute -inset-0.5 bg-gradient-to-r from-teal-500 to-emerald-500 rounded-2xl blur opacity-20 group-hover:opacity-100 transition duration-500"></div>
-              <div className="relative h-full bg-slate-900/80 backdrop-blur-sm border border-slate-700/50 p-6 rounded-2xl flex flex-col items-start hover:bg-slate-800/80 transition">
+              <div className="relative h-full bg-white backdrop-blur-sm border border-slate-200 p-6 rounded-2xl flex flex-col items-start hover:bg-slate-50 shadow-sm transition">
                 <div className="w-12 h-12 rounded-lg bg-teal-500/20 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
                   <Users className="text-teal-400 w-6 h-6" />
                 </div>
-                <h2 className="text-xl font-bold text-white mb-2">Manage Team</h2>
-                <p className="text-slate-400 text-sm">Invite leads and manage dashboard access.</p>
+                <h2 className="text-xl font-bold text-slate-900 mb-2">Manage Team</h2>
+                <p className="text-slate-600 text-sm">Invite leads and manage dashboard access.</p>
               </div>
             </Link>
 
             <Link to="/admin/dashboard/contacts" className="group relative">
               <div className="absolute -inset-0.5 bg-gradient-to-r from-violet-500 to-fuchsia-500 rounded-2xl blur opacity-20 group-hover:opacity-100 transition duration-500"></div>
-              <div className="relative h-full bg-slate-900/80 backdrop-blur-sm border border-slate-700/50 p-6 rounded-2xl flex flex-col items-start hover:bg-slate-800/80 transition">
+              <div className="relative h-full bg-white backdrop-blur-sm border border-slate-200 p-6 rounded-2xl flex flex-col items-start hover:bg-slate-50 shadow-sm transition">
                 <div className="w-12 h-12 rounded-lg bg-violet-500/20 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300 relative">
                   <MessageSquare className="text-violet-400 w-6 h-6" />
                   {unreadCount > 0 && (
@@ -128,10 +128,10 @@ const AdminDashboard = () => {
                     </span>
                   )}
                 </div>
-                <h2 className="text-xl font-bold text-white mb-2">
+                <h2 className="text-xl font-bold text-slate-900 mb-2">
                   Inbox Messages
                 </h2>
-                <p className="text-slate-400 text-sm">Read and reply to user queries.</p>
+                <p className="text-slate-600 text-sm">Read and reply to user queries.</p>
               </div>
             </Link>
 
@@ -143,12 +143,12 @@ const AdminDashboard = () => {
           <div className="space-y-4">
             <button 
               onClick={() => navigate('/admin/dashboard')}
-              className="flex items-center gap-2 text-slate-400 hover:text-white transition-colors font-semibold group w-fit bg-slate-900/50 px-4 py-2 rounded-lg border border-slate-800/60"
+              className="flex items-center gap-2 text-slate-600 hover:text-slate-900 transition-colors font-semibold group w-fit bg-white px-4 py-2 rounded-lg border border-slate-200 shadow-sm hover:bg-slate-50"
             >
               <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
               Back to Dashboard
             </button>
-            <div className="bg-slate-900/40 backdrop-blur-md border border-slate-800/60 p-8 rounded-2xl shadow-2xl relative">
+            <div className="bg-white/80 backdrop-blur-md border border-slate-200 p-8 rounded-2xl shadow-xl relative">
               <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-purple-500 via-pink-500 to-teal-500 opacity-50 rounded-t-2xl"></div>
               <Outlet />
             </div>
@@ -156,9 +156,9 @@ const AdminDashboard = () => {
         )}
 
         {/* Footer Support Text */}
-        <div className="mt-12 pt-6 border-t border-slate-800/60 text-center">
-          <p className="text-slate-500 text-sm">
-            Contact <a href="mailto:tathagata.2500705021@cukerala.ac.in" className="text-purple-400 hover:text-purple-300 transition-colors font-medium">tathagata.2500705021@cukerala.ac.in</a> for support.
+        <div className="mt-12 pt-6 border-t border-slate-200 text-center">
+          <p className="text-slate-600 text-sm">
+            Contact <a href="mailto:tathagata.2500705021@cukerala.ac.in" className="text-purple-600 hover:text-purple-500 transition-colors font-medium">tathagata.2500705021@cukerala.ac.in</a> for support.
           </p>
         </div>
       </div>

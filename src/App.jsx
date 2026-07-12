@@ -35,7 +35,7 @@ function PublicHome() {
   }, []);
 
   return (
-    <div className="bg-slate-950">
+    <div className="bg-slate-50">
       <Header isVisible={isHeaderVisible} />
       
       <div id="hero-image-section" className="fixed top-0 left-0 w-full h-screen z-0">
@@ -43,7 +43,7 @@ function PublicHome() {
       </div>
       
       <div className="h-screen" />
-      <div className="relative z-10 bg-slate-950">
+      <div className="relative z-10 bg-slate-50">
         <div className="container mx-auto px-6 max-w-7xl">
           <main>
             <section id="announcements" className="scroll-mt-24">
@@ -96,7 +96,7 @@ function App() {
           <Route path="team" element={<ManageTeam />} />
           <Route path="contacts" element={<ManageContacts />} />
           <Route index element={
-            <div className="text-center text-slate-400 py-12">
+            <div className="text-center text-slate-500 py-12">
               <p className="text-lg">Welcome to Admin Dashboard!</p>
               <p className="text-sm mt-2">Select an option above to get started</p>
             </div>
