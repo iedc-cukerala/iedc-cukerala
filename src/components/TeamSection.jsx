@@ -131,7 +131,7 @@ const TeamSection = () => {
 
                 <div className="text-center w-full mb-4">
                   <h3 className="text-xl font-bold text-[#1e1b4b] mb-1">{member.name}</h3>
-                  <p className="text-sm font-bold text-[#00f2fe] uppercase tracking-wider">{member.role}</p>
+                  <p className="text-sm font-bold text-pink-600 uppercase tracking-wider">{member.role}</p>
                 </div>
                 
                 {/* Always visible Social Icons including Phone */}

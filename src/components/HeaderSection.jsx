@@ -44,7 +44,7 @@ const Header = ({ isVisible }) => {
                                     <a key={link.name} href={link.href} className="hover:text-slate-900 transition-colors duration-300">{link.name}</a>
                                 ))}
                             </nav>
-                            <a href="/admin/login" className="gradient-button text-white font-semibold px-5 py-2 rounded-lg shadow-lg transition-transform duration-300 hover:scale-105">
+                            <a href="#/admin/login" className="gradient-button text-white font-semibold px-5 py-2 rounded-lg shadow-lg transition-transform duration-300 hover:scale-105">
                                 Admin & Lead Login
                             </a>
                         </div>
@@ -87,7 +87,7 @@ const Header = ({ isVisible }) => {
                         </nav>
                         <div className="pt-8">
                             <a 
-                                href="/admin/login" 
+                                href="#/admin/login" 
                                 className="gradient-button text-white font-semibold px-8 py-3 rounded-lg shadow-lg"
                                 onClick={() => setIsMenuOpen(false)}
                             >
