@@ -1,6 +1,6 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
-import { ChevronDown, Sparkles } from 'lucide-react';
+import { ChevronDown, Sparkles, Rocket, Zap, Code, Lightbulb } from 'lucide-react';
 import cukVideo from '../assets/cuk_video.mp4'; 
 import cukPoster from '../assets/posters/cuk_poster.jpg'; 
 
@@ -58,6 +58,47 @@ const HeroImageSection = () => {
             </div>
             
             <div ref={scrollRef} className="relative z-20 container mx-auto px-6 h-full flex flex-col items-center justify-center">
+                
+                {/* --- FLOATING 3D-LIKE GRAPHICS --- */}
+                <motion.div 
+                    animate={{ y: [0, -30, 0], rotate: [0, 10, 0], scale: [1, 1.1, 1] }} 
+                    transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }} 
+                    className="absolute top-1/4 left-[10%] md:left-[20%] z-0 opacity-80"
+                >
+                    <div className="bg-white/80 backdrop-blur-md p-4 rounded-2xl shadow-[0_10px_30px_rgba(236,72,153,0.3)] border border-white/50">
+                        <Rocket className="w-10 h-10 md:w-16 md:h-16 text-pink-500" strokeWidth={1.5} />
+                    </div>
+                </motion.div>
+
+                <motion.div 
+                    animate={{ y: [0, 40, 0], rotate: [0, -15, 0], scale: [1, 1.2, 1] }} 
+                    transition={{ duration: 7, repeat: Infinity, ease: "easeInOut", delay: 1 }} 
+                    className="absolute top-1/3 right-[10%] md:right-[15%] z-0 opacity-80"
+                >
+                    <div className="bg-white/80 backdrop-blur-md p-5 rounded-full shadow-[0_10px_30px_rgba(168,85,247,0.3)] border border-white/50">
+                        <Zap className="w-12 h-12 md:w-20 md:h-20 text-purple-500" strokeWidth={1.5} />
+                    </div>
+                </motion.div>
+
+                <motion.div 
+                    animate={{ y: [0, -20, 0], rotate: [0, 20, 0], scale: [1, 1.1, 1] }} 
+                    transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 2 }} 
+                    className="absolute bottom-1/4 left-[15%] md:left-[25%] z-0 opacity-70 hidden md:block"
+                >
+                    <div className="bg-white/80 backdrop-blur-md p-4 rounded-xl shadow-[0_10px_30px_rgba(59,130,246,0.3)] border border-white/50 transform -rotate-12">
+                        <Code className="w-10 h-10 md:w-14 md:h-14 text-blue-500" strokeWidth={1.5} />
+                    </div>
+                </motion.div>
+
+                <motion.div 
+                    animate={{ y: [0, 30, 0], rotate: [0, -10, 0], scale: [1, 1.15, 1] }} 
+                    transition={{ duration: 8, repeat: Infinity, ease: "easeInOut", delay: 3 }} 
+                    className="absolute bottom-1/3 right-[20%] md:right-[25%] z-0 opacity-70 hidden md:block"
+                >
+                    <div className="bg-white/80 backdrop-blur-md p-4 rounded-2xl shadow-[0_10px_30px_rgba(234,179,8,0.3)] border border-white/50 transform rotate-12">
+                        <Lightbulb className="w-10 h-10 md:w-12 md:h-12 text-yellow-500" strokeWidth={1.5} />
+                    </div>
+                </motion.div>
                 <motion.div 
                     style={{ 
                         opacity: contentOpacity,

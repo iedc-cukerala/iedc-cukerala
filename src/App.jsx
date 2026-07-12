@@ -43,8 +43,19 @@ function PublicHome() {
       </div>
       
       <div className="h-screen" />
-      <div className="relative z-10 bg-slate-50">
-        <div className="container mx-auto px-6 max-w-7xl">
+      <div className="relative z-10 bg-slate-50 overflow-hidden">
+        
+        {/* --- DYNAMIC GRAPHICAL BACKGROUND --- */}
+        <div className="absolute inset-0 z-0 pointer-events-none">
+          <div className="absolute inset-0 bg-grid-pattern opacity-60"></div>
+          {/* Floating Blobs */}
+          <div className="blob bg-purple-300 w-[500px] h-[500px] top-[-10%] left-[-10%]"></div>
+          <div className="blob bg-pink-300 w-[600px] h-[600px] top-[20%] right-[-15%]" style={{ animationDelay: '3s', animationDuration: '20s' }}></div>
+          <div className="blob bg-blue-300 w-[400px] h-[400px] bottom-[10%] left-[20%]" style={{ animationDelay: '5s', animationDuration: '18s' }}></div>
+          <div className="blob bg-teal-200 w-[700px] h-[700px] bottom-[-20%] right-[-10%]" style={{ animationDelay: '7s' }}></div>
+        </div>
+
+        <div className="container mx-auto px-6 max-w-7xl relative z-10">
           <main>
             <section id="announcements" className="scroll-mt-24">
               <AnnouncementsSection />
@@ -70,8 +81,8 @@ function PublicHome() {
               <ContactSection />
             </section>
           </main>
-          <Footer />
         </div>
+        <Footer />
       </div>
     </div>
   );

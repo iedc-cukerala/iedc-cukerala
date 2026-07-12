@@ -18,6 +18,31 @@ body {
   background: none;
 }
 
+/* Background Graphics */
+.bg-grid-pattern {
+  background-size: 40px 40px;
+  background-image: linear-gradient(to right, rgba(0, 0, 0, 0.04) 1px, transparent 1px),
+                    linear-gradient(to bottom, rgba(0, 0, 0, 0.04) 1px, transparent 1px);
+  mask-image: linear-gradient(to bottom, transparent, black 5%, black 95%, transparent);
+  -webkit-mask-image: linear-gradient(to bottom, transparent, black 5%, black 95%, transparent);
+}
+
+.blob {
+  position: absolute;
+  filter: blur(90px);
+  z-index: 0;
+  opacity: 0.5;
+  border-radius: 50%;
+  animation: blob-float 15s infinite alternate cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes blob-float {
+  0% { transform: translate(0px, 0px) scale(1); }
+  33% { transform: translate(50px, -50px) scale(1.1); }
+  66% { transform: translate(-30px, 30px) scale(0.9); }
+  100% { transform: translate(0px, 0px) scale(1); }
+}
+
 /* Custom Gradient Text */
 .gradient-text {
   background: linear-gradient(to right, #9333ea, #db2777); /* Slightly darker purple/pink for contrast */
