@@ -10,7 +10,8 @@ export const useEvents = () => {
   const fetchEvents = async () => {
     setLoading(true);
     try {
-      const q = query(collection(db, 'events'), orderBy('date', 'desc'));
+      // Remove orderBy to prevent Firebase index errors. We'll sort on the client side.
+      const q = query(collection(db, 'events'));
       const snapshot = await getDocs(q);
       
       const activeEvents = [];
@@ -46,6 +47,7 @@ export const useEvents = () => {
         }
       }
 
+      activeEvents.sort((a, b) => new Date(a.date) - new Date(b.date)); // Ascending for upcoming events
       setEvents(activeEvents);
     } catch (error) {
       console.error('Error fetching events:', error);

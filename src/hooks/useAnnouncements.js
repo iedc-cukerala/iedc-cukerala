@@ -10,9 +10,12 @@ export const useAnnouncements = () => {
   const fetchAnnouncements = async () => {
     setLoading(true);
     try {
-      const q = query(collection(db, 'announcements'), orderBy('date', 'desc'));
+      // Remove orderBy to prevent Firebase index errors. We'll sort on the client side.
+      const q = query(collection(db, 'announcements'));
       const snapshot = await getDocs(q);
-      setAnnouncements(snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() })));
+      const data = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+      data.sort((a, b) => new Date(b.date) - new Date(a.date));
+      setAnnouncements(data);
     } catch (error) {
       console.error('Error fetching announcements:', error);
     } finally {

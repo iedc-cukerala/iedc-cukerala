@@ -67,9 +67,15 @@ const EventsSection = () => {
         </div>
 
         {events.length === 0 ? (
-          <div className="text-center text-slate-500 py-12 bg-white rounded-3xl border border-slate-200 shadow-xl">
-            <p className="text-lg font-medium">No upcoming events. Check back soon for exciting opportunities!</p>
-          </div>
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            className="text-center py-24 bg-white/50 backdrop-blur-md rounded-[2rem] border border-white/50 shadow-sm mx-auto max-w-2xl"
+          >
+            <Calendar className="w-16 h-16 text-pink-300 mx-auto mb-4" />
+            <p className="text-[#1e1b4b] text-xl font-medium">No upcoming events.</p>
+            <p className="text-[#1e1b4b]/60 mt-2">Check back soon for exciting opportunities!</p>
+          </motion.div>
         ) : (
           <motion.div 
             variants={containerVariants}

@@ -31,7 +31,7 @@ const PastEventsSection = () => {
     );
   }
 
-  if (pastEvents.length === 0) return null;
+  // Removed early return null so the section remains visible
 
   return (
     <section className="py-32 bg-transparent relative">
@@ -55,53 +55,65 @@ const PastEventsSection = () => {
           </motion.h2>
         </div>
 
-        <motion.div 
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: true, margin: "-100px" }}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
-        >
-          {pastEvents.map(event => (
-            <motion.div 
-              key={event.id}
-              variants={itemVariants}
-              whileHover={{ y: -10 }}
-              onClick={() => setSelectedEvent(event)}
-              className="group relative bg-white rounded-[2rem] overflow-hidden shadow-[0_10px_30px_-10px_rgba(0,0,0,0.1)] border border-slate-200 hover:shadow-[0_20px_50px_-15px_rgba(0,242,254,0.4)] transition-all duration-500 flex flex-col h-full cursor-pointer hover-lift"
-            >
-              <div className="relative h-72 overflow-hidden bg-slate-100 shrink-0">
-                {event.imageUrl ? (
-                  <img
-                    src={event.imageUrl}
-                    alt={event.title}
-                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 grayscale-[20%] group-hover:grayscale-0"
-                    onError={(e) => {
-                      e.target.src = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300"%3E%3Crect fill="%23f8fafc" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" font-size="20" fill="%23cbd5e1" text-anchor="middle" dy=".3em"%3EImage not available%3C/text%3E%3C/svg%3E';
-                    }}
-                  />
-                ) : (
-                  <div className="w-full h-full flex items-center justify-center bg-slate-100">
-                      <Calendar className="w-16 h-16 text-slate-300" />
+        {pastEvents.length === 0 ? (
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            className="text-center py-24 bg-white/50 backdrop-blur-md rounded-[2rem] border border-white/50 shadow-sm max-w-2xl mx-auto"
+          >
+            <Calendar className="w-16 h-16 text-blue-300 mx-auto mb-4" />
+            <p className="text-[#1e1b4b] text-xl font-medium">No past events yet.</p>
+            <p className="text-[#1e1b4b]/60 mt-2">Check back soon for updates on our past successes!</p>
+          </motion.div>
+        ) : (
+          <motion.div 
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, margin: "-100px" }}
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+          >
+            {pastEvents.map(event => (
+              <motion.div 
+                key={event.id}
+                variants={itemVariants}
+                whileHover={{ y: -10 }}
+                onClick={() => setSelectedEvent(event)}
+                className="group relative bg-white rounded-[2rem] overflow-hidden shadow-[0_10px_30px_-10px_rgba(0,0,0,0.1)] border border-slate-200 hover:shadow-[0_20px_50px_-15px_rgba(0,242,254,0.4)] transition-all duration-500 flex flex-col h-full cursor-pointer hover-lift"
+              >
+                <div className="relative h-72 overflow-hidden bg-slate-100 shrink-0">
+                  {event.imageUrl ? (
+                    <img
+                      src={event.imageUrl}
+                      alt={event.title}
+                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 grayscale-[20%] group-hover:grayscale-0"
+                      onError={(e) => {
+                        e.target.src = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300"%3E%3Crect fill="%23f8fafc" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" font-size="20" fill="%23cbd5e1" text-anchor="middle" dy=".3em"%3EImage not available%3C/text%3E%3C/svg%3E';
+                      }}
+                    />
+                  ) : (
+                    <div className="w-full h-full flex items-center justify-center bg-slate-100">
+                        <Calendar className="w-16 h-16 text-slate-300" />
+                    </div>
+                  )}
+                  
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#1e1b4b]/95 via-[#1e1b4b]/50 to-transparent opacity-80 group-hover:opacity-100 transition-opacity duration-500"></div>
+                  
+                  <div className="absolute top-4 right-4 z-10 flex items-center gap-1.5 bg-green-500/90 backdrop-blur-md text-white text-[10px] font-bold px-2.5 py-1 rounded-full uppercase tracking-wider shadow-sm">
+                    <CheckCircle2 className="w-3.5 h-3.5" /> Completed
                   </div>
-                )}
-                
-                <div className="absolute inset-0 bg-gradient-to-t from-[#1e1b4b]/95 via-[#1e1b4b]/50 to-transparent opacity-80 group-hover:opacity-100 transition-opacity duration-500"></div>
-                
-                <div className="absolute top-4 right-4 z-10 flex items-center gap-1.5 bg-green-500/90 backdrop-blur-md text-white text-[10px] font-bold px-2.5 py-1 rounded-full uppercase tracking-wider shadow-sm">
-                  <CheckCircle2 className="w-3.5 h-3.5" /> Completed
-                </div>
 
-                <div className="absolute bottom-6 left-6 right-6 z-10 text-white transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
-                   <h3 className="text-2xl font-bold mb-3 leading-tight text-white shadow-sm">{event.title}</h3>
-                   <div className="flex items-center gap-4 text-sm font-medium text-pink-200">
-                      <span className="flex items-center gap-1.5"><Calendar className="w-4 h-4" /> {new Date(event.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}</span>
-                   </div>
+                  <div className="absolute bottom-6 left-6 right-6 z-10 text-white transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
+                     <h3 className="text-2xl font-bold mb-3 leading-tight text-white shadow-sm">{event.title}</h3>
+                     <div className="flex items-center gap-4 text-sm font-medium text-pink-200">
+                        <span className="flex items-center gap-1.5"><Calendar className="w-4 h-4" /> {new Date(event.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}</span>
+                     </div>
+                  </div>
                 </div>
-              </div>
-            </motion.div>
-          ))}
-        </motion.div>
+              </motion.div>
+            ))}
+          </motion.div>
+        )}
       </div>
 
       {/* Popup Modal */}

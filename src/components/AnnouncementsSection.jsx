@@ -27,7 +27,7 @@ const AnnouncementsSection = () => {
     </section>
   );
 
-  if (announcements.length === 0) return null;
+  // Removing the early return so the section structure remains even when empty
 
   return (
     <section id="announcements" className="py-24 bg-transparent relative overflow-hidden">
@@ -54,65 +54,77 @@ const AnnouncementsSection = () => {
           </motion.h2>
         </div>
 
-        <motion.div 
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: true, margin: "-50px" }}
-          className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-5xl mx-auto"
-        >
-          {announcements.map((announcement) => (
-            <motion.div 
-              key={announcement.id} 
-              variants={itemVariants}
-              className="group relative bg-white/80 backdrop-blur-xl rounded-3xl p-8 border border-white shadow-[0_10px_30px_-10px_rgba(0,0,0,0.1)] hover:shadow-[0_20px_50px_-15px_rgba(255,153,51,0.4)] transition-all duration-500 overflow-hidden hover-lift"
-            >
-              {/* Left accent border that expands on hover */}
-              <div className="absolute left-0 top-0 bottom-0 w-1.5 bg-gradient-to-b from-orange-400 to-pink-500 group-hover:w-3 transition-all duration-300 ease-out"></div>
-              
-              {/* Subtle glowing background on hover */}
-              <div className="absolute inset-0 bg-gradient-to-br from-orange-50 to-pink-50 opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-0"></div>
+        {announcements.length === 0 ? (
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            className="text-center py-24 bg-white/50 backdrop-blur-md rounded-[2rem] border border-white/50 shadow-sm mx-auto max-w-2xl"
+          >
+            <Bell className="w-16 h-16 text-orange-300 mx-auto mb-4" />
+            <p className="text-[#1e1b4b] text-xl font-medium">No announcements at the moment.</p>
+            <p className="text-[#1e1b4b]/60 mt-2">Check back soon for latest news and updates!</p>
+          </motion.div>
+        ) : (
+          <motion.div 
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, margin: "-50px" }}
+            className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-5xl mx-auto"
+          >
+            {announcements.map((announcement) => (
+              <motion.div 
+                key={announcement.id} 
+                variants={itemVariants}
+                className="group relative bg-white/80 backdrop-blur-xl rounded-3xl p-8 border border-white shadow-[0_10px_30px_-10px_rgba(0,0,0,0.1)] hover:shadow-[0_20px_50px_-15px_rgba(255,153,51,0.4)] transition-all duration-500 overflow-hidden hover-lift"
+              >
+                {/* Left accent border that expands on hover */}
+                <div className="absolute left-0 top-0 bottom-0 w-1.5 bg-gradient-to-b from-orange-400 to-pink-500 group-hover:w-3 transition-all duration-300 ease-out"></div>
+                
+                {/* Subtle glowing background on hover */}
+                <div className="absolute inset-0 bg-gradient-to-br from-orange-50 to-pink-50 opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-0"></div>
 
-              <div className="relative z-10 flex gap-6">
-                {/* Icon Box */}
-                <div className="hidden sm:flex shrink-0 w-16 h-16 rounded-2xl bg-orange-100 text-orange-600 items-center justify-center transform group-hover:scale-110 group-hover:rotate-6 transition-all duration-500 shadow-sm">
-                   <Bell className="w-6 h-6" />
-                </div>
-
-                <div className="flex-1">
-                  <div className="flex items-center gap-1.5 text-sm font-semibold text-orange-500 mb-3 uppercase tracking-wider">
-                    <CalendarIcon className="w-4 h-4" />
-                    {new Date(announcement.date).toLocaleDateString('en-US', { 
-                      month: 'short', 
-                      day: 'numeric', 
-                      year: 'numeric' 
-                    })}
+                <div className="relative z-10 flex gap-6">
+                  {/* Icon Box */}
+                  <div className="hidden sm:flex shrink-0 w-16 h-16 rounded-2xl bg-orange-100 text-orange-600 items-center justify-center transform group-hover:scale-110 group-hover:rotate-6 transition-all duration-500 shadow-sm">
+                     <Bell className="w-6 h-6" />
                   </div>
-                  <h3 className="text-2xl font-bold text-[#1e1b4b] mb-3 group-hover:text-orange-600 transition-colors">
-                    {announcement.title}
-                  </h3>
-                  <p className="text-[#1e1b4b]/70 leading-relaxed text-[15px]">
-                    {announcement.description}
-                  </p>
 
-                  {announcement.link && (
-                    <div className="mt-6">
-                      <a 
-                        href={announcement.link}
-                        target="_blank"
-                        rel="noreferrer"
-                        className="inline-flex items-center gap-2 text-orange-600 font-bold hover:text-pink-600 transition-colors group/link"
-                      >
-                        Read More
-                        <ArrowUpRight className="w-5 h-5 transform group-hover/link:translate-x-1 group-hover/link:-translate-y-1 transition-transform" />
-                      </a>
+                  <div className="flex-1">
+                    <div className="flex items-center gap-1.5 text-sm font-semibold text-orange-500 mb-3 uppercase tracking-wider">
+                      <CalendarIcon className="w-4 h-4" />
+                      {new Date(announcement.date).toLocaleDateString('en-US', { 
+                        month: 'short', 
+                        day: 'numeric', 
+                        year: 'numeric' 
+                      })}
                     </div>
-                  )}
+                    <h3 className="text-2xl font-bold text-[#1e1b4b] mb-3 group-hover:text-orange-600 transition-colors">
+                      {announcement.title}
+                    </h3>
+                    <p className="text-[#1e1b4b]/70 leading-relaxed text-[15px]">
+                      {announcement.description}
+                    </p>
+
+                    {announcement.link && (
+                      <div className="mt-6">
+                        <a 
+                          href={announcement.link}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="inline-flex items-center gap-2 text-orange-600 font-bold hover:text-pink-600 transition-colors group/link"
+                        >
+                          Read More
+                          <ArrowUpRight className="w-5 h-5 transform group-hover/link:translate-x-1 group-hover/link:-translate-y-1 transition-transform" />
+                        </a>
+                      </div>
+                    )}
+                  </div>
                 </div>
-              </div>
-            </motion.div>
-          ))}
-        </motion.div>
+              </motion.div>
+            ))}
+          </motion.div>
+        )}
       </div>
     </section>
   );

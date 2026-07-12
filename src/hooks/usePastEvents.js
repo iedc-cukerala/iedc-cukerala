@@ -7,18 +7,21 @@ export const usePastEvents = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // We still ask Firebase to sort it first
-    const q = query(collection(db, 'pastEvents'), orderBy('date', 'desc'));
+    // Remove orderBy to prevent Firebase index errors. We'll sort on the client side.
+    const q = query(collection(db, 'pastEvents'));
     
     const unsubscribe = onSnapshot(q, (snapshot) => {
       const eventsData = snapshot.docs.map(doc => ({
         id: doc.id,
         ...doc.data()
       }))
-      // FORCE REACT TO DOUBLE-CHECK THE SORTING (Newest First)
+      // SORT IN REACT INSTEAD OF FIREBASE (Newest First)
       .sort((a, b) => new Date(b.date) - new Date(a.date)); 
 
       setPastEvents(eventsData);
+      setLoading(false);
+    }, (error) => {
+      console.error("Error fetching past events:", error);
       setLoading(false);
     });
 
