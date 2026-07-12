@@ -32,12 +32,12 @@ const Footer = () => {
             </div>
 
             <div className="container mx-auto px-6 py-12">
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center md:text-left">
-                    <div className='flex flex-col justify-center items-center md:items-start'>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+                    <div className='flex flex-col items-center'>
                         <a href="#" className="text-2xl font-bold text-white z-10 flex items-center">
                             <img src="./iedc_logo.png" alt="IEDC Logo" className="inline-block h-8 mr-3" />
                             IEDC <span className="gradient-text ml-2 mr-3">CUK</span>
-                            <div className="flex items-center justify-center w-10 h-10 bg-white rounded-full p-0.5 shadow-md border border-slate-200 overflow-hidden shrink-0">
+                            <div className="flex items-center justify-center w-10 h-10 bg-white rounded-full ml-2 p-0.5 shadow-md border border-slate-200 overflow-hidden">
                                 <img src="https://www.cukerala.ac.in/assets/img/CUKLOGO.png" alt="CUK Logo" className="w-full h-full object-contain transform scale-110" />
                             </div>
                         </a>
@@ -45,26 +45,24 @@ const Footer = () => {
                     </div>
 
                     <div className='flex flex-col items-center'>
-                        <div className='flex flex-col items-center md:items-start'>
-                            <h3 className="text-lg font-semibold text-white mb-4">Quick Links</h3>
-                            <ul className="space-y-2 text-center md:text-left">
-                                {navLinks.map(link => (
-                                    <li key={link.name}>
-                                        <a 
-                                          href={link.href} 
-                                          target={link.external ? "_blank" : "_self"}
-                                          rel={link.external ? "noopener noreferrer" : ""}
-                                          className="text-slate-400 hover:text-pink-400 transition-colors duration-300 outline-none focus:outline-none"
-                                        >
-                                            {link.name}
-                                        </a>
-                                    </li>
-                                ))}
-                            </ul>
-                        </div>
+                        <h3 className="text-lg font-semibold text-white mb-4">Quick Links</h3>
+                        <ul className="space-y-2 text-center">
+                            {navLinks.map(link => (
+                                <li key={link.name}>
+                                    <a 
+                                      href={link.href} 
+                                      target={link.external ? "_blank" : "_self"}
+                                      rel={link.external ? "noopener noreferrer" : ""}
+                                      className="text-slate-400 hover:text-pink-400 transition-colors duration-300 outline-none focus:outline-none"
+                                    >
+                                        {link.name}
+                                    </a>
+                                </li>
+                            ))}
+                        </ul>
                     </div>
 
-                    <div className='flex flex-col items-center md:items-end'>
+                    <div className='flex flex-col items-center'>
                         <h3 className="text-lg font-semibold text-white mb-4">Connect With Us</h3>
                         <div className="flex justify-center space-x-4">
                             {socialLinks.map((social, index) => (
