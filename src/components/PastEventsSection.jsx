@@ -10,19 +10,25 @@ const PastEventsSection = () => {
 
   return (
     <section className="py-20 border-b border-slate-800">
-      <h2 className="text-4xl font-bold gradient-text mb-12 text-center">📸 Past Events & Gallery</h2>
+      <div className="text-center mb-16">
+        <div className="inline-flex items-center justify-center px-4 py-1.5 rounded-full bg-pink-900/30 border border-pink-500/30 text-pink-300 text-sm font-semibold mb-4 tracking-wide uppercase">
+          Our Legacy
+        </div>
+        <h2 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-white via-slate-200 to-slate-400">
+          Past Events & Gallery
+        </h2>
+      </div>
 
-      {/* CHANGED: Made the grid 2 columns max (lg:grid-cols-2) and increased the gap */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto">
+      <div className="flex flex-wrap justify-center gap-8 max-w-6xl mx-auto">
         {pastEvents.map(event => (
           <div 
             key={event.id} 
             onClick={() => setSelectedEvent(event)}
-            className="glass-card rounded-lg overflow-hidden cursor-pointer hover:border-blue-500 transition group relative shadow-lg"
+            className="w-full md:w-[calc(50%-2rem)] max-w-xl group relative overflow-hidden rounded-2xl glass-card cursor-pointer hover:shadow-2xl hover:shadow-purple-500/20 transition-all duration-500"
           >
             {/* CHANGED: Increased image height to h-72 (much taller!) */}
             <div className="h-72 overflow-hidden">
-              <img src={event.coverImageUrl} alt={event.title} className="w-full h-full object-cover group-hover:scale-110 transition duration-500" />
+              <img src={event.imageUrl} alt={event.title} className="w-full h-full object-cover group-hover:scale-110 transition duration-500" />
               <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/40 to-transparent opacity-90"></div>
             </div>
             
@@ -42,7 +48,7 @@ const PastEventsSection = () => {
             className="bg-slate-900 border border-slate-700 rounded-xl max-w-2xl w-full overflow-hidden shadow-2xl transform transition-all"
             onClick={(e) => e.stopPropagation()} 
           >
-            <img src={selectedEvent.coverImageUrl} alt="Cover" className="w-full h-72 object-cover" />
+            <img src={selectedEvent.imageUrl} alt="Cover" className="w-full h-72 object-cover" />
             <div className="p-6 md:p-8">
               <h2 className="text-3xl font-bold text-white mb-2">{selectedEvent.title}</h2>
               <p className="text-slate-400 mb-6">📅 Conducted on: {selectedEvent.date}</p>
@@ -50,7 +56,7 @@ const PastEventsSection = () => {
               
               <div className="flex gap-4">
                 <a 
-                  href={selectedEvent.driveLink} 
+                  href={selectedEvent.link} 
                   target="_blank" 
                   rel="noopener noreferrer"
                   className="flex-1 bg-blue-600 text-white text-center font-bold py-3 rounded-lg hover:bg-blue-500 transition shadow-lg"

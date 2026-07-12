@@ -3,9 +3,10 @@ import { Instagram, Linkedin, Twitter, Mail } from 'lucide-react';
 
 const Footer = () => {
     const navLinks = [
-        { name: 'About', href: '#about' },
-        { name: 'Events', href: '#events' },
-        { name: 'Team', href: '#team' },
+        { name: 'About', href: '#about', external: false },
+        { name: 'Events', href: '#events', external: false },
+        { name: 'Kerala Startup Mission', href: 'https://startupmission.kerala.gov.in/iedc', external: true },
+        { name: 'Central University of Kerala', href: 'https://www.cukerala.ac.in/', external: true },
     ];
 
     const socialLinks = [
@@ -32,7 +33,7 @@ const Footer = () => {
 
             <div className="container mx-auto px-6 py-12">
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center md:text-left">
-                    <div className='flex flex-col justify-center items-center'>
+                    <div className='flex flex-col justify-center items-center md:items-start'>
                         <a href="#" className="text-2xl font-bold text-white z-10 flex items-center">
                         <img src="./iedc_logo.png" alt="IEDC Logo" className="inline-block h-6 mr-2" />
                         IEDC <span className="gradient-text ml-2">CUK</span>
@@ -40,22 +41,29 @@ const Footer = () => {
                         <p className="text-slate-400 mt-2">Innovate. Incubate. Inspire.</p>
                     </div>
 
-                    <div className='flex flex-col md:items-end'>
-                        <h3 className="text-lg font-semibold text-white mb-4">Quick Links</h3>
-                        <ul className="space-y-2">
-                            {navLinks.map(link => (
-                                <li key={link.name}>
-                                    <a href={link.href} className="text-slate-400 hover:text-pink-400 transition-colors duration-300">
-                                        {link.name}
-                                    </a>
-                                </li>
-                            ))}
-                        </ul>
+                    <div className='flex flex-col items-center'>
+                        <div className='flex flex-col items-center md:items-start'>
+                            <h3 className="text-lg font-semibold text-white mb-4">Quick Links</h3>
+                            <ul className="space-y-2 text-center md:text-left">
+                                {navLinks.map(link => (
+                                    <li key={link.name}>
+                                        <a 
+                                          href={link.href} 
+                                          target={link.external ? "_blank" : "_self"}
+                                          rel={link.external ? "noopener noreferrer" : ""}
+                                          className="text-slate-400 hover:text-pink-400 transition-colors duration-300 outline-none focus:outline-none"
+                                        >
+                                            {link.name}
+                                        </a>
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
                     </div>
 
-                    <div className='flex flex-col md:items-end'>
+                    <div className='flex flex-col items-center md:items-end'>
                         <h3 className="text-lg font-semibold text-white mb-4">Connect With Us</h3>
-                        <div className="flex justify-center md:justify-start space-x-4">
+                        <div className="flex justify-center space-x-4">
                             {socialLinks.map((social, index) => (
                                 <a 
                                     key={index} 
@@ -70,7 +78,7 @@ const Footer = () => {
                 </div>
 
                 {/* --- UPDATED COPYRIGHT & DEVELOPER CREDIT SECTION --- */}
-                <div className="mt-12 pt-8 border-t border-slate-800 flex flex-col items-center justify-center">
+                <div className="mt-12 pt-8 flex flex-col items-center justify-center">
                     <p className="text-slate-500 text-sm text-center">
                         &copy; {new Date().getFullYear()} IEDC Central University of Kerala. All Rights Reserved.
                     </p>
@@ -80,7 +88,7 @@ const Footer = () => {
                             href="https://www.linkedin.com/in/tathagata-mandal-453863225/" 
                             target="_blank" 
                             rel="noopener noreferrer"
-                            className="text-pink-400 font-semibold hover:text-pink-300 transition"
+                            className="text-pink-400 font-semibold hover:text-pink-300 transition outline-none focus:outline-none"
                         >
                             Tathagata Mandal
                         </a>

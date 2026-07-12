@@ -7,7 +7,7 @@ const EventsSection = () => {
   if (loading) {
     return (
       <section className="py-20 border-b border-slate-800">
-        <h2 className="text-4xl font-bold gradient-text mb-12 text-center">Upcoming Events</h2>
+        <h2 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-white via-slate-200 to-slate-400 mb-12 text-center">Upcoming Events</h2>
         <div className="text-center text-slate-400">Loading events...</div>
       </section>
     );
@@ -15,16 +15,23 @@ const EventsSection = () => {
 
   return (
     <section className="py-20 border-b border-slate-800">
-      <h2 className="text-4xl font-bold gradient-text mb-12 text-center">📅 Upcoming Events</h2>
+      <div className="text-center mb-16">
+        <div className="inline-flex items-center justify-center px-4 py-1.5 rounded-full bg-purple-900/30 border border-purple-500/30 text-purple-300 text-sm font-semibold mb-4 tracking-wide uppercase">
+          What's Next
+        </div>
+        <h2 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-white via-slate-200 to-slate-400">
+          Upcoming Events
+        </h2>
+      </div>
 
       {events.length === 0 ? (
         <div className="text-center text-slate-400">
           <p>No upcoming events. Check back soon for exciting opportunities!</p>
         </div>
       ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="flex flex-wrap justify-center gap-6">
           {events.map(event => (
-            <div key={event.id} className="glass-card rounded-lg overflow-hidden hover:border-purple-500 transition group flex flex-col h-full">
+            <div key={event.id} className="w-full sm:w-[calc(50%-1.5rem)] lg:w-[calc(33.333%-1.5rem)] max-w-md glass-card rounded-lg overflow-hidden hover:border-purple-500 transition group flex flex-col h-full">
               {event.imageUrl && (
                 <div className="relative h-48 overflow-hidden shrink-0">
                   <img

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useEvents } from '../../hooks/useEvents';
+import { CalendarPlus, Edit3, Trash2, Calendar, Clock, Image as ImageIcon, Link as LinkIcon, Save, XCircle, Tag } from 'lucide-react';
 
 const ManageEvents = () => {
   const { events, addEvent, updateEvent, deleteEvent, loading } = useEvents();
@@ -63,71 +64,99 @@ const ManageEvents = () => {
   };
 
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+    <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 relative z-10">
       {/* Form */}
-      <div className="h-fit">
-        <h2 className="text-2xl font-bold gradient-text mb-4">
-          {editingId ? '✏️ Edit Event' : '➕ Add New Event'}
-        </h2>
+      <div className="lg:col-span-5 space-y-6">
+        <div>
+          <h2 className="text-2xl font-extrabold text-white flex items-center gap-2 mb-1">
+            <CalendarPlus className="text-purple-400 w-6 h-6" />
+            {editingId ? 'Edit Event' : 'Add New Event'}
+          </h2>
+          <p className="text-slate-400 text-sm">Fill in the details to publish an upcoming event.</p>
+        </div>
 
         {submitError && (
-          <div className="bg-red-500/20 border border-red-500 text-red-200 p-3 rounded mb-4 text-sm">
-            {submitError}
+          <div className="bg-red-500/10 border border-red-500/50 text-red-400 p-3 rounded-lg mb-4 text-sm flex items-center gap-2">
+            <XCircle className="w-4 h-4" /> {submitError}
           </div>
         )}
 
-        <form onSubmit={handleSubmit} className="space-y-4">
-          <div>
-            <label className="block text-slate-300 text-sm font-semibold mb-2">Event Title *</label>
-            <input type="text" name="title" placeholder="e.g., Workshop on AI" value={formData.title} onChange={handleInputChange} className="w-full bg-slate-800 text-white p-3 rounded border border-slate-700 focus:border-purple-500 outline-none transition" required />
+        <form onSubmit={handleSubmit} className="bg-slate-900/50 border border-slate-800/60 p-6 rounded-2xl shadow-xl space-y-5 relative overflow-hidden group">
+          <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-purple-500 to-indigo-500 opacity-50 group-hover:opacity-100 transition-opacity duration-300"></div>
+          
+          <div className="space-y-1">
+            <label className="text-xs font-semibold text-slate-400 uppercase tracking-wider">Event Title *</label>
+            <input type="text" name="title" placeholder="e.g., Workshop on AI" value={formData.title} onChange={handleInputChange} className="w-full bg-slate-950/50 text-white p-3 rounded-lg border border-slate-700/50 focus:border-purple-500/50 focus:ring-1 focus:ring-purple-500/50 outline-none transition-all placeholder:text-slate-600" required />
           </div>
 
-          <div>
-            <label className="block text-slate-300 text-sm font-semibold mb-2">Description *</label>
-            <textarea name="description" placeholder="Event details and information" value={formData.description} onChange={handleInputChange} className="w-full bg-slate-800 text-white p-3 rounded border border-slate-700 focus:border-purple-500 outline-none transition min-h-24" required />
+          <div className="space-y-1">
+            <label className="text-xs font-semibold text-slate-400 uppercase tracking-wider">Description *</label>
+            <textarea name="description" placeholder="Event details and information" value={formData.description} onChange={handleInputChange} className="w-full bg-slate-950/50 text-white p-3 rounded-lg border border-slate-700/50 focus:border-purple-500/50 focus:ring-1 focus:ring-purple-500/50 outline-none transition-all placeholder:text-slate-600 min-h-24 custom-scrollbar" required />
           </div>
 
           <div className="grid grid-cols-2 gap-4">
-            <div>
-              <label className="block text-slate-300 text-sm font-semibold mb-2">Date *</label>
-              <input type="date" name="date" value={formData.date} onChange={handleInputChange} className="w-full bg-slate-800 text-white p-3 rounded border border-slate-700 focus:border-purple-500 outline-none transition" required />
+            <div className="space-y-1">
+              <label className="text-xs font-semibold text-slate-400 uppercase tracking-wider">Date *</label>
+              <div className="relative">
+                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                  <Calendar className="h-4 w-4 text-slate-500" />
+                </div>
+                <input type="date" name="date" value={formData.date} onChange={handleInputChange} className="w-full bg-slate-950/50 text-white pl-9 p-3 rounded-lg border border-slate-700/50 focus:border-purple-500/50 focus:ring-1 focus:ring-purple-500/50 outline-none transition-all [&::-webkit-calendar-picker-indicator]:filter [&::-webkit-calendar-picker-indicator]:invert" required />
+              </div>
             </div>
-            <div>
-              <label className="block text-slate-300 text-sm font-semibold mb-2">Time *</label>
-              <input type="time" name="time" value={formData.time} onChange={handleInputChange} className="w-full bg-slate-800 text-white p-3 rounded border border-slate-700 focus:border-purple-500 outline-none transition" required />
+            <div className="space-y-1">
+              <label className="text-xs font-semibold text-slate-400 uppercase tracking-wider">Time *</label>
+              <div className="relative">
+                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                  <Clock className="h-4 w-4 text-slate-500" />
+                </div>
+                <input type="time" name="time" value={formData.time} onChange={handleInputChange} className="w-full bg-slate-950/50 text-white pl-9 p-3 rounded-lg border border-slate-700/50 focus:border-purple-500/50 focus:ring-1 focus:ring-purple-500/50 outline-none transition-all [&::-webkit-calendar-picker-indicator]:filter [&::-webkit-calendar-picker-indicator]:invert" required />
+              </div>
             </div>
           </div>
 
-          <div>
-            <label className="block text-slate-300 text-sm font-semibold mb-2">Category *</label>
-            <input type="text" name="category" placeholder="e.g., Workshop, Seminar, Bootcamp" value={formData.category} onChange={handleInputChange} className="w-full bg-slate-800 text-white p-3 rounded border border-slate-700 focus:border-purple-500 outline-none transition" required />
+          <div className="space-y-1">
+            <label className="text-xs font-semibold text-slate-400 uppercase tracking-wider">Category *</label>
+            <div className="relative">
+              <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                <Tag className="h-4 w-4 text-slate-500" />
+              </div>
+              <input type="text" name="category" placeholder="e.g., Workshop, Seminar" value={formData.category} onChange={handleInputChange} className="w-full bg-slate-950/50 text-white pl-9 p-3 rounded-lg border border-slate-700/50 focus:border-purple-500/50 focus:ring-1 focus:ring-purple-500/50 outline-none transition-all placeholder:text-slate-600" required />
+            </div>
           </div>
 
-          {/* --- REVERTED BACK TO TEXT URL FOR IMAGES --- */}
-          <div>
-            <label className="block text-slate-300 text-sm font-semibold mb-2">Image URL *</label>
-            <input type="url" name="imageUrl" placeholder="https://example.com/image.jpg" value={formData.imageUrl} onChange={handleInputChange} className="w-full bg-slate-800 text-white p-3 rounded border border-slate-700 focus:border-purple-500 outline-none transition" required />
+          <div className="space-y-1">
+            <label className="text-xs font-semibold text-slate-400 uppercase tracking-wider">Image URL *</label>
+            <div className="relative">
+              <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                <ImageIcon className="h-4 w-4 text-slate-500" />
+              </div>
+              <input type="url" name="imageUrl" placeholder="https://example.com/image.jpg" value={formData.imageUrl} onChange={handleInputChange} className="w-full bg-slate-950/50 text-white pl-9 p-3 rounded-lg border border-slate-700/50 focus:border-purple-500/50 focus:ring-1 focus:ring-purple-500/50 outline-none transition-all placeholder:text-slate-600" required />
+            </div>
             {formData.imageUrl && (
-              <div className="mt-2">
-                <p className="text-xs text-slate-400 mb-2">Preview:</p>
-                <img src={formData.imageUrl} alt="Preview" className="w-full h-32 object-cover rounded border border-slate-700" onError={(e) => { e.target.style.display = 'none'; }} />
+              <div className="mt-3 relative rounded-lg overflow-hidden border border-slate-700 h-32 bg-slate-950">
+                <img src={formData.imageUrl} alt="Preview" className="w-full h-full object-cover" onError={(e) => { e.target.style.display = 'none'; }} />
               </div>
             )}
           </div>
 
-          {/* --- NEW REGISTRATION LINK INPUT --- */}
-          <div>
-            <label className="block text-slate-300 text-sm font-semibold mb-2">Registration Link (Optional)</label>
-            <input type="url" name="link" placeholder="https://forms.gle/..." value={formData.link} onChange={handleInputChange} className="w-full bg-slate-800 text-white p-3 rounded border border-slate-700 focus:border-purple-500 outline-none transition" />
+          <div className="space-y-1">
+            <label className="text-xs font-semibold text-slate-400 uppercase tracking-wider">Registration Link (Optional)</label>
+            <div className="relative">
+              <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                <LinkIcon className="h-4 w-4 text-slate-500" />
+              </div>
+              <input type="url" name="link" placeholder="https://forms.gle/..." value={formData.link} onChange={handleInputChange} className="w-full bg-slate-950/50 text-white pl-9 p-3 rounded-lg border border-slate-700/50 focus:border-purple-500/50 focus:ring-1 focus:ring-purple-500/50 outline-none transition-all placeholder:text-slate-600" />
+            </div>
           </div>
 
-          <div className="flex gap-2 pt-4">
-            <button type="submit" className="flex-1 gradient-button text-white font-bold py-3 rounded hover:opacity-90 transition">
-              {editingId ? '💾 Update Event' : '✚ Add Event'}
+          <div className="flex gap-3 pt-2">
+            <button type="submit" className="flex-1 bg-gradient-to-r from-purple-600 to-indigo-600 text-white font-bold py-3 rounded-lg hover:opacity-90 transition-all shadow-[0_0_20px_rgba(168,85,247,0.3)] flex items-center justify-center gap-2">
+              <Save className="w-4 h-4" /> {editingId ? 'Update Event' : 'Add Event'}
             </button>
             {editingId && (
-              <button type="button" onClick={handleCancel} className="flex-1 bg-slate-700 hover:bg-slate-600 text-white font-bold py-3 rounded transition">
-                Cancel
+              <button type="button" onClick={handleCancel} className="flex-1 bg-slate-800 border border-slate-700 hover:bg-slate-700 text-slate-300 font-bold py-3 rounded-lg transition-all flex items-center justify-center gap-2">
+                <XCircle className="w-4 h-4" /> Cancel
               </button>
             )}
           </div>
@@ -135,42 +164,82 @@ const ManageEvents = () => {
       </div>
 
       {/* Events List */}
-      <div className="h-fit">
-        <h2 className="text-2xl font-bold gradient-text mb-4">
-          📋 Events ({events.length})
-        </h2>
+      <div className="lg:col-span-7 space-y-6">
+        <div className="flex items-center justify-between mb-1">
+          <div>
+            <h2 className="text-2xl font-extrabold text-white flex items-center gap-2">
+              <Calendar className="text-purple-400 w-6 h-6" />
+              Active Events
+            </h2>
+            <p className="text-slate-400 text-sm">Manage and monitor upcoming events.</p>
+          </div>
+          <div className="bg-slate-800/80 px-3 py-1 rounded-full border border-slate-700 flex items-center gap-2">
+            <span className="text-purple-400 font-bold">{events.length}</span>
+            <span className="text-slate-400 text-xs uppercase tracking-wider">Total</span>
+          </div>
+        </div>
 
-        {loading ? (
-          <div className="text-center py-8">
-            <p className="text-slate-400">Loading events...</p>
-          </div>
-        ) : events.length === 0 ? (
-          <div className="glass-card p-6 rounded-lg text-center">
-            <p className="text-slate-400">No events yet. Create your first event!</p>
-          </div>
-        ) : (
-          <div className="space-y-3 max-h-96 overflow-y-auto">
-            {events.map(event => (
-              <div key={event.id} className="bg-slate-800 p-4 rounded border border-slate-700 hover:border-purple-500 transition">
-                <h3 className="font-bold text-white mb-1">{event.title}</h3>
-                <div className="flex items-center gap-2 text-xs text-slate-400 mb-2">
-                  <span>📅 {event.date}</span>
-                  <span>🕐 {event.time}</span>
-                  <span className="bg-purple-500/20 text-purple-300 px-2 py-0.5 rounded">{event.category}</span>
+        <div className="bg-slate-900/50 border border-slate-800/60 p-6 rounded-2xl shadow-xl min-h-[400px]">
+          {loading ? (
+            <div className="flex flex-col items-center justify-center h-40 text-slate-500">
+              <div className="w-8 h-8 border-2 border-purple-500/30 border-t-purple-500 rounded-full animate-spin mb-3"></div>
+              <p>Loading events...</p>
+            </div>
+          ) : events.length === 0 ? (
+            <div className="flex flex-col items-center justify-center h-40 text-slate-500">
+              <CalendarPlus className="w-12 h-12 mb-3 opacity-20" />
+              <p>No events yet. Create your first event!</p>
+            </div>
+          ) : (
+            <div className="space-y-4 max-h-[600px] overflow-y-auto pr-2 custom-scrollbar">
+              {events.map(event => (
+                <div key={event.id} className="bg-slate-950/50 p-5 rounded-xl border border-slate-800/80 hover:border-purple-500/50 transition-colors group relative overflow-hidden">
+                  <div className="absolute top-0 left-0 w-1 h-full bg-purple-500/50 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                  
+                  <div className="flex flex-col sm:flex-row gap-5">
+                    {/* Thumbnail */}
+                    {event.imageUrl && (
+                      <div className="w-full sm:w-32 h-24 rounded-lg overflow-hidden shrink-0 border border-slate-800">
+                        <img src={event.imageUrl} alt={event.title} className="w-full h-full object-cover" />
+                      </div>
+                    )}
+                    
+                    {/* Content */}
+                    <div className="flex-1 flex flex-col">
+                      <div className="flex justify-between items-start mb-1">
+                        <h3 className="font-bold text-white text-lg leading-tight">{event.title}</h3>
+                        <span className="bg-purple-900/30 text-purple-400 text-[10px] px-2 py-1 rounded-full border border-purple-700/30 uppercase tracking-wider font-bold whitespace-nowrap ml-3">
+                          {event.category}
+                        </span>
+                      </div>
+                      
+                      <div className="flex flex-wrap items-center gap-3 text-[11px] text-slate-400 font-medium mb-3">
+                        <span className="flex items-center gap-1"><Calendar className="w-3 h-3" /> {event.date}</span>
+                        <span className="flex items-center gap-1"><Clock className="w-3 h-3" /> {event.time}</span>
+                        {event.link && (
+                          <a href={event.link} target="_blank" rel="noreferrer" className="flex items-center gap-1 text-blue-400 hover:text-blue-300">
+                            <LinkIcon className="w-3 h-3" /> Registration
+                          </a>
+                        )}
+                      </div>
+                      
+                      <p className="text-sm text-slate-400 mb-4 line-clamp-2 leading-relaxed">{event.description}</p>
+                      
+                      <div className="flex gap-2 mt-auto justify-end">
+                        <button onClick={() => handleEdit(event)} className="flex items-center gap-1.5 bg-slate-800 hover:bg-slate-700 text-white px-4 py-1.5 rounded-lg text-xs font-bold border border-slate-700 transition-colors">
+                          <Edit3 className="w-3.5 h-3.5" /> Edit
+                        </button>
+                        <button onClick={() => handleDelete(event.id)} className="flex items-center gap-1.5 bg-rose-900/10 hover:bg-rose-600 text-rose-500 hover:text-white px-4 py-1.5 rounded-lg text-xs font-bold border border-rose-900/30 transition-colors">
+                          <Trash2 className="w-3.5 h-3.5" /> Delete
+                        </button>
+                      </div>
+                    </div>
+                  </div>
                 </div>
-                <p className="text-sm text-slate-300 mb-3 line-clamp-2">{event.description}</p>
-                {/* Shows the link in the admin list if it exists */}
-                {event.link && (
-                    <a href={event.link} target="_blank" rel="noreferrer" className="text-xs text-blue-400 hover:underline mb-3 block">🔗 View Link</a>
-                )}
-                <div className="flex gap-2">
-                  <button onClick={() => handleEdit(event)} className="flex-1 bg-blue-600 hover:bg-blue-700 text-white py-2 rounded text-sm font-semibold transition">✏️ Edit</button>
-                  <button onClick={() => handleDelete(event.id)} className="flex-1 bg-red-600 hover:bg-red-700 text-white py-2 rounded text-sm font-semibold transition">🗑️ Delete</button>
-                </div>
-              </div>
-            ))}
-          </div>
-        )}
+              ))}
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );

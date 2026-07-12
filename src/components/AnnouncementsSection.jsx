@@ -7,7 +7,7 @@ const AnnouncementsSection = () => {
   if (loading) {
     return (
       <section className="py-20 border-b border-slate-800">
-        <h2 className="text-4xl font-bold gradient-text mb-12 text-center">Announcements</h2>
+        <h2 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-white via-slate-200 to-slate-400 mb-12 text-center">Announcements</h2>
         <div className="text-center text-slate-400">Loading announcements...</div>
       </section>
     );
@@ -15,16 +15,23 @@ const AnnouncementsSection = () => {
 
   return (
     <section className="py-20 border-b border-slate-800">
-      <h2 className="text-4xl font-bold gradient-text mb-12 text-center">📢 Announcements</h2>
+      <div className="text-center mb-16">
+        <div className="inline-flex items-center justify-center px-4 py-1.5 rounded-full bg-blue-900/30 border border-blue-500/30 text-blue-300 text-sm font-semibold mb-4 tracking-wide uppercase">
+          Stay Updated
+        </div>
+        <h2 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-white via-slate-200 to-slate-400">
+          Announcements
+        </h2>
+      </div>
 
       {announcements.length === 0 ? (
         <div className="text-center text-slate-400">
           <p>No announcements at the moment. Check back soon!</p>
         </div>
       ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="flex flex-wrap justify-center gap-6">
           {announcements.map(announcement => (
-            <div key={announcement.id} className="glass-card p-6 rounded-lg hover:border-purple-500 transition">
+            <div key={announcement.id} className="w-full sm:w-[calc(50%-1.5rem)] lg:w-[calc(33.333%-1.5rem)] max-w-md glass-card p-6 rounded-lg border-l-4 border-l-blue-500 hover:shadow-[0_0_20px_rgba(59,130,246,0.2)] transition">
               <div className="flex justify-between items-start mb-2">
                 <h3 className="text-xl font-bold text-purple-400 flex-1">{announcement.title}</h3>
               </div>

@@ -30,8 +30,11 @@ const Header = ({ isVisible }) => {
                 <div className="container mx-auto px-6 py-4 flex justify-between items-center">
                     
                     <a href="#" className="text-3xl font-bold text-white z-10 flex items-center">
-                        <img src="./iedc_logo.png" alt="IEDC Logo" className="inline-block h-8 mr-4" />
-                        IEDC <span className="gradient-text ml-2">CUK</span>
+                        <img src="./iedc_logo.png" alt="IEDC Logo" className="inline-block h-10 mr-3" />
+                        IEDC <span className="gradient-text ml-2 mr-3">CUK</span>
+                        <div className="hidden sm:flex items-center justify-center w-14 h-14 bg-white rounded-full ml-2 p-0.5 shadow-lg border border-slate-700/50 overflow-hidden">
+                            <img src="https://www.cukerala.ac.in/assets/img/CUKLOGO.png" alt="CUK Logo" className="w-full h-full object-contain transform scale-110" />
+                        </div>
                     </a>
                     
                     <div className="flex items-center space-x-4">
@@ -42,7 +45,7 @@ const Header = ({ isVisible }) => {
                                 ))}
                             </nav>
                             <a href="/admin/login" className="gradient-button text-white font-semibold px-5 py-2 rounded-lg shadow-lg transition-transform duration-300 hover:scale-105">
-                                Admin Login
+                                Admin & Lead Login
                             </a>
                         </div>
 
@@ -88,7 +91,7 @@ const Header = ({ isVisible }) => {
                                 className="gradient-button text-white font-semibold px-8 py-3 rounded-lg shadow-lg"
                                 onClick={() => setIsMenuOpen(false)}
                             >
-                                Admin Login
+                                Admin & Lead Login
                             </a>
                         </div>
                     </motion.div>

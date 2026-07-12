@@ -1,8 +1,8 @@
 import { initializeApp } from 'firebase/app';
 import { getFirestore } from 'firebase/firestore';
 import { getAuth } from 'firebase/auth';
-
-const firebaseConfig = {
+import { getStorage } from 'firebase/storage';
+export const firebaseConfig = {
   apiKey: "AIzaSyA_EOPHGYMV8z1itWvL9yEXanGnnjiZaYM",
   authDomain: "iedc-cuk.firebaseapp.com",
   projectId: "iedc-cuk",
@@ -18,4 +18,5 @@ const app = initializeApp(firebaseConfig);
 // Export the services your app needs
 export const db = getFirestore(app);
 export const auth = getAuth(app);
+export const storage = getStorage(app);
 export default app;

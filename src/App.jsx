@@ -5,7 +5,8 @@ import AdminDashboard from './pages/Admin/AdminDashboard';
 import ManageEvents from './pages/Admin/ManageEvents';
 import ManagePastEvents from './pages/Admin/ManagePastEvents';
 import ManageAnnouncements from './pages/Admin/ManageAnnouncements';
-import ManageTeam from './pages/Admin/ManageTeam'; // <-- ADDED NEW IMPORT
+import ManageTeam from './pages/Admin/ManageTeam';
+import ManageContacts from './pages/Admin/ManageContacts';
 import ProtectedRoute from './components/ProtectedRoute';
 import Header from './components/HeaderSection';
 import HeroImageSection from './components/HeroImageSection';
@@ -16,7 +17,7 @@ import AnnouncementsSection from './components/AnnouncementsSection';
 import TeamSection from './components/TeamSection';
 import ContactSection from './components/ContactSection';
 import Footer from './components/Footer';
-
+import LeadDashboard from './pages/LeadDashboard';
 function PublicHome() {
   const [isHeaderVisible, setIsHeaderVisible] = useState(false);
 
@@ -84,7 +85,7 @@ function App() {
         <Route
           path="/admin/dashboard"
           element={
-            <ProtectedRoute>
+            <ProtectedRoute allowedRoles={['admin']}>
               <AdminDashboard />
             </ProtectedRoute>
           }
@@ -92,7 +93,8 @@ function App() {
           <Route path="events" element={<ManageEvents />} />
           <Route path="past-events" element={<ManagePastEvents />} /> 
           <Route path="announcements" element={<ManageAnnouncements />} />
-          <Route path="team" element={<ManageTeam />} /> {/* <-- ADDED ROUTE HERE */}
+          <Route path="team" element={<ManageTeam />} />
+          <Route path="contacts" element={<ManageContacts />} />
           <Route index element={
             <div className="text-center text-slate-400 py-12">
               <p className="text-lg">Welcome to Admin Dashboard!</p>
@@ -100,6 +102,14 @@ function App() {
             </div>
           } />
         </Route>
+        <Route 
+          path="/lead-dashboard" 
+          element={
+            <ProtectedRoute allowedRoles={['admin', 'lead']}>
+              <LeadDashboard />
+            </ProtectedRoute>
+          } 
+        />
         <Route path="/" element={<PublicHome />} />
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>

@@ -12,7 +12,41 @@ export const useEvents = () => {
     try {
       const q = query(collection(db, 'events'), orderBy('date', 'desc'));
       const snapshot = await getDocs(q);
-      setEvents(snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() })));
+      
+      const activeEvents = [];
+      const now = new Date();
+      now.setHours(0, 0, 0, 0); // Start of today
+
+      for (const document of snapshot.docs) {
+        const data = document.data();
+        const eventDate = new Date(data.date);
+
+        // If event date has passed
+        if (eventDate < now) {
+          try {
+            // Auto-migrate to pastEvents collection
+            await addDoc(collection(db, 'pastEvents'), {
+              title: data.title || '',
+              date: data.date || '',
+              time: data.time || '',
+              category: data.category || '',
+              description: data.description || '',
+              imageUrl: data.imageUrl || '',
+              link: '' // Cleared so admin can add the drive link
+            });
+            // Delete from active events
+            await deleteDoc(doc(db, 'events', document.id));
+          } catch (e) {
+            // If user lacks permission (e.g. normal visitor), silently skip migration.
+            // The event is still filtered out of the active list below.
+            console.log("Could not auto-migrate past event (likely insufficient permissions).");
+          }
+        } else {
+          activeEvents.push({ id: document.id, ...data });
+        }
+      }
+
+      setEvents(activeEvents);
     } catch (error) {
       console.error('Error fetching events:', error);
     } finally {

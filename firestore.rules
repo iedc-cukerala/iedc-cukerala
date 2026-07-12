@@ -1,0 +1,64 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Helper Functions
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+    
+    function isAdmin() {
+      return isAuthenticated() && (
+        request.auth.token.email.lower() == "tathagatamandal68@gmail.com" ||
+        exists(/databases/$(database)/documents/admins/$(request.auth.uid)) ||
+        exists(/databases/$(database)/documents/admins/$(request.auth.token.email.lower())) ||
+        // Check if user's email exists in the admins collection
+        get(/databases/$(database)/documents/admins/$(request.auth.uid)).data.email == request.auth.token.email
+      );
+    }
+    
+    // Note: Since Firestore rules can't query by field (only by document ID),
+    // and the code searches by email, it is safest to allow a user to read the admin
+    // collection to verify themselves, or better yet, verify admin status via existence.
+
+    // Allow anyone to read public data
+    match /events/{document} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+    
+    match /past-events/{document} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+    
+    match /announcements/{document} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+    
+    match /contacts/{document} {
+      // Anyone can submit a contact form (create)
+      allow create: if true;
+      // Only admins can read, update, or delete contacts
+      allow read, update, delete: if isAdmin();
+    }
+
+    match /admins/{document} {
+      // Users need to read admins to check if they are an admin
+      allow read: if isAuthenticated();
+      allow write: if isAdmin();
+    }
+
+    match /leads/{document} {
+      // Anyone can read leads to display the Team Section
+      allow read: if true;
+      
+      // Admins can create/delete/manage leads
+      allow create, delete: if isAdmin();
+      
+      // Leads can update their OWN profile (if UID matches OR if they are claiming it via their email)
+      allow update: if isAdmin() || (isAuthenticated() && (resource.data.uid == request.auth.uid || resource.data.email.lower() == request.auth.token.email.lower()));
+    }
+  }
+}
