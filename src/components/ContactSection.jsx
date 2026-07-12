@@ -92,7 +92,7 @@ const ContactSection = () => {
                             <p className="text-slate-600">Follow us on our social media channels to stay updated with our latest events and announcements.</p>
                         </div>
                         
-                        <div className="flex space-x-6">
+                        <div className="flex justify-center md:justify-start space-x-6">
                             <a href='http://www.instagram.com/iedc_cuk' target="_blank" rel="noreferrer" className="w-14 h-14 bg-white rounded-2xl flex items-center justify-center text-slate-500 hover:text-pink-600 hover:bg-slate-50 border border-slate-200 hover:border-pink-500/50 transition-all duration-300 hover:scale-110 shadow-md hover:shadow-pink-500/20">
                                 <Instagram size={28} />
                             </a>

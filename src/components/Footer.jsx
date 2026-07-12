@@ -41,29 +41,27 @@ const Footer = () => {
                         <p className="text-slate-600 mt-2">Innovate. Incubate. Inspire.</p>
                     </div>
 
-                    <div className='flex flex-col items-center'>
-                        <div className='flex flex-col items-center md:items-start'>
-                            <h3 className="text-lg font-semibold text-slate-900 mb-4">Quick Links</h3>
-                            <ul className="space-y-2 text-center md:text-left">
-                                {navLinks.map(link => (
-                                    <li key={link.name}>
-                                        <a 
-                                          href={link.href} 
-                                          target={link.external ? "_blank" : "_self"}
-                                          rel={link.external ? "noopener noreferrer" : ""}
-                                          className="text-slate-600 hover:text-pink-600 transition-colors duration-300 outline-none focus:outline-none"
-                                        >
-                                            {link.name}
-                                        </a>
-                                    </li>
-                                ))}
-                            </ul>
-                        </div>
+                    <div className='flex flex-col items-center md:items-start'>
+                        <h3 className="text-lg font-semibold text-slate-900 mb-4">Quick Links</h3>
+                        <ul className="space-y-2 text-center md:text-left">
+                            {navLinks.map(link => (
+                                <li key={link.name}>
+                                    <a 
+                                      href={link.href} 
+                                      target={link.external ? "_blank" : "_self"}
+                                      rel={link.external ? "noopener noreferrer" : ""}
+                                      className="text-slate-600 hover:text-pink-600 transition-colors duration-300 outline-none focus:outline-none"
+                                    >
+                                        {link.name}
+                                    </a>
+                                </li>
+                            ))}
+                        </ul>
                     </div>
 
-                    <div className='flex flex-col items-center md:items-end'>
+                    <div className='flex flex-col items-center md:items-start'>
                         <h3 className="text-lg font-semibold text-slate-900 mb-4">Connect With Us</h3>
-                        <div className="flex justify-center space-x-4">
+                        <div className="flex justify-center md:justify-start space-x-4">
                             {socialLinks.map((social, index) => (
                                 <a 
                                     key={index} 
