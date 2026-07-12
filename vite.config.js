@@ -4,10 +4,10 @@ import tailwindcss from '@tailwindcss/vite'
 
 
 // https://vite.dev/config/
-export default defineConfig({
-  base: '/iedc-cukerala/',
+export default defineConfig(({ command }) => ({
+  base: command === 'serve' ? '/' : '/iedc-cukerala/',
   plugins: [
     tailwindcss(),
     react()
   ],
-})
+}))
