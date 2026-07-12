@@ -35,7 +35,7 @@ const Footer = () => {
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
                     <div className='flex flex-col items-center'>
                         <a href="#" className="text-2xl font-bold text-slate-900 z-10 flex items-center">
-                        <img src="./iedc_logo.png" alt="IEDC Logo" className="inline-block h-6 mr-2 filter brightness-0" />
+                        <img src="./iedc_logo.png" alt="IEDC Logo" className="inline-block h-6 mr-2" />
                         IEDC <span className="gradient-text ml-2">CUK</span>
                     </a>
                         <p className="text-slate-600 mt-2">Innovate. Incubate. Inspire.</p>

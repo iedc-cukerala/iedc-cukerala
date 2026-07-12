@@ -30,7 +30,7 @@ const Header = ({ isVisible }) => {
                 <div className="container mx-auto px-6 py-4 flex justify-between items-center">
                     
                     <a href="#" className="text-3xl font-bold text-slate-900 z-10 flex items-center">
-                        <img src="./iedc_logo.png" alt="IEDC Logo" className="inline-block h-10 mr-3 filter brightness-0" />
+                        <img src="./iedc_logo.png" alt="IEDC Logo" className="inline-block h-10 mr-3" />
                         IEDC <span className="gradient-text ml-2 mr-3">CUK</span>
                         <div className="hidden sm:flex items-center justify-center w-14 h-14 bg-white rounded-full ml-2 p-0.5 shadow-lg border border-slate-200 overflow-hidden">
                             <img src="https://www.cukerala.ac.in/assets/img/CUKLOGO.png" alt="CUK Logo" className="w-full h-full object-contain transform scale-110" />
