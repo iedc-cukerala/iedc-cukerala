@@ -6,6 +6,8 @@ import { Calendar, ArrowRight, CheckCircle2, X, Image as ImageIcon } from 'lucid
 const PastEventsSection = () => {
   const { pastEvents, loading } = usePastEvents();
   const [selectedEvent, setSelectedEvent] = useState(null);
+  
+  const validPastEvents = pastEvents.filter(event => event.title && event.title.trim() !== '');
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -55,7 +57,7 @@ const PastEventsSection = () => {
           </motion.h2>
         </div>
 
-        {pastEvents.length === 0 ? (
+        {validPastEvents.length === 0 ? (
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -73,7 +75,7 @@ const PastEventsSection = () => {
             viewport={{ once: true, margin: "-100px" }}
             className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
           >
-            {pastEvents.map(event => (
+            {validPastEvents.map(event => (
               <motion.div 
                 key={event.id}
                 variants={itemVariants}
@@ -106,7 +108,7 @@ const PastEventsSection = () => {
                   <div className="absolute bottom-6 left-6 right-6 z-10 text-white transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
                      <h3 className="text-2xl font-bold mb-3 leading-tight text-white shadow-sm">{event.title}</h3>
                      <div className="flex items-center gap-4 text-sm font-medium text-pink-200">
-                        <span className="flex items-center gap-1.5"><Calendar className="w-4 h-4" /> {new Date(event.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}</span>
+                        <span className="flex items-center gap-1.5"><Calendar className="w-4 h-4" /> {event.date ? new Date(event.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) : 'TBD'}</span>
                      </div>
                   </div>
                 </div>

@@ -6,20 +6,7 @@ import { Calendar, Clock, ArrowRight } from 'lucide-react';
 const EventsSection = () => {
   const { events, loading } = useEvents();
 
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    show: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.15
-      }
-    }
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 30 },
-    show: { opacity: 1, y: 0, transition: { type: "spring", stiffness: 300, damping: 24 } }
-  };
+  const validEvents = events.filter(event => event.title && event.title.trim() !== '');
 
   if (loading) {
     return (
@@ -66,7 +53,7 @@ const EventsSection = () => {
           </div>
         </div>
 
-        {events.length === 0 ? (
+        {validEvents.length === 0 ? (
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -78,16 +65,22 @@ const EventsSection = () => {
           </motion.div>
         ) : (
           <motion.div 
-            variants={containerVariants}
             initial="hidden"
             whileInView="show"
             viewport={{ once: true, margin: "-100px" }}
+            variants={{
+              hidden: { opacity: 0 },
+              show: { opacity: 1, transition: { staggerChildren: 0.15 } }
+            }}
             className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
           >
-            {events.map(event => (
+            {validEvents.map(event => (
               <motion.div 
                 key={event.id}
-                variants={itemVariants}
+                variants={{
+                  hidden: { opacity: 0, y: 30 },
+                  show: { opacity: 1, y: 0, transition: { type: "spring", stiffness: 300, damping: 24 } }
+                }}
                 whileHover={{ y: -10 }}
                 className="group relative bg-white rounded-[2rem] overflow-hidden border border-slate-200 shadow-[0_10px_30px_-10px_rgba(0,0,0,0.1)] hover:shadow-[0_20px_50px_-15px_rgba(236,72,153,0.3)] transition-all duration-500 flex flex-col h-[450px]"
               >
@@ -129,8 +122,11 @@ const EventsSection = () => {
 
                   <div className="flex items-center justify-between text-white/90 text-sm font-semibold border-t border-white/20 pt-4">
                     <div className="flex items-center gap-4">
-                      <span className="flex items-center gap-1.5"><Calendar className="w-4 h-4 text-pink-400" /> {new Date(event.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}</span>
-                      <span className="flex items-center gap-1.5"><Clock className="w-4 h-4 text-pink-400" /> {event.time}</span>
+                      <span className="flex items-center gap-1.5">
+                        <Calendar className="w-4 h-4 text-pink-400" /> 
+                        {event.date ? new Date(event.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) : 'TBD'}
+                      </span>
+                      <span className="flex items-center gap-1.5"><Clock className="w-4 h-4 text-pink-400" /> {event.time || 'TBD'}</span>
                     </div>
                     
                     {event.link && (

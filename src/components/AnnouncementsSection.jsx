@@ -5,6 +5,7 @@ import { Bell, Calendar as CalendarIcon, ArrowUpRight } from 'lucide-react';
 
 const AnnouncementsSection = () => {
   const { announcements, loading } = useAnnouncements();
+  const validAnnouncements = announcements.filter(announcement => announcement.title && announcement.title.trim() !== '');
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -54,7 +55,7 @@ const AnnouncementsSection = () => {
           </motion.h2>
         </div>
 
-        {announcements.length === 0 ? (
+        {validAnnouncements.length === 0 ? (
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -72,7 +73,7 @@ const AnnouncementsSection = () => {
             viewport={{ once: true, margin: "-50px" }}
             className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-5xl mx-auto"
           >
-            {announcements.map((announcement) => (
+            {validAnnouncements.map((announcement) => (
               <motion.div 
                 key={announcement.id} 
                 variants={itemVariants}
