@@ -54,7 +54,7 @@ const HeroImageSection = () => {
                 >
                     <source src={cukVideo} type="video/mp4" />
                 </video>
-                <div className="absolute inset-0 bg-white/70"></div>
+                <div className="absolute inset-0 bg-white/40"></div>
             </div>
             
             <div ref={scrollRef} className="relative z-20 container mx-auto px-6 h-full flex flex-col items-center justify-center">
