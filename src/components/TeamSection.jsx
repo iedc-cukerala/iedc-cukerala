@@ -18,29 +18,40 @@ const TeamSection = () => {
 
         // Define exact sorting order for roles
         const roleOrder = [
-          "Nodal Officer",
-          "Co-Nodal Officer",
-          "Student Lead I",
-          "Student Lead II",
-          "Technology Lead",
-          "Women Innovation Lead",
-          "Community Lead",
-          "Finance Lead",
-          "Research & IPR Lead",
-          "Branding & Marketing",
-          "Quality & Operation Lead",
-          "Creativity & Innovation Lead"
+          "nodal officer",
+          "co-nodal officer",
+          "conodal officer",
+          "co nodal officer",
+          "student lead i",
+          "student lead ii",
+          "technology lead",
+          "women innovation lead",
+          "community lead",
+          "finance lead",
+          "research & ipr lead",
+          "branding & marketing",
+          "quality & operation lead",
+          "creativity & innovation lead"
         ];
 
         members.sort((a, b) => {
-          const indexA = roleOrder.indexOf(a.role);
-          const indexB = roleOrder.indexOf(b.role);
+          const roleA = a.role ? a.role.toLowerCase().trim() : "";
+          const roleB = b.role ? b.role.toLowerCase().trim() : "";
+          
+          let indexA = roleOrder.indexOf(roleA);
+          let indexB = roleOrder.indexOf(roleB);
           
           // Unknown roles go to the bottom
           const posA = indexA === -1 ? 999 : indexA;
           const posB = indexB === -1 ? 999 : indexB;
           
-          return posA - posB;
+          if (posA !== posB) {
+            return posA - posB;
+          }
+          // If roles are same or both unknown, sort by name
+          const nameA = a.name ? a.name.toLowerCase() : "";
+          const nameB = b.name ? b.name.toLowerCase() : "";
+          return nameA.localeCompare(nameB);
         });
 
         setTeamMembers(members);
