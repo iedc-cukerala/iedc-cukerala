@@ -69,6 +69,18 @@ const AdminLogin = () => {
             uid: user.uid,
           });
         }
+
+        // Add lead to admins collection so Firestore rules recognize them
+        const adminCheck = await getDoc(doc(db, 'admins', user.uid));
+        if (!adminCheck.exists()) {
+          await setDoc(doc(db, 'admins', user.uid), {
+            email: email.toLowerCase(),
+            uid: user.uid,
+            status: 'active',
+            isLead: true
+          });
+        }
+
         navigate('/admin/dashboard');
         return;
       }

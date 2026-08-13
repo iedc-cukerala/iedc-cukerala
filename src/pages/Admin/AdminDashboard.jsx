@@ -48,8 +48,12 @@ const AdminDashboard = () => {
           </div>
           <div className="flex items-center gap-6 bg-slate-800/50 py-2 px-4 rounded-full border border-slate-700/50">
             <div className="flex items-center gap-3">
-              <div className="w-8 h-8 rounded-full bg-slate-700 flex items-center justify-center text-sm font-bold border border-slate-600">
-                {user?.email?.charAt(0).toUpperCase()}
+              <div className="w-8 h-8 rounded-full bg-slate-700 flex items-center justify-center overflow-hidden border border-slate-600">
+                {user?.photoURL ? (
+                  <img src={user.photoURL} alt="Profile" className="w-full h-full object-cover" />
+                ) : (
+                  <span className="text-sm font-bold">{user?.email?.charAt(0).toUpperCase()}</span>
+                )}
               </div>
               <p className="text-slate-300 text-sm hidden sm:block font-medium">{user?.email}</p>
             </div>
