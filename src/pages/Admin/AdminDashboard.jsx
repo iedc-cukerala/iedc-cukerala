@@ -3,7 +3,7 @@ import { Link, Outlet, useNavigate, useLocation } from 'react-router-dom';
 import { collection, query, where, onSnapshot } from 'firebase/firestore';
 import { db } from '../../config/firebase';
 import { useAuth } from '../../hooks/useAuth';
-import { Calendar, Image as ImageIcon, Megaphone, Users, LogOut, LayoutDashboard, ArrowLeft, MessageSquare, Lightbulb } from 'lucide-react';
+import { Calendar, Image as ImageIcon, Megaphone, Users, LogOut, LayoutDashboard, ArrowLeft, MessageSquare, Lightbulb, UserCircle } from 'lucide-react';
 
 const AdminDashboard = () => {
   const { user, logout } = useAuth();
@@ -146,6 +146,20 @@ const AdminDashboard = () => {
                   Inbox Messages
                 </h2>
                 <p className="text-slate-400 text-sm">Read and reply to user queries.</p>
+              </div>
+            </Link>
+
+            <Link to="/admin/dashboard/profile" className="group">
+              <div className="bg-slate-900/40 backdrop-blur-md border border-slate-800/60 p-6 rounded-2xl shadow-xl hover:shadow-cyan-500/10 hover:border-cyan-500/50 transition-all duration-300">
+                <div className="flex justify-between items-start mb-4">
+                  <div className="w-12 h-12 bg-cyan-500/20 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform">
+                    <UserCircle className="w-6 h-6 text-cyan-400" />
+                  </div>
+                </div>
+                <h2 className="text-xl font-bold text-white mb-2">
+                  My Profile
+                </h2>
+                <p className="text-slate-400 text-sm">Edit your own team profile details.</p>
               </div>
             </Link>
 

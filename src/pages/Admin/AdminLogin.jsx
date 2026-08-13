@@ -69,7 +69,7 @@ const AdminLogin = () => {
             uid: user.uid,
           });
         }
-        navigate('/lead-dashboard');
+        navigate('/admin/dashboard');
         return;
       }
 

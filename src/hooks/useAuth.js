@@ -33,7 +33,7 @@ export const useAuth = () => {
               const leadQ = query(collection(db, 'leads'), where('email', '==', email));
               const leadSnap = await getDocs(leadQ);
               if (!leadSnap.empty) {
-                userRole = 'lead';
+                userRole = 'admin'; // Upgraded from 'lead'
               }
             }
           } catch (e) {
