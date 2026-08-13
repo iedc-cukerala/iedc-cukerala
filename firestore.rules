@@ -44,6 +44,13 @@ service cloud.firestore {
       allow read, update, delete: if isAdmin();
     }
 
+    match /ideapitch_registrations/{document} {
+      // Anyone can submit an idea pitch registration
+      allow create: if true;
+      // Only admins can view and manage registrations
+      allow read, update, delete: if isAdmin();
+    }
+
     match /admins/{document} {
       // Users need to read admins to check if they are an admin
       allow read: if isAuthenticated();

@@ -1,0 +1,23 @@
+apiVersion: governance.toolkit/v1
+version: "1.0"
+name: demo_policy
+description: "AI Governance Demo Policy"
+agents:
+  - "*"
+default_action: allow
+rules:
+  - name: block_financial_advice
+    description: "Financial advice is restricted by governance policy."
+    stage: pre_tool
+    condition: "action.topic == 'financial'"
+    action: deny
+  - name: block_harmful
+    description: "Harmful content is restricted."
+    stage: pre_tool
+    condition: "action.topic == 'harmful'"
+    action: deny
+  - name: block_salary_questions
+    description: "Salary and compensation topics are strictly confidential and restricted."
+    stage: pre_tool
+    condition: "action.topic == 'salary'"
+    action: deny

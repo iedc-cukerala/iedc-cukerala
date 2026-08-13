@@ -3,7 +3,7 @@ import { Link, Outlet, useNavigate, useLocation } from 'react-router-dom';
 import { collection, query, where, onSnapshot } from 'firebase/firestore';
 import { db } from '../../config/firebase';
 import { useAuth } from '../../hooks/useAuth';
-import { Calendar, Image as ImageIcon, Megaphone, Users, LogOut, LayoutDashboard, ArrowLeft, MessageSquare } from 'lucide-react';
+import { Calendar, Image as ImageIcon, Megaphone, Users, LogOut, LayoutDashboard, ArrowLeft, MessageSquare, Lightbulb } from 'lucide-react';
 
 const AdminDashboard = () => {
   const { user, logout } = useAuth();
@@ -111,6 +111,20 @@ const AdminDashboard = () => {
                 </div>
                 <h2 className="text-xl font-bold text-white mb-2">Manage Team</h2>
                 <p className="text-slate-400 text-sm">Invite leads and manage dashboard access.</p>
+              </div>
+            </Link>
+
+            <Link to="/admin/dashboard/ideapitch" className="group">
+              <div className="bg-slate-900/40 backdrop-blur-md border border-slate-800/60 p-6 rounded-2xl shadow-xl hover:shadow-yellow-500/10 hover:border-yellow-500/50 transition-all duration-300">
+                <div className="flex justify-between items-start mb-4">
+                  <div className="w-12 h-12 bg-yellow-500/20 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform">
+                    <Lightbulb className="w-6 h-6 text-yellow-400" />
+                  </div>
+                </div>
+                <h2 className="text-xl font-bold text-white mb-2">
+                  Idea Pitch
+                </h2>
+                <p className="text-slate-400 text-sm">Manage idea pitch registrations.</p>
               </div>
             </Link>
 

@@ -7,6 +7,7 @@ import ManagePastEvents from './pages/Admin/ManagePastEvents';
 import ManageAnnouncements from './pages/Admin/ManageAnnouncements';
 import ManageTeam from './pages/Admin/ManageTeam';
 import ManageContacts from './pages/Admin/ManageContacts';
+import ManageIdeaPitch from './pages/Admin/ManageIdeaPitch';
 import ProtectedRoute from './components/ProtectedRoute';
 import Header from './components/HeaderSection';
 import HeroImageSection from './components/HeroImageSection';
@@ -18,6 +19,7 @@ import TeamSection from './components/TeamSection';
 import ContactSection from './components/ContactSection';
 import Footer from './components/Footer';
 import LeadDashboard from './pages/LeadDashboard';
+import IdeaPitchRegistration from './pages/IdeaPitchRegistration';
 function PublicHome() {
   const [isHeaderVisible, setIsHeaderVisible] = useState(false);
 
@@ -95,6 +97,7 @@ function App() {
           <Route path="announcements" element={<ManageAnnouncements />} />
           <Route path="team" element={<ManageTeam />} />
           <Route path="contacts" element={<ManageContacts />} />
+          <Route path="ideapitch" element={<ManageIdeaPitch />} />
           <Route index element={
             <div className="text-center text-slate-400 py-12">
               <p className="text-lg">Welcome to Admin Dashboard!</p>
@@ -110,6 +113,7 @@ function App() {
             </ProtectedRoute>
           } 
         />
+        <Route path="/ideapitch" element={<IdeaPitchRegistration />} />
         <Route path="/" element={<PublicHome />} />
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>
