@@ -8,6 +8,7 @@ const ManagePastEvents = () => {
     title: '', description: '', date: '', time: '', category: '', imageUrl: '', link: ''
   });
   const [editingId, setEditingId] = useState(null);
+  const [submitError, setSubmitError] = useState('');
 
   const handleInputChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -15,13 +16,18 @@ const ManagePastEvents = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (editingId) {
-      await updatePastEvent(editingId, formData);
-      setEditingId(null);
-    } else {
-      await addPastEvent(formData);
+    setSubmitError('');
+    try {
+      if (editingId) {
+        await updatePastEvent(editingId, formData);
+        setEditingId(null);
+      } else {
+        await addPastEvent(formData);
+      }
+      setFormData({ title: '', description: '', date: '', time: '', category: '', imageUrl: '', link: '' });
+    } catch (error) {
+      setSubmitError('Error: ' + error.message);
     }
-    setFormData({ title: '', description: '', date: '', time: '', category: '', imageUrl: '', link: '' });
   };
 
   const handleEdit = (event) => {
@@ -40,6 +46,12 @@ const ManagePastEvents = () => {
           </h2>
           <p className="text-slate-400 text-sm">Archive completed events to showcase in the gallery.</p>
         </div>
+
+        {submitError && (
+          <div className="bg-red-500/10 border border-red-500/50 text-red-400 p-3 rounded-lg mb-4 text-sm flex items-center gap-2">
+            <span>⚠️</span> {submitError}
+          </div>
+        )}
 
         <form onSubmit={handleSubmit} className="bg-slate-900/50 border border-slate-800/60 p-6 rounded-2xl shadow-xl space-y-5 relative overflow-hidden group">
           <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-500 to-cyan-500 opacity-50 group-hover:opacity-100 transition-opacity duration-300"></div>

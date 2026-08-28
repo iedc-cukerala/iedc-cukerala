@@ -27,7 +27,7 @@ service cloud.firestore {
       allow write: if isAdmin();
     }
     
-    match /past-events/{document} {
+    match /pastEvents/{document} {
       allow read: if true;
       allow write: if isAdmin();
     }
@@ -54,7 +54,12 @@ service cloud.firestore {
     match /admins/{document} {
       // Users need to read admins to check if they are an admin
       allow read: if isAuthenticated();
-      allow write: if isAdmin();
+      allow update, delete: if isAdmin();
+      // Allow university users to initialize their admin record (UI only triggers this if they are a verified lead)
+      allow create: if isAuthenticated() 
+                    && request.auth.uid == document 
+                    && request.resource.data.email.lower() == request.auth.token.email.lower()
+                    && request.auth.token.email.lower().matches('.*@cukerala\\.ac\\.in');
     }
 
     match /leads/{document} {
