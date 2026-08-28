@@ -85,53 +85,53 @@ const ManageEvents = () => {
           <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-purple-500 to-indigo-500 opacity-50 group-hover:opacity-100 transition-opacity duration-300"></div>
           
           <div className="space-y-1">
-            <label className="text-xs font-semibold text-slate-400 uppercase tracking-wider">Event Title *</label>
-            <input type="text" name="title" placeholder="e.g., Workshop on AI" value={formData.title} onChange={handleInputChange} className="w-full bg-slate-950/50 text-white p-3 rounded-lg border border-slate-700/50 focus:border-purple-500/50 focus:ring-1 focus:ring-purple-500/50 outline-none transition-all placeholder:text-slate-600" required />
+            <label className="text-xs font-semibold text-slate-400 uppercase tracking-wider">Event Title</label>
+            <input type="text" name="title" placeholder="e.g., Workshop on AI" value={formData.title} onChange={handleInputChange} className="w-full bg-slate-950/50 text-white p-3 rounded-lg border border-slate-700/50 focus:border-purple-500/50 focus:ring-1 focus:ring-purple-500/50 outline-none transition-all placeholder:text-slate-600" />
           </div>
 
           <div className="space-y-1">
-            <label className="text-xs font-semibold text-slate-400 uppercase tracking-wider">Description *</label>
-            <textarea name="description" placeholder="Event details and information" value={formData.description} onChange={handleInputChange} className="w-full bg-slate-950/50 text-white p-3 rounded-lg border border-slate-700/50 focus:border-purple-500/50 focus:ring-1 focus:ring-purple-500/50 outline-none transition-all placeholder:text-slate-600 min-h-24 custom-scrollbar" required />
+            <label className="text-xs font-semibold text-slate-400 uppercase tracking-wider">Description</label>
+            <textarea name="description" placeholder="Event details and information" value={formData.description} onChange={handleInputChange} className="w-full bg-slate-950/50 text-white p-3 rounded-lg border border-slate-700/50 focus:border-purple-500/50 focus:ring-1 focus:ring-purple-500/50 outline-none transition-all placeholder:text-slate-600 min-h-24 custom-scrollbar" />
           </div>
 
           <div className="grid grid-cols-2 gap-4">
             <div className="space-y-1">
-              <label className="text-xs font-semibold text-slate-400 uppercase tracking-wider">Date *</label>
+              <label className="text-xs font-semibold text-slate-400 uppercase tracking-wider">Date</label>
               <div className="relative">
                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                   <Calendar className="h-4 w-4 text-slate-500" />
                 </div>
-                <input type="date" name="date" value={formData.date} onChange={handleInputChange} className="w-full bg-slate-950/50 text-white pl-9 p-3 rounded-lg border border-slate-700/50 focus:border-purple-500/50 focus:ring-1 focus:ring-purple-500/50 outline-none transition-all [&::-webkit-calendar-picker-indicator]:filter [&::-webkit-calendar-picker-indicator]:invert" required />
+                <input type="date" name="date" value={formData.date} onChange={handleInputChange} className="w-full bg-slate-950/50 text-white pl-9 p-3 rounded-lg border border-slate-700/50 focus:border-purple-500/50 focus:ring-1 focus:ring-purple-500/50 outline-none transition-all [&::-webkit-calendar-picker-indicator]:filter [&::-webkit-calendar-picker-indicator]:invert" />
               </div>
             </div>
             <div className="space-y-1">
-              <label className="text-xs font-semibold text-slate-400 uppercase tracking-wider">Time *</label>
+              <label className="text-xs font-semibold text-slate-400 uppercase tracking-wider">Time</label>
               <div className="relative">
                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                   <Clock className="h-4 w-4 text-slate-500" />
                 </div>
-                <input type="time" name="time" value={formData.time} onChange={handleInputChange} className="w-full bg-slate-950/50 text-white pl-9 p-3 rounded-lg border border-slate-700/50 focus:border-purple-500/50 focus:ring-1 focus:ring-purple-500/50 outline-none transition-all [&::-webkit-calendar-picker-indicator]:filter [&::-webkit-calendar-picker-indicator]:invert" required />
+                <input type="time" name="time" value={formData.time} onChange={handleInputChange} className="w-full bg-slate-950/50 text-white pl-9 p-3 rounded-lg border border-slate-700/50 focus:border-purple-500/50 focus:ring-1 focus:ring-purple-500/50 outline-none transition-all [&::-webkit-calendar-picker-indicator]:filter [&::-webkit-calendar-picker-indicator]:invert" />
               </div>
             </div>
           </div>
 
           <div className="space-y-1">
-            <label className="text-xs font-semibold text-slate-400 uppercase tracking-wider">Category *</label>
+            <label className="text-xs font-semibold text-slate-400 uppercase tracking-wider">Category</label>
             <div className="relative">
               <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                 <Tag className="h-4 w-4 text-slate-500" />
               </div>
-              <input type="text" name="category" placeholder="e.g., Workshop, Seminar" value={formData.category} onChange={handleInputChange} className="w-full bg-slate-950/50 text-white pl-9 p-3 rounded-lg border border-slate-700/50 focus:border-purple-500/50 focus:ring-1 focus:ring-purple-500/50 outline-none transition-all placeholder:text-slate-600" required />
+              <input type="text" name="category" placeholder="e.g., Workshop, Seminar" value={formData.category} onChange={handleInputChange} className="w-full bg-slate-950/50 text-white pl-9 p-3 rounded-lg border border-slate-700/50 focus:border-purple-500/50 focus:ring-1 focus:ring-purple-500/50 outline-none transition-all placeholder:text-slate-600" />
             </div>
           </div>
 
           <div className="space-y-1">
-            <label className="text-xs font-semibold text-slate-400 uppercase tracking-wider">Image URL *</label>
+            <label className="text-xs font-semibold text-slate-400 uppercase tracking-wider">Image URL</label>
             <div className="relative">
               <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                 <ImageIcon className="h-4 w-4 text-slate-500" />
               </div>
-              <input type="url" name="imageUrl" placeholder="https://example.com/image.jpg" value={formData.imageUrl} onChange={handleInputChange} className="w-full bg-slate-950/50 text-white pl-9 p-3 rounded-lg border border-slate-700/50 focus:border-purple-500/50 focus:ring-1 focus:ring-purple-500/50 outline-none transition-all placeholder:text-slate-600" required />
+              <input type="url" name="imageUrl" placeholder="https://example.com/image.jpg" value={formData.imageUrl} onChange={handleInputChange} className="w-full bg-slate-950/50 text-white pl-9 p-3 rounded-lg border border-slate-700/50 focus:border-purple-500/50 focus:ring-1 focus:ring-purple-500/50 outline-none transition-all placeholder:text-slate-600" />
             </div>
             {formData.imageUrl && (
               <div className="mt-3 relative rounded-lg overflow-hidden border border-slate-700 aspect-[4/3] w-48 bg-slate-950">
