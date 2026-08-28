@@ -81,7 +81,7 @@ const ManageEvents = () => {
           </div>
         )}
 
-        <form onSubmit={handleSubmit} className="bg-slate-900/50 border border-slate-800/60 p-6 rounded-2xl shadow-xl space-y-5 relative overflow-hidden group">
+        <form onSubmit={handleSubmit} className="bg-slate-900/50 border border-slate-800/60 p-4 sm:p-6 rounded-2xl shadow-xl space-y-5 relative overflow-hidden group">
           <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-purple-500 to-indigo-500 opacity-50 group-hover:opacity-100 transition-opacity duration-300"></div>
           
           <div className="space-y-1">
@@ -179,7 +179,7 @@ const ManageEvents = () => {
           </div>
         </div>
 
-        <div className="bg-slate-900/50 border border-slate-800/60 p-6 rounded-2xl shadow-xl min-h-[400px]">
+        <div className="bg-slate-900/50 border border-slate-800/60 p-4 sm:p-6 rounded-2xl shadow-xl min-h-[400px]">
           {loading ? (
             <div className="flex flex-col items-center justify-center h-40 text-slate-500">
               <div className="w-8 h-8 border-2 border-purple-500/30 border-t-purple-500 rounded-full animate-spin mb-3"></div>
@@ -193,7 +193,7 @@ const ManageEvents = () => {
           ) : (
             <div className="space-y-4 max-h-[600px] overflow-y-auto pr-2 custom-scrollbar">
               {events.map(event => (
-                <div key={event.id} className="bg-slate-950/50 p-5 rounded-xl border border-slate-800/80 hover:border-purple-500/50 transition-colors group relative overflow-hidden">
+                <div key={event.id} className="bg-slate-950/50 p-4 sm:p-5 rounded-xl border border-slate-800/80 hover:border-purple-500/50 transition-colors group relative overflow-hidden">
                   <div className="absolute top-0 left-0 w-1 h-full bg-purple-500/50 opacity-0 group-hover:opacity-100 transition-opacity"></div>
                   
                   <div className="flex flex-col sm:flex-row gap-5">

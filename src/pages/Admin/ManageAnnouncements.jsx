@@ -73,7 +73,7 @@ const ManageAnnouncements = () => {
           </div>
         )}
 
-        <form onSubmit={handleSubmit} className="bg-slate-900/50 border border-slate-800/60 p-6 rounded-2xl shadow-xl space-y-5 relative overflow-hidden group">
+        <form onSubmit={handleSubmit} className="bg-slate-900/50 border border-slate-800/60 p-4 sm:p-6 rounded-2xl shadow-xl space-y-5 relative overflow-hidden group">
           <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-pink-500 to-rose-500 opacity-50 group-hover:opacity-100 transition-opacity duration-300"></div>
           
           <div className="space-y-1">
@@ -154,7 +154,7 @@ const ManageAnnouncements = () => {
           </div>
         </div>
 
-        <div className="bg-slate-900/50 border border-slate-800/60 p-6 rounded-2xl shadow-xl min-h-[400px]">
+        <div className="bg-slate-900/50 border border-slate-800/60 p-4 sm:p-6 rounded-2xl shadow-xl min-h-[400px]">
           {loading ? (
             <div className="flex flex-col items-center justify-center h-40 text-slate-500">
               <div className="w-8 h-8 border-2 border-pink-500/30 border-t-pink-500 rounded-full animate-spin mb-3"></div>

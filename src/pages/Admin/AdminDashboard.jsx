@@ -69,14 +69,14 @@ const AdminDashboard = () => {
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-6 py-8 relative z-10">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 py-6 sm:py-8 relative z-10">
         {/* Navigation Cards */}
         {isRoot && (
           <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6 mb-8">
             
             <Link to="/admin/dashboard/events" className="group relative">
               <div className="absolute -inset-0.5 bg-gradient-to-r from-purple-500 to-indigo-500 rounded-2xl blur opacity-20 group-hover:opacity-100 transition duration-500"></div>
-              <div className="relative h-full bg-slate-900/80 backdrop-blur-sm border border-slate-700/50 p-6 rounded-2xl flex flex-col items-start hover:bg-slate-800/80 transition">
+              <div className="relative h-full bg-slate-900/80 backdrop-blur-sm border border-slate-700/50 p-4 sm:p-6 rounded-2xl flex flex-col items-start hover:bg-slate-800/80 transition">
                 <div className="w-12 h-12 rounded-lg bg-purple-500/20 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
                   <Calendar className="text-purple-400 w-6 h-6" />
                 </div>
@@ -87,7 +87,7 @@ const AdminDashboard = () => {
 
             <Link to="/admin/dashboard/past-events" className="group relative">
               <div className="absolute -inset-0.5 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-2xl blur opacity-20 group-hover:opacity-100 transition duration-500"></div>
-              <div className="relative h-full bg-slate-900/80 backdrop-blur-sm border border-slate-700/50 p-6 rounded-2xl flex flex-col items-start hover:bg-slate-800/80 transition">
+              <div className="relative h-full bg-slate-900/80 backdrop-blur-sm border border-slate-700/50 p-4 sm:p-6 rounded-2xl flex flex-col items-start hover:bg-slate-800/80 transition">
                 <div className="w-12 h-12 rounded-lg bg-blue-500/20 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
                   <ImageIcon className="text-blue-400 w-6 h-6" />
                 </div>
@@ -98,7 +98,7 @@ const AdminDashboard = () => {
 
             <Link to="/admin/dashboard/announcements" className="group relative">
               <div className="absolute -inset-0.5 bg-gradient-to-r from-pink-500 to-rose-500 rounded-2xl blur opacity-20 group-hover:opacity-100 transition duration-500"></div>
-              <div className="relative h-full bg-slate-900/80 backdrop-blur-sm border border-slate-700/50 p-6 rounded-2xl flex flex-col items-start hover:bg-slate-800/80 transition">
+              <div className="relative h-full bg-slate-900/80 backdrop-blur-sm border border-slate-700/50 p-4 sm:p-6 rounded-2xl flex flex-col items-start hover:bg-slate-800/80 transition">
                 <div className="w-12 h-12 rounded-lg bg-pink-500/20 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
                   <Megaphone className="text-pink-400 w-6 h-6" />
                 </div>
@@ -109,7 +109,7 @@ const AdminDashboard = () => {
 
             <Link to="/admin/dashboard/team" className="group relative">
               <div className="absolute -inset-0.5 bg-gradient-to-r from-teal-500 to-emerald-500 rounded-2xl blur opacity-20 group-hover:opacity-100 transition duration-500"></div>
-              <div className="relative h-full bg-slate-900/80 backdrop-blur-sm border border-slate-700/50 p-6 rounded-2xl flex flex-col items-start hover:bg-slate-800/80 transition">
+              <div className="relative h-full bg-slate-900/80 backdrop-blur-sm border border-slate-700/50 p-4 sm:p-6 rounded-2xl flex flex-col items-start hover:bg-slate-800/80 transition">
                 <div className="w-12 h-12 rounded-lg bg-teal-500/20 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
                   <Users className="text-teal-400 w-6 h-6" />
                 </div>
@@ -119,7 +119,7 @@ const AdminDashboard = () => {
             </Link>
 
             <Link to="/admin/dashboard/ideapitch" className="group">
-              <div className="bg-slate-900/40 backdrop-blur-md border border-slate-800/60 p-6 rounded-2xl shadow-xl hover:shadow-yellow-500/10 hover:border-yellow-500/50 transition-all duration-300">
+              <div className="bg-slate-900/40 backdrop-blur-md border border-slate-800/60 p-4 sm:p-6 rounded-2xl shadow-xl hover:shadow-yellow-500/10 hover:border-yellow-500/50 transition-all duration-300">
                 <div className="flex justify-between items-start mb-4">
                   <div className="w-12 h-12 bg-yellow-500/20 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform">
                     <Lightbulb className="w-6 h-6 text-yellow-400" />
@@ -134,7 +134,7 @@ const AdminDashboard = () => {
 
             <Link to="/admin/dashboard/contacts" className="group relative">
               <div className="absolute -inset-0.5 bg-gradient-to-r from-violet-500 to-fuchsia-500 rounded-2xl blur opacity-20 group-hover:opacity-100 transition duration-500"></div>
-              <div className="relative h-full bg-slate-900/80 backdrop-blur-sm border border-slate-700/50 p-6 rounded-2xl flex flex-col items-start hover:bg-slate-800/80 transition">
+              <div className="relative h-full bg-slate-900/80 backdrop-blur-sm border border-slate-700/50 p-4 sm:p-6 rounded-2xl flex flex-col items-start hover:bg-slate-800/80 transition">
                 <div className="w-12 h-12 rounded-lg bg-violet-500/20 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300 relative">
                   <MessageSquare className="text-violet-400 w-6 h-6" />
                   {unreadCount > 0 && (
@@ -154,7 +154,7 @@ const AdminDashboard = () => {
             </Link>
 
             <Link to="/admin/dashboard/profile" className="group">
-              <div className="bg-slate-900/40 backdrop-blur-md border border-slate-800/60 p-6 rounded-2xl shadow-xl hover:shadow-cyan-500/10 hover:border-cyan-500/50 transition-all duration-300">
+              <div className="bg-slate-900/40 backdrop-blur-md border border-slate-800/60 p-4 sm:p-6 rounded-2xl shadow-xl hover:shadow-cyan-500/10 hover:border-cyan-500/50 transition-all duration-300">
                 <div className="flex justify-between items-start mb-4">
                   <div className="w-12 h-12 bg-cyan-500/20 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform">
                     <UserCircle className="w-6 h-6 text-cyan-400" />
@@ -180,7 +180,7 @@ const AdminDashboard = () => {
               <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
               Back to Dashboard
             </button>
-            <div className="bg-slate-900/40 backdrop-blur-md border border-slate-800/60 p-8 rounded-2xl shadow-2xl relative">
+            <div className="bg-slate-900/40 backdrop-blur-md border border-slate-800/60 p-4 sm:p-8 rounded-2xl shadow-2xl relative">
               <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-purple-500 via-pink-500 to-teal-500 opacity-50 rounded-t-2xl"></div>
               <Outlet />
             </div>
