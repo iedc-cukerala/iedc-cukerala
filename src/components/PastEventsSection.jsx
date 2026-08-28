@@ -26,8 +26,8 @@ const PastEventsSection = () => {
             onClick={() => setSelectedEvent(event)}
             className="w-full md:w-[calc(50%-2rem)] max-w-xl group relative overflow-hidden rounded-2xl glass-card cursor-pointer hover:shadow-2xl hover:shadow-purple-500/20 transition-all duration-500"
           >
-            {/* CHANGED: Increased image height to h-72 (much taller!) */}
-            <div className="h-72 overflow-hidden">
+            {/* CHANGED: 4:3 Aspect Ratio for consistent thumbnail sizing */}
+            <div className="aspect-[4/3] w-full overflow-hidden">
               <img src={event.imageUrl} alt={event.title} className="w-full h-full object-cover group-hover:scale-110 transition duration-500" />
               <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/40 to-transparent opacity-90"></div>
             </div>
@@ -45,27 +45,37 @@ const PastEventsSection = () => {
       {selectedEvent && (
         <div className="fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4" onClick={() => setSelectedEvent(null)}>
           <div 
-            className="bg-slate-900 border border-slate-700 rounded-xl max-w-2xl w-full overflow-hidden shadow-2xl transform transition-all"
+            className="bg-slate-900 border border-slate-700 rounded-xl max-w-4xl w-full max-h-[90vh] overflow-y-auto shadow-2xl transform transition-all flex flex-col md:flex-row"
             onClick={(e) => e.stopPropagation()} 
           >
-            <img src={selectedEvent.imageUrl} alt="Cover" className="w-full h-72 object-cover" />
-            <div className="p-6 md:p-8">
+            {/* Left Column: Image */}
+            <div className="w-full md:w-1/2 bg-slate-950 flex items-center justify-center p-4">
+              <img src={selectedEvent.imageUrl} alt="Cover" className="max-w-full max-h-[40vh] md:max-h-full object-contain rounded-lg shadow-lg" />
+            </div>
+            
+            {/* Right Column: Text & Buttons */}
+            <div className="w-full md:w-1/2 p-6 md:p-8 flex flex-col">
               <h2 className="text-3xl font-bold text-white mb-2">{selectedEvent.title}</h2>
               <p className="text-slate-400 mb-6">📅 Conducted on: {selectedEvent.date}</p>
-              <p className="text-slate-300 mb-8 whitespace-pre-line leading-relaxed">{selectedEvent.description}</p>
               
-              <div className="flex gap-4">
-                <a 
-                  href={selectedEvent.link} 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="flex-1 bg-blue-600 text-white text-center font-bold py-3 rounded-lg hover:bg-blue-500 transition shadow-lg"
-                >
-                  📸 View Full Photo Gallery
-                </a>
+              <div className="text-slate-300 mb-8 whitespace-pre-line leading-relaxed flex-grow overflow-y-auto pr-2">
+                {selectedEvent.description}
+              </div>
+              
+              <div className="flex flex-col gap-3 mt-auto pt-4 border-t border-slate-800">
+                {selectedEvent.link && (
+                  <a 
+                    href={selectedEvent.link} 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="w-full bg-blue-600 text-white text-center font-bold py-3 rounded-lg hover:bg-blue-500 transition shadow-lg"
+                  >
+                    📸 View Full Photo Gallery
+                  </a>
+                )}
                 <button 
                   onClick={() => setSelectedEvent(null)}
-                  className="px-6 bg-slate-800 text-slate-300 font-bold rounded-lg hover:bg-slate-700 transition"
+                  className="w-full py-3 bg-slate-800 text-slate-300 font-bold rounded-lg hover:bg-slate-700 transition"
                 >
                   Close
                 </button>

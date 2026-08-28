@@ -98,7 +98,7 @@ const ManagePastEvents = () => {
               <input type="url" name="imageUrl" placeholder="https://example.com/image.jpg" value={formData.imageUrl} onChange={handleInputChange} className="w-full bg-slate-950/50 text-white pl-9 p-3 rounded-lg border border-slate-700/50 focus:border-blue-500/50 focus:ring-1 focus:ring-blue-500/50 outline-none transition-all placeholder:text-slate-600" required />
             </div>
             {formData.imageUrl && (
-              <div className="mt-3 relative rounded-lg overflow-hidden border border-slate-700 h-24 bg-slate-950">
+              <div className="mt-3 relative rounded-lg overflow-hidden border border-slate-700 aspect-[4/3] w-48 bg-slate-950">
                 <img src={formData.imageUrl} alt="Preview" className="w-full h-full object-cover" onError={(e) => { e.target.style.display = 'none'; }} />
               </div>
             )}
@@ -147,7 +147,7 @@ const ManagePastEvents = () => {
               {pastEvents.map(event => (
                 <div key={event.id} className="bg-slate-950/50 rounded-xl border border-slate-800/80 hover:border-blue-500/50 transition-colors group overflow-hidden flex flex-col">
                   {/* Thumbnail */}
-                  <div className="w-full h-32 relative border-b border-slate-800/80">
+                  <div className="w-full aspect-[4/3] relative border-b border-slate-800/80">
                     <img src={event.imageUrl} alt={event.title} className="w-full h-full object-cover" />
                     <div className="absolute inset-0 bg-gradient-to-t from-slate-950 to-transparent"></div>
                     <div className="absolute bottom-2 left-3 flex items-center gap-1 text-[10px] text-white font-semibold bg-black/50 px-2 py-0.5 rounded backdrop-blur-sm">

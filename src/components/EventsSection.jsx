@@ -33,7 +33,7 @@ const EventsSection = () => {
           {events.map(event => (
             <div key={event.id} className="w-full sm:w-[calc(50%-1.5rem)] lg:w-[calc(33.333%-1.5rem)] max-w-md glass-card rounded-lg overflow-hidden hover:border-purple-500 transition group flex flex-col h-full">
               {event.imageUrl && (
-                <div className="relative h-48 overflow-hidden shrink-0">
+                <div className="relative aspect-[4/3] w-full overflow-hidden shrink-0">
                   <img
                     src={event.imageUrl}
                     alt={event.title}

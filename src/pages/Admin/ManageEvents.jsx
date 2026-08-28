@@ -134,7 +134,7 @@ const ManageEvents = () => {
               <input type="url" name="imageUrl" placeholder="https://example.com/image.jpg" value={formData.imageUrl} onChange={handleInputChange} className="w-full bg-slate-950/50 text-white pl-9 p-3 rounded-lg border border-slate-700/50 focus:border-purple-500/50 focus:ring-1 focus:ring-purple-500/50 outline-none transition-all placeholder:text-slate-600" required />
             </div>
             {formData.imageUrl && (
-              <div className="mt-3 relative rounded-lg overflow-hidden border border-slate-700 h-32 bg-slate-950">
+              <div className="mt-3 relative rounded-lg overflow-hidden border border-slate-700 aspect-[4/3] w-48 bg-slate-950">
                 <img src={formData.imageUrl} alt="Preview" className="w-full h-full object-cover" onError={(e) => { e.target.style.display = 'none'; }} />
               </div>
             )}
@@ -199,7 +199,7 @@ const ManageEvents = () => {
                   <div className="flex flex-col sm:flex-row gap-5">
                     {/* Thumbnail */}
                     {event.imageUrl && (
-                      <div className="w-full sm:w-32 h-24 rounded-lg overflow-hidden shrink-0 border border-slate-800">
+                      <div className="w-full sm:w-32 aspect-[4/3] rounded-lg overflow-hidden shrink-0 border border-slate-800">
                         <img src={event.imageUrl} alt={event.title} className="w-full h-full object-cover" />
                       </div>
                     )}
