@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useContact } from '../hooks/useContact';
 // eslint-disable-next-line no-unused-vars
 import { motion } from 'framer-motion';
-import { Instagram, Linkedin, Twitter, Mail, Phone } from 'lucide-react';
+import { Instagram, Linkedin, Twitter, Mail, Phone, Youtube } from 'lucide-react';
 import AnimatedSection from './AnimatedSection';
 
 const ContactSection = () => {
@@ -98,6 +98,9 @@ const ContactSection = () => {
                             </a>
                             <a href='https://www.linkedin.com/in/iedc-cuk-56b73b259/' target="_blank" rel="noreferrer" className="w-14 h-14 bg-slate-800/80 rounded-2xl flex items-center justify-center text-slate-400 hover:text-blue-400 hover:bg-slate-800 border border-slate-700 hover:border-blue-500/50 transition-all duration-300 hover:scale-110 shadow-lg hover:shadow-blue-500/20">
                                 <Linkedin size={28} />
+                            </a>
+                            <a href='https://www.youtube.com/@iedc_cukerala' target="_blank" rel="noreferrer" className="w-14 h-14 bg-slate-800/80 rounded-2xl flex items-center justify-center text-slate-400 hover:text-red-500 hover:bg-slate-800 border border-slate-700 hover:border-red-500/50 transition-all duration-300 hover:scale-110 shadow-lg hover:shadow-red-500/20">
+                                <Youtube size={28} />
                             </a>
                         </div>
                     </motion.div>

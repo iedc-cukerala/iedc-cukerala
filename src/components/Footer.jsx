@@ -1,5 +1,5 @@
 import React from 'react';
-import { Instagram, Linkedin, Twitter, Mail } from 'lucide-react';
+import { Instagram, Linkedin, Twitter, Mail, Youtube } from 'lucide-react';
 
 const Footer = () => {
     const navLinks = [
@@ -12,6 +12,7 @@ const Footer = () => {
     const socialLinks = [
         { icon: <Instagram size={24} />, href: 'http://www.instagram.com/iedc_cuk' },
         { icon: <Linkedin size={24} />, href: 'https://www.linkedin.com/in/iedc-cuk-56b73b259/' },
+        { icon: <Youtube size={24} />, href: 'https://www.youtube.com/@iedc_cukerala' },
     ];
 
     return (
