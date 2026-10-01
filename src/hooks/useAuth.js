@@ -15,7 +15,7 @@ export const useAuth = () => {
         let userRole = null;
         
         const superAdmins = [
-          'tathagatamandal68@gmail.com'
+          'iedctech@cukerala.ac.in'
         ];
 
         if (superAdmins.includes(email.toLowerCase())) {

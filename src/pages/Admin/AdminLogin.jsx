@@ -14,7 +14,7 @@ const AdminLogin = () => {
   const processLoginResult = async (user) => {
     try {
       const email = user.email;
-      const superAdmins = ['tathagatamandal68@gmail.com'];
+      const superAdmins = ['iedctech@cukerala.ac.in'];
 
       let isAdmin = false;
       if (superAdmins.includes(email.toLowerCase())) {
