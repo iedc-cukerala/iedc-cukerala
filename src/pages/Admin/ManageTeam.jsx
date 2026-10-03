@@ -6,16 +6,16 @@ import { Mail, User, Users, Shield, UserPlus, XCircle, CheckCircle2, Clock, Tras
 
 const ManageTeam = () => {
   const { leads, inviteLead, revokeLead } = useTeam();
-  const { isSuperAdmin } = useAuth();
+  const { isSuperAdmin, loading } = useAuth();
   const navigate = useNavigate();
   const [formData, setFormData] = useState({ name: '', role: '', email: '' });
   const [isSending, setIsSending] = useState(false);
 
   useEffect(() => {
-    if (isSuperAdmin === false) {
+    if (!loading && isSuperAdmin === false) {
       navigate('/admin/dashboard');
     }
-  }, [isSuperAdmin, navigate]);
+  }, [isSuperAdmin, loading, navigate]);
 
   const handleInputChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
