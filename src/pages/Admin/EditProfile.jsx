@@ -48,7 +48,7 @@ const EditProfile = () => {
             leadDocId = docSnap.id;
           }
         } else {
-          const q = query(collection(db, 'leads'), where('uid', '==', user.uid));
+          const q = query(collection(db, 'leads'), where('email', '==', user.email.toLowerCase()));
           const querySnapshot = await getDocs(q);
           if (!querySnapshot.empty) {
             const leadDoc = querySnapshot.docs[0];

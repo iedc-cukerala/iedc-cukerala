@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { collection, addDoc, deleteDoc, doc, onSnapshot, query, orderBy } from 'firebase/firestore';
+import { collection, addDoc, deleteDoc, doc, onSnapshot, query, orderBy, getDoc } from 'firebase/firestore';
 import { db } from '../config/firebase';
 
 export const useTeam = () => {
@@ -29,6 +29,13 @@ export const useTeam = () => {
   };
 
   const revokeLead = async (id) => {
+    const leadDoc = await getDoc(doc(db, 'leads', id));
+    if (leadDoc.exists()) {
+      const leadData = leadDoc.data();
+      if (leadData.uid) {
+        await deleteDoc(doc(db, 'admins', leadData.uid));
+      }
+    }
     await deleteDoc(doc(db, 'leads', id));
   };
 
