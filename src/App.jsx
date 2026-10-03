@@ -20,6 +20,8 @@ import TeamSection from './components/TeamSection';
 import ContactSection from './components/ContactSection';
 import Footer from './components/Footer';
 import IdeaPitchRegistration from './pages/IdeaPitchRegistration';
+import LeadProfile from './pages/LeadProfile';
+
 function PublicHome() {
   const [isHeaderVisible, setIsHeaderVisible] = useState(false);
 
@@ -107,6 +109,7 @@ function App() {
           } />
         </Route>
         <Route path="/ideapitch" element={<IdeaPitchRegistration />} />
+        <Route path="/lead/:roleSlug" element={<LeadProfile />} />
         <Route path="/" element={<PublicHome />} />
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { collection, query, where, getDocs } from "firebase/firestore";
+import { Link } from "react-router-dom";
 import { db } from "../config/firebase";
 import { Linkedin, Mail, Phone } from "lucide-react";
 
@@ -99,44 +100,46 @@ const TeamSection = () => {
                 viewport={{ once: true, amount: 0.5 }}
                 className="group relative w-full sm:w-[calc(50%-2rem)] lg:w-[calc(25%-2rem)] max-w-[280px]"
               >
-                <div className="absolute -inset-1 group-hover:bg-gradient-to-br group-hover:from-purple-600 group-hover:to-pink-600 rounded-2xl blur opacity-60 transition duration-800"></div>
-                
-                <div className="relative w-full h-full bg-slate-900 rounded-2xl text-center p-6 flex flex-col items-center">
-                  <div className="w-40 h-40 rounded-full mb-4 border-4 border-slate-700 shadow-lg overflow-hidden transition-transform duration-300 md:group-hover:scale-105 bg-slate-800">
-                    {member.imageUrl ? (
-                      <img
-                        src={member.imageUrl}
-                        alt={member.name}
-                        className="w-full h-full object-cover"
-                      />
-                    ) : (
-                      <div className="w-full h-full flex items-center justify-center text-4xl text-slate-600 font-bold uppercase">
-                        {member.name.charAt(0)}
-                      </div>
-                    )}
-                  </div>
-                  <h3 className="text-xl font-bold text-white mt-2">{member.name}</h3>
-                  <p className="gradient-text font-semibold font-['Poppins'] mb-4">{member.role}</p>
+                <Link to={`/lead/${(member.role || 'lead').toLowerCase().replace(/\s+/g, '-').replace(/[^\w\-]+/g, '').replace(/\-\-+/g, '-').replace(/^-+/, '').replace(/-+$/, '')}`} className="block w-full h-full">
+                  <div className="absolute -inset-1 group-hover:bg-gradient-to-br group-hover:from-purple-600 group-hover:to-pink-600 rounded-2xl blur opacity-60 transition duration-800"></div>
+                  
+                  <div className="relative w-full h-full bg-slate-900 rounded-2xl text-center p-6 flex flex-col items-center hover:bg-slate-800 transition-colors duration-300">
+                    <div className="w-40 h-40 rounded-full mb-4 border-4 border-slate-700 shadow-lg overflow-hidden transition-transform duration-300 md:group-hover:scale-105 bg-slate-800">
+                      {member.imageUrl ? (
+                        <img
+                          src={member.imageUrl}
+                          alt={member.name}
+                          className="w-full h-full object-cover"
+                        />
+                      ) : (
+                        <div className="w-full h-full flex items-center justify-center text-4xl text-slate-600 font-bold uppercase">
+                          {member.name.charAt(0)}
+                        </div>
+                      )}
+                    </div>
+                    <h3 className="text-xl font-bold text-white mt-2 group-hover:text-purple-400 transition-colors">{member.name}</h3>
+                    <p className="gradient-text font-semibold font-['Poppins'] mb-4">{member.role}</p>
 
-                  {/* Social Links */}
-                  <div className="flex space-x-4 mt-auto">
-                    {member.linkedin && (
-                      <a href={member.linkedin} target="_blank" rel="noreferrer" className="text-slate-400 hover:text-blue-500 transition">
-                        <Linkedin size={20} />
-                      </a>
-                    )}
-                    {member.email && (
-                      <a href={`mailto:${member.email}`} className="text-slate-400 hover:text-red-400 transition">
-                        <Mail size={20} />
-                      </a>
-                    )}
-                    {member.phone && (
-                      <a href={`tel:${member.phone}`} className="text-slate-400 hover:text-green-400 transition">
-                        <Phone size={20} />
-                      </a>
-                    )}
+                    {/* Social Links - prevent default so clicking doesn't trigger Link navigation */}
+                    <div className="flex space-x-4 mt-auto relative z-20">
+                      {member.linkedin && (
+                        <a href={member.linkedin} target="_blank" rel="noreferrer" onClick={(e) => e.stopPropagation()} className="text-slate-400 hover:text-blue-500 transition">
+                          <Linkedin size={20} />
+                        </a>
+                      )}
+                      {member.email && (
+                        <a href={`mailto:${member.email}`} onClick={(e) => e.stopPropagation()} className="text-slate-400 hover:text-red-400 transition">
+                          <Mail size={20} />
+                        </a>
+                      )}
+                      {member.phone && (
+                        <a href={`tel:${member.phone}`} onClick={(e) => e.stopPropagation()} className="text-slate-400 hover:text-green-400 transition">
+                          <Phone size={20} />
+                        </a>
+                      )}
+                    </div>
                   </div>
-                </div>
+                </Link>
               </motion.div>
             ))}
           </div>

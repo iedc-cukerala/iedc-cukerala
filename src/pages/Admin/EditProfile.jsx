@@ -4,7 +4,9 @@ import { collection, query, where, getDocs, updateDoc, doc, getDoc } from 'fireb
 import Cropper from 'react-easy-crop';
 import { db, auth } from '../../config/firebase';
 import { useAuth } from '../../hooks/useAuth';
-import { ArrowLeft } from 'lucide-react';
+import { ArrowLeft, Download } from 'lucide-react';
+import { toJpeg } from 'html-to-image';
+import VirtualIDCard from '../../components/VirtualIDCard';
 
 const EditProfile = () => {
   const [leadData, setLeadData] = useState(null);
@@ -27,6 +29,21 @@ const EditProfile = () => {
   const [searchParams] = useSearchParams();
   const { isSuperAdmin } = useAuth();
   const targetId = searchParams.get('id');
+  const idCardRef = useRef(null);
+
+  const downloadIdCard = async () => {
+    if (!idCardRef.current) return;
+    try {
+      const dataUrl = await toJpeg(idCardRef.current, { quality: 0.95 });
+      const link = document.createElement('a');
+      link.download = `${leadData.name.replace(/\s+/g, '_')}_IEDC_IDCard.jpeg`;
+      link.href = dataUrl;
+      link.click();
+    } catch (err) {
+      console.error('Error generating ID card', err);
+      alert('Failed to generate ID card');
+    }
+  };
 
   useEffect(() => {
     const fetchLeadData = async () => {
@@ -58,16 +75,19 @@ const EditProfile = () => {
         }
 
         if (leadDataObj) {
-          setDocId(leadDocId);
-          setLeadData({
-            name: leadDataObj.name || '',
-            role: leadDataObj.role || '',
-            imageUrl: leadDataObj.imageUrl || '',
-            linkedin: leadDataObj.linkedin || '',
-            email: leadDataObj.email || '',
-            phone: leadDataObj.phone || '',
-          });
-        }
+            setDocId(leadDocId);
+            setLeadData({
+              name: leadDataObj.name || '',
+              role: leadDataObj.role || '',
+              department: leadDataObj.department || '',
+              bio: leadDataObj.bio || '',
+              imageUrl: leadDataObj.imageUrl || '',
+              linkedin: leadDataObj.linkedin || '',
+              instagram: leadDataObj.instagram || '',
+              email: leadDataObj.email || '',
+              phone: leadDataObj.phone || '',
+            });
+          }
       } catch (err) {
         console.error("Error fetching lead:", err);
       }
@@ -150,8 +170,11 @@ const EditProfile = () => {
       await updateDoc(doc(db, 'leads', docId), {
         name: leadData.name,
         role: leadData.role,
+        department: leadData.department,
+        bio: leadData.bio,
         imageUrl: finalImageUrl,
         linkedin: leadData.linkedin,
+        instagram: leadData.instagram,
         email: leadData.email,
         phone: leadData.phone,
       });
@@ -291,6 +314,23 @@ const EditProfile = () => {
                 className="w-full bg-slate-950/50 text-white p-4 rounded-xl border border-white/10 outline-none focus:border-purple-500/50 focus:ring-1 focus:ring-purple-500/50 transition-all disabled:opacity-50 disabled:bg-slate-900/50" 
               />
             </div>
+            <div className="space-y-2">
+              <label className="text-xs font-semibold text-slate-400 uppercase tracking-wider pl-1">Department / Course</label>
+              <input 
+                type="text" name="department" value={leadData.department} onChange={handleChange} disabled={!isEditing}
+                placeholder="e.g. Computer Science (2022-2026)"
+                className="w-full bg-slate-950/50 text-white p-4 rounded-xl border border-white/10 outline-none focus:border-purple-500/50 focus:ring-1 focus:ring-purple-500/50 transition-all disabled:opacity-50 disabled:bg-slate-900/50" 
+              />
+            </div>
+            <div className="space-y-2">
+              <label className="text-xs font-semibold text-slate-400 uppercase tracking-wider pl-1">Short Bio</label>
+              <textarea 
+                name="bio" value={leadData.bio} onChange={handleChange} disabled={!isEditing}
+                placeholder="A brief introduction about yourself..."
+                rows="3"
+                className="w-full bg-slate-950/50 text-white p-4 rounded-xl border border-white/10 outline-none focus:border-purple-500/50 focus:ring-1 focus:ring-purple-500/50 transition-all disabled:opacity-50 disabled:bg-slate-900/50 resize-none" 
+              ></textarea>
+            </div>
           </div>
         </div>
 
@@ -303,6 +343,14 @@ const EditProfile = () => {
                 type="url" name="linkedin" value={leadData.linkedin} onChange={handleChange} disabled={!isEditing}
                 placeholder="https://linkedin.com/in/..."
                 className="w-full bg-slate-950/50 text-white p-4 rounded-xl border border-white/10 outline-none focus:border-blue-500/50 focus:ring-1 focus:ring-blue-500/50 transition-all disabled:opacity-50 disabled:bg-slate-900/50" 
+              />
+            </div>
+            <div className="space-y-2">
+              <label className="text-xs font-semibold text-slate-400 uppercase tracking-wider pl-1">Instagram Username</label>
+              <input 
+                type="text" name="instagram" value={leadData.instagram} onChange={handleChange} disabled={!isEditing}
+                placeholder="@username"
+                className="w-full bg-slate-950/50 text-white p-4 rounded-xl border border-white/10 outline-none focus:border-pink-500/50 focus:ring-1 focus:ring-pink-500/50 transition-all disabled:opacity-50 disabled:bg-slate-900/50" 
               />
             </div>
             <div className="space-y-2">
@@ -353,6 +401,29 @@ const EditProfile = () => {
           )}
         </div>
       </form>
+
+      {/* ID Card Section */}
+      <div className="mt-16 pt-8 border-t border-slate-800">
+        <div className="flex flex-col md:flex-row items-center justify-between gap-6 mb-8">
+          <div>
+            <h3 className="text-xl font-bold text-white mb-2">Virtual ID Card</h3>
+            <p className="text-slate-400 text-sm">Download your official IEDC Virtual ID Card containing a QR code to your public sub-profile.</p>
+          </div>
+          <button 
+            onClick={downloadIdCard}
+            className="flex items-center gap-2 px-6 py-3 bg-slate-800 border border-slate-700 text-white font-bold rounded-xl hover:bg-slate-700 hover:border-purple-500/50 transition-all shadow-lg"
+          >
+            <Download className="w-5 h-5" /> Download ID Card
+          </button>
+        </div>
+        
+        <div className="flex justify-center bg-slate-950/50 p-8 rounded-3xl border border-white/5 overflow-x-auto">
+          {/* We render the card here so html-to-image can capture it, but scale it down slightly for preview */}
+          <div className="transform scale-90 md:scale-100 origin-top">
+            <VirtualIDCard ref={idCardRef} lead={leadData} />
+          </div>
+        </div>
+      </div>
     </div>
   );
 };
