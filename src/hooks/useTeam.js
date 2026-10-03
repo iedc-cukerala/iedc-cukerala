@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { collection, addDoc, deleteDoc, doc, onSnapshot, query, orderBy, getDoc } from 'firebase/firestore';
+import { collection, addDoc, deleteDoc, doc, onSnapshot, query, where, orderBy, getDoc } from 'firebase/firestore';
 import { db } from '../config/firebase';
 
 export const useTeam = () => {
@@ -32,8 +32,12 @@ export const useTeam = () => {
     const leadDoc = await getDoc(doc(db, 'leads', id));
     if (leadDoc.exists()) {
       const leadData = leadDoc.data();
-      if (leadData.uid) {
-        await deleteDoc(doc(db, 'admins', leadData.uid));
+      if (leadData.email) {
+        const adminQ = query(collection(db, 'admins'), where('email', '==', leadData.email.toLowerCase()));
+        const { getDocs } = await import('firebase/firestore');
+        const adminSnap = await getDocs(adminQ);
+        const deletePromises = adminSnap.docs.map(adminDoc => deleteDoc(doc(db, 'admins', adminDoc.id)));
+        await Promise.all(deletePromises);
       }
     }
     await deleteDoc(doc(db, 'leads', id));
