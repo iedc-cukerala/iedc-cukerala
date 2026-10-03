@@ -34,7 +34,7 @@ const EditProfile = () => {
   const downloadIdCard = async () => {
     if (!idCardRef.current) return;
     try {
-      const dataUrl = await toJpeg(idCardRef.current, { quality: 0.95 });
+      const dataUrl = await toJpeg(idCardRef.current, { quality: 1, pixelRatio: 2 });
       const link = document.createElement('a');
       link.download = `${leadData.name.replace(/\s+/g, '_')}_IEDC_IDCard.jpeg`;
       link.href = dataUrl;
