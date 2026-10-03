@@ -7,6 +7,7 @@ export const useAuth = () => {
   const [loading, setLoading] = useState(true);
 
   const [role, setRole] = useState(null);
+  const [isSuperAdmin, setIsSuperAdmin] = useState(false);
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
@@ -20,7 +21,9 @@ export const useAuth = () => {
 
         if (superAdmins.includes(email.toLowerCase())) {
           userRole = 'admin';
+          setIsSuperAdmin(true);
         } else {
+          setIsSuperAdmin(false);
           try {
             const { collection, query, where, getDocs } = await import('firebase/firestore');
             const { db } = await import('../config/firebase');
@@ -43,6 +46,7 @@ export const useAuth = () => {
         setRole(userRole);
       } else {
         setRole(null);
+        setIsSuperAdmin(false);
       }
       setUser(currentUser);
       setLoading(false);
@@ -64,5 +68,5 @@ export const useAuth = () => {
     return signInWithPopup(auth, provider);
   };
 
-  return { user, loading, role, login, logout, signInWithGoogle };
+  return { user, loading, role, isSuperAdmin, login, logout, signInWithGoogle };
 };

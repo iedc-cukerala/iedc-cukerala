@@ -6,7 +6,7 @@ import { useAuth } from '../../hooks/useAuth';
 import { Calendar, Image as ImageIcon, Megaphone, Users, LogOut, LayoutDashboard, ArrowLeft, MessageSquare, Lightbulb, UserCircle } from 'lucide-react';
 
 const AdminDashboard = () => {
-  const { user, logout } = useAuth();
+  const { user, logout, isSuperAdmin } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
   const [unreadCount, setUnreadCount] = useState(0);
@@ -107,16 +107,18 @@ const AdminDashboard = () => {
               </div>
             </Link>
 
-            <Link to="/admin/dashboard/team" className="group relative">
-              <div className="absolute -inset-0.5 bg-gradient-to-r from-teal-500 to-emerald-500 rounded-2xl blur opacity-20 group-hover:opacity-100 transition duration-500"></div>
-              <div className="relative h-full bg-slate-900/80 backdrop-blur-sm border border-slate-700/50 p-4 sm:p-6 rounded-2xl flex flex-col items-center sm:items-start text-center sm:text-left hover:bg-slate-800/80 transition">
-                <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-lg bg-teal-500/20 flex items-center justify-center mb-2 sm:mb-4 group-hover:scale-110 transition-transform duration-300">
-                  <Users className="text-teal-400 w-5 h-5 sm:w-6 sm:h-6" />
+            {isSuperAdmin && (
+              <Link to="/admin/dashboard/team" className="group relative">
+                <div className="absolute -inset-0.5 bg-gradient-to-r from-teal-500 to-emerald-500 rounded-2xl blur opacity-20 group-hover:opacity-100 transition duration-500"></div>
+                <div className="relative h-full bg-slate-900/80 backdrop-blur-sm border border-slate-700/50 p-4 sm:p-6 rounded-2xl flex flex-col items-center sm:items-start text-center sm:text-left hover:bg-slate-800/80 transition">
+                  <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-lg bg-teal-500/20 flex items-center justify-center mb-2 sm:mb-4 group-hover:scale-110 transition-transform duration-300">
+                    <Users className="text-teal-400 w-5 h-5 sm:w-6 sm:h-6" />
+                  </div>
+                  <h2 className="text-sm sm:text-xl font-bold text-white mb-1 sm:mb-2">Team</h2>
+                  <p className="text-slate-400 text-sm hidden sm:block">Invite leads and manage dashboard access.</p>
                 </div>
-                <h2 className="text-sm sm:text-xl font-bold text-white mb-1 sm:mb-2">Team</h2>
-                <p className="text-slate-400 text-sm hidden sm:block">Invite leads and manage dashboard access.</p>
-              </div>
-            </Link>
+              </Link>
+            )}
 
             <Link to="/admin/dashboard/ideapitch" className="group">
               <div className="relative h-full bg-slate-900/40 backdrop-blur-md border border-slate-800/60 p-4 sm:p-6 rounded-2xl flex flex-col items-center sm:items-start text-center sm:text-left shadow-xl hover:shadow-yellow-500/10 hover:border-yellow-500/50 transition-all duration-300">

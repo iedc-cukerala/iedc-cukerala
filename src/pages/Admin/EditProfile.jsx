@@ -1,8 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { collection, query, where, getDocs, updateDoc, doc } from 'firebase/firestore';
+import { useNavigate, useSearchParams } from 'react-router-dom';
+import { collection, query, where, getDocs, updateDoc, doc, getDoc } from 'firebase/firestore';
 import Cropper from 'react-easy-crop';
 import { db, auth } from '../../config/firebase';
+import { useAuth } from '../../hooks/useAuth';
 import { ArrowLeft } from 'lucide-react';
 
 const EditProfile = () => {
@@ -23,6 +24,9 @@ const EditProfile = () => {
   const [isEditing, setIsEditing] = useState(false);
   const fileInputRef = useRef(null);
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+  const { isSuperAdmin } = useAuth();
+  const targetId = searchParams.get('id');
 
   useEffect(() => {
     const fetchLeadData = async () => {
@@ -32,26 +36,46 @@ const EditProfile = () => {
         return;
       }
 
-      const q = query(collection(db, 'leads'), where('uid', '==', user.uid));
-      const querySnapshot = await getDocs(q);
+      let leadDataObj = null;
+      let leadDocId = null;
 
-      if (!querySnapshot.empty) {
-        const leadDoc = querySnapshot.docs[0];
-        setDocId(leadDoc.id);
-        setLeadData({
-          name: leadDoc.data().name || '',
-          role: leadDoc.data().role || '',
-          imageUrl: leadDoc.data().imageUrl || '',
-          linkedin: leadDoc.data().linkedin || '',
-          email: leadDoc.data().email || '',
-          phone: leadDoc.data().phone || '',
-        });
+      try {
+        if (isSuperAdmin && targetId) {
+          const docRef = doc(db, 'leads', targetId);
+          const docSnap = await getDoc(docRef);
+          if (docSnap.exists()) {
+            leadDataObj = docSnap.data();
+            leadDocId = docSnap.id;
+          }
+        } else {
+          const q = query(collection(db, 'leads'), where('uid', '==', user.uid));
+          const querySnapshot = await getDocs(q);
+          if (!querySnapshot.empty) {
+            const leadDoc = querySnapshot.docs[0];
+            leadDataObj = leadDoc.data();
+            leadDocId = leadDoc.id;
+          }
+        }
+
+        if (leadDataObj) {
+          setDocId(leadDocId);
+          setLeadData({
+            name: leadDataObj.name || '',
+            role: leadDataObj.role || '',
+            imageUrl: leadDataObj.imageUrl || '',
+            linkedin: leadDataObj.linkedin || '',
+            email: leadDataObj.email || '',
+            phone: leadDataObj.phone || '',
+          });
+        }
+      } catch (err) {
+        console.error("Error fetching lead:", err);
       }
       setLoading(false);
     };
 
     fetchLeadData();
-  }, [navigate]);
+  }, [navigate, isSuperAdmin, targetId]);
 
   const handleChange = (e) => {
     setLeadData({ ...leadData, [e.target.name]: e.target.value });
@@ -202,10 +226,10 @@ const EditProfile = () => {
             <ArrowLeft className="w-4 h-4 mr-1" /> Back to Dashboard
           </button>
           <div className="inline-flex items-center justify-center px-4 py-1.5 rounded-full bg-purple-900/30 border border-purple-500/30 text-purple-300 text-xs font-semibold mb-3 tracking-wider uppercase">
-              Admin Profile
+              {targetId && isSuperAdmin ? 'Edit Team Member' : 'Admin Profile'}
           </div>
           <h2 className="text-3xl md:text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-white to-slate-400">
-              Edit My Profile
+              {targetId && isSuperAdmin ? 'Edit Member Profile' : 'Edit My Profile'}
           </h2>
         </div>
       </div>

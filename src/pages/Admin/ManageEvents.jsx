@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useEvents } from '../../hooks/useEvents';
-import { CalendarPlus, Edit3, Trash2, Calendar, Clock, Image as ImageIcon, Link as LinkIcon, Save, XCircle, Tag } from 'lucide-react';
+import { compressImageToBase64 } from '../../utils/imageUtils';
+import { CalendarPlus, Edit3, Trash2, Calendar, Clock, Image as ImageIcon, Link as LinkIcon, Save, XCircle, Tag, UploadCloud } from 'lucide-react';
 
 const ManageEvents = () => {
   const { events, addEvent, updateEvent, deleteEvent, loading } = useEvents();
@@ -15,10 +16,27 @@ const ManageEvents = () => {
   });
   const [editingId, setEditingId] = useState(null);
   const [submitError, setSubmitError] = useState('');
+  const [isUploadingImage, setIsUploadingImage] = useState(false);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
+  };
+
+  const handleImageUpload = async (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+    
+    setIsUploadingImage(true);
+    try {
+      const base64Image = await compressImageToBase64(file);
+      setFormData(prev => ({ ...prev, imageUrl: base64Image }));
+    } catch (error) {
+      alert("Failed to process image.");
+      console.error(error);
+    } finally {
+      setIsUploadingImage(false);
+    }
   };
 
   const handleSubmit = async (e) => {
@@ -126,16 +144,36 @@ const ManageEvents = () => {
           </div>
 
           <div className="space-y-1">
-            <label className="text-xs font-semibold text-slate-400 uppercase tracking-wider">Image URL</label>
+            <label className="text-xs font-semibold text-slate-400 uppercase tracking-wider">Event Thumbnail</label>
             <div className="relative">
-              <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                <ImageIcon className="h-4 w-4 text-slate-500" />
-              </div>
-              <input type="url" name="imageUrl" placeholder="https://example.com/image.jpg" value={formData.imageUrl} onChange={handleInputChange} className="w-full bg-slate-950/50 text-white pl-9 p-3 rounded-lg border border-slate-700/50 focus:border-purple-500/50 focus:ring-1 focus:ring-purple-500/50 outline-none transition-all placeholder:text-slate-600" />
+              <input 
+                type="file" 
+                accept="image/*"
+                onChange={handleImageUpload}
+                disabled={isUploadingImage}
+                className="hidden" 
+                id="event-image-upload" 
+              />
+              <label 
+                htmlFor="event-image-upload" 
+                className="w-full bg-slate-950/50 text-white p-3 rounded-lg border border-slate-700/50 hover:border-purple-500/50 transition-all cursor-pointer flex items-center justify-center gap-2"
+              >
+                <UploadCloud className="h-5 w-5 text-purple-400" />
+                <span className="font-medium text-sm">
+                  {isUploadingImage ? 'Processing Image...' : 'Upload Thumbnail Image'}
+                </span>
+              </label>
             </div>
             {formData.imageUrl && (
-              <div className="mt-3 relative rounded-lg overflow-hidden border border-slate-700 aspect-[4/3] w-48 bg-slate-950">
+              <div className="mt-3 relative rounded-lg overflow-hidden border border-slate-700 aspect-[4/3] w-48 bg-slate-950 group">
                 <img src={formData.imageUrl} alt="Preview" className="w-full h-full object-cover" onError={(e) => { e.target.style.display = 'none'; }} />
+                <button 
+                  type="button"
+                  onClick={() => setFormData(prev => ({ ...prev, imageUrl: '' }))}
+                  className="absolute top-2 right-2 bg-red-500/80 hover:bg-red-500 text-white p-1 rounded-md opacity-0 group-hover:opacity-100 transition-opacity"
+                >
+                  <XCircle className="w-4 h-4" />
+                </button>
               </div>
             )}
           </div>

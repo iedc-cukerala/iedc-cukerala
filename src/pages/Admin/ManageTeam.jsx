@@ -1,11 +1,21 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useTeam } from '../../hooks/useTeam';
-import { Mail, User, Users, Shield, UserPlus, XCircle, CheckCircle2, Clock, Trash2 } from 'lucide-react';
+import { useAuth } from '../../hooks/useAuth';
+import { useNavigate } from 'react-router-dom';
+import { Mail, User, Users, Shield, UserPlus, XCircle, CheckCircle2, Clock, Trash2, Edit } from 'lucide-react';
 
 const ManageTeam = () => {
   const { leads, inviteLead, revokeLead } = useTeam();
+  const { isSuperAdmin } = useAuth();
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({ name: '', role: '', email: '' });
   const [isSending, setIsSending] = useState(false);
+
+  useEffect(() => {
+    if (isSuperAdmin === false) {
+      navigate('/admin/dashboard');
+    }
+  }, [isSuperAdmin, navigate]);
 
   const handleInputChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -151,17 +161,26 @@ const ManageTeam = () => {
                       )}
                     </div>
                     
-                    {/* The Kill Switch */}
-                    <button 
-                      onClick={() => {
-                        if(window.confirm(`Are you sure you want to permanently revoke access for ${lead.name}?`)) {
-                          revokeLead(lead.id);
-                        }
-                      }} 
-                      className="flex items-center gap-1 bg-rose-900/10 text-rose-500 px-3 py-1.5 rounded-lg text-xs font-bold border border-rose-900/30 hover:bg-rose-600 hover:text-white transition-all opacity-0 group-hover:opacity-100"
-                    >
-                      <Trash2 className="w-3.5 h-3.5" /> Revoke
-                    </button>
+                    {/* Actions */}
+                    <div className="flex gap-2 opacity-0 group-hover:opacity-100 transition-all">
+                      <button 
+                        onClick={() => navigate(`/admin/dashboard/profile?id=${lead.id}`)} 
+                        className="flex items-center gap-1 bg-blue-900/10 text-blue-400 px-3 py-1.5 rounded-lg text-xs font-bold border border-blue-900/30 hover:bg-blue-600 hover:text-white transition-all"
+                      >
+                        <Edit className="w-3.5 h-3.5" /> Edit
+                      </button>
+                      
+                      <button 
+                        onClick={() => {
+                          if(window.confirm(`Are you sure you want to permanently revoke access for ${lead.name}?`)) {
+                            revokeLead(lead.id);
+                          }
+                        }} 
+                        className="flex items-center gap-1 bg-rose-900/10 text-rose-500 px-3 py-1.5 rounded-lg text-xs font-bold border border-rose-900/30 hover:bg-rose-600 hover:text-white transition-all"
+                      >
+                        <Trash2 className="w-3.5 h-3.5" /> Revoke
+                      </button>
+                    </div>
                   </div>
                 </div>
               ))
