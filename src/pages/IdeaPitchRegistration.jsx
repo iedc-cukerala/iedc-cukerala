@@ -47,7 +47,6 @@ const IdeaPitchRegistration = () => {
         member1Department: '',
         member1Course: '',
         member1Semester: '',
-        member1Year: '',
         member1RegNo: '',
         member1Email: '',
         member1Phone: '',
@@ -56,7 +55,6 @@ const IdeaPitchRegistration = () => {
         member2Department: '',
         member2Course: '',
         member2Semester: '',
-        member2Year: '',
         member2RegNo: '',
         member2Email: '',
         member2Phone: ''
@@ -71,6 +69,17 @@ const IdeaPitchRegistration = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+
+        if (!formData.member1Email.endsWith('@cukerala.ac.in')) {
+            alert("Team Leader's email must be a valid @cukerala.ac.in address.");
+            return;
+        }
+
+        if (hasSecondMember && !formData.member2Email.endsWith('@cukerala.ac.in')) {
+            alert("Second Member's email must be a valid @cukerala.ac.in address.");
+            return;
+        }
+
         setIsSubmitting(true);
         try {
             await addDoc(collection(db, 'ideapitch_registrations'), {
@@ -242,7 +251,7 @@ const IdeaPitchRegistration = () => {
                                     <FormField label="Full Name" value={formData.member1Name} onChange={e => updateField('member1Name', e.target.value)} required placeholder="John Doe" />
                                     
                                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                        <FormField type="email" label="Email Address" value={formData.member1Email} onChange={e => updateField('member1Email', e.target.value)} required placeholder="john@example.com" />
+                                        <FormField type="email" label="Email Address" value={formData.member1Email} onChange={e => updateField('member1Email', e.target.value)} required placeholder="name@cukerala.ac.in" />
                                         <FormField type="tel" label="Phone Number" value={formData.member1Phone} onChange={e => updateField('member1Phone', e.target.value)} required placeholder="+91 9876543210" />
                                     </div>
                                     
@@ -251,9 +260,8 @@ const IdeaPitchRegistration = () => {
                                         <FormField label="Course" value={formData.member1Course} onChange={e => updateField('member1Course', e.target.value)} required placeholder="B.Tech / MSc" />
                                     </div>
 
-                                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                         <FormField label="Semester" value={formData.member1Semester} onChange={e => updateField('member1Semester', e.target.value)} required placeholder="S4" />
-                                        <FormField label="Year" value={formData.member1Year} onChange={e => updateField('member1Year', e.target.value)} required placeholder="2nd Year" />
                                         <FormField label="Registration No" value={formData.member1RegNo} onChange={e => updateField('member1RegNo', e.target.value)} required placeholder="CUK12345" />
                                     </div>
 
@@ -286,7 +294,7 @@ const IdeaPitchRegistration = () => {
                                     <FormField label="Full Name" value={formData.member2Name} onChange={e => updateField('member2Name', e.target.value)} required={hasSecondMember} placeholder="Jane Smith" />
                                     
                                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                        <FormField type="email" label="Email Address" value={formData.member2Email} onChange={e => updateField('member2Email', e.target.value)} required={hasSecondMember} placeholder="jane@example.com" />
+                                        <FormField type="email" label="Email Address" value={formData.member2Email} onChange={e => updateField('member2Email', e.target.value)} required={hasSecondMember} placeholder="name@cukerala.ac.in" />
                                         <FormField type="tel" label="Phone Number" value={formData.member2Phone} onChange={e => updateField('member2Phone', e.target.value)} required={hasSecondMember} placeholder="+91 9876543210" />
                                     </div>
                                     
@@ -295,9 +303,8 @@ const IdeaPitchRegistration = () => {
                                         <FormField label="Course" value={formData.member2Course} onChange={e => updateField('member2Course', e.target.value)} required={hasSecondMember} placeholder="B.Tech / MSc" />
                                     </div>
 
-                                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                         <FormField label="Semester" value={formData.member2Semester} onChange={e => updateField('member2Semester', e.target.value)} required={hasSecondMember} placeholder="S4" />
-                                        <FormField label="Year" value={formData.member2Year} onChange={e => updateField('member2Year', e.target.value)} required={hasSecondMember} placeholder="2nd Year" />
                                         <FormField label="Registration No" value={formData.member2RegNo} onChange={e => updateField('member2RegNo', e.target.value)} required={hasSecondMember} placeholder="CUK12346" />
                                     </div>
 
@@ -372,6 +379,24 @@ const IdeaPitchRegistration = () => {
                         </AnimatePresence>
                     </form>
                 </div>
+            </div>
+
+            {/* Developer Footer */}
+            <div className="mt-auto pt-16 pb-8 flex flex-col items-center justify-center relative z-10 w-full">
+                <p className="text-slate-500 text-sm text-center">
+                    &copy; {new Date().getFullYear()} IEDC Central University of Kerala. All Rights Reserved.
+                </p>
+                <p className="text-slate-500 text-sm text-center mt-2">
+                    Developed by{' '}
+                    <a 
+                        href="https://www.linkedin.com/in/tathagata-mandal-453863225/" 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        className="text-pink-400 font-semibold hover:text-pink-300 transition outline-none focus:outline-none"
+                    >
+                        Tathagata Mandal
+                    </a>
+                </p>
             </div>
         </div>
     );
