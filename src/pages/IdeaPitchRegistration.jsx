@@ -5,7 +5,7 @@ import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
 import { ArrowRight, ArrowLeft, CheckCircle, Lightbulb, Users, FileText, Send, UserPlus, UserMinus } from 'lucide-react';
 import Footer from '../components/Footer';
 
-const FormField = ({ label, type = "text", value, onChange, required, placeholder, multiline = false }) => (
+const FormField = ({ label, type = "text", value, onChange, required, placeholder, multiline = false, errorText }) => (
     <div className="mb-4">
         <label className="block text-sm font-medium text-slate-300 mb-1">
             {label} {required && <span className="text-pink-500">*</span>}
@@ -26,9 +26,10 @@ const FormField = ({ label, type = "text", value, onChange, required, placeholde
                 value={value}
                 onChange={onChange}
                 placeholder={placeholder}
-                className="w-full bg-slate-900/50 border border-slate-700/50 rounded-xl px-4 py-3 text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-purple-500 transition-all"
+                className={`w-full bg-slate-900/50 border rounded-xl px-4 py-3 text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-purple-500 transition-all ${errorText ? 'border-red-500' : 'border-slate-700/50'}`}
             />
         )}
+        {errorText && <p className="text-red-400 text-xs mt-1">{errorText}</p>}
     </div>
 );
 
@@ -277,7 +278,15 @@ const IdeaPitchRegistration = () => {
                                         <FormField label="Full Name" value={member.name} onChange={e => updateMemberField(idx, 'name', e.target.value)} required placeholder="John Doe" />
                                         
                                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                            <FormField type="email" label="Email Address" value={member.email} onChange={e => updateMemberField(idx, 'email', e.target.value)} required placeholder="name@cukerala.ac.in" />
+                                            <FormField 
+                                                type="email" 
+                                                label="Official Email Address" 
+                                                value={member.email} 
+                                                onChange={e => updateMemberField(idx, 'email', e.target.value)} 
+                                                required 
+                                                placeholder="name@cukerala.ac.in"
+                                                errorText={member.email && !member.email.endsWith('@cukerala.ac.in') ? "Please put official @cukerala.ac.in mail" : ""}
+                                            />
                                             <FormField type="tel" label="Phone Number" value={member.phone} onChange={e => updateMemberField(idx, 'phone', e.target.value)} required placeholder="+91 9876543210" />
                                         </div>
                                         
