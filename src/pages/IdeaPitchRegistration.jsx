@@ -59,28 +59,21 @@ const IdeaPitchRegistration = () => {
         });
     };
 
-    const addMember = () => {
-        if (formData.members.length < 4) {
-            setFormData(prev => ({
-                ...prev,
-                members: [
-                    ...prev.members,
-                    { name: '', department: '', course: '', semester: '', regNo: '', email: '', phone: '' }
-                ]
-            }));
-            // Immediately jump to the new member step
-            setStep(prev => prev + 1);
-        }
-    };
-
-    const removeMember = (indexToRemove) => {
-        if (formData.members.length > 2) {
-            setFormData(prev => ({
-                ...prev,
-                members: prev.members.filter((_, idx) => idx !== indexToRemove)
-            }));
-            setStep(prev => prev - 1);
-        }
+    const handleTeamSizeChange = (e) => {
+        const size = parseInt(e.target.value, 10);
+        setFormData(prev => {
+            let newMembers = [...prev.members];
+            if (size > newMembers.length) {
+                // Add missing members
+                while (newMembers.length < size) {
+                    newMembers.push({ name: '', department: '', course: '', semester: '', regNo: '', email: '', phone: '' });
+                }
+            } else if (size < newMembers.length) {
+                // Remove extra members
+                newMembers = newMembers.slice(0, size);
+            }
+            return { ...prev, members: newMembers };
+        });
     };
 
     const nextStep = () => setStep(prev => prev + 1);
@@ -239,6 +232,21 @@ const IdeaPitchRegistration = () => {
                                     <FormField label="Idea Title" value={formData.ideaTitle} onChange={e => updateIdeaField('ideaTitle', e.target.value)} required placeholder="Smart IoT Solution" />
                                     <FormField label="Brief Description of Idea" value={formData.ideaDescription} onChange={e => updateIdeaField('ideaDescription', e.target.value)} required multiline placeholder="Describe the problem and your solution..." />
                                     
+                                    <div className="mb-4">
+                                        <label className="block text-sm font-medium text-slate-300 mb-1">
+                                            Team Size <span className="text-pink-500">*</span>
+                                        </label>
+                                        <select
+                                            value={formData.members.length}
+                                            onChange={handleTeamSizeChange}
+                                            className="w-full bg-slate-900/50 border border-slate-700/50 rounded-xl px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-purple-500 transition-all appearance-none"
+                                        >
+                                            <option value={2}>2 Members</option>
+                                            <option value={3}>3 Members</option>
+                                            <option value={4}>4 Members</option>
+                                        </select>
+                                    </div>
+                                    
                                     <div className="mt-8 flex justify-end">
                                         <button type="submit" className="flex items-center gap-2 bg-gradient-to-r from-purple-500 to-pink-500 text-white px-6 py-3 rounded-xl font-semibold hover:opacity-90 transition-opacity">
                                             Next: Team Leader <ArrowRight size={20} />
@@ -264,11 +272,6 @@ const IdeaPitchRegistration = () => {
                                                 <Users className={idx === 0 ? "text-purple-400" : "text-pink-400"} /> 
                                                 {idx === 0 ? "Team Leader" : `Member ${idx + 1}`}
                                             </div>
-                                            {idx > 1 && (
-                                                <button type="button" onClick={() => removeMember(idx)} className="text-red-400 hover:text-red-300 text-sm flex items-center gap-1 transition-colors">
-                                                    <UserMinus size={16} /> Remove
-                                                </button>
-                                            )}
                                         </h3>
                                         
                                         <FormField label="Full Name" value={member.name} onChange={e => updateMemberField(idx, 'name', e.target.value)} required placeholder="John Doe" />
@@ -294,13 +297,6 @@ const IdeaPitchRegistration = () => {
                                             </button>
                                             
                                             <div className="flex flex-col md:flex-row gap-4 w-full md:w-auto">
-                                                {/* If this is the last member being viewed, and we haven't reached 4 members yet */}
-                                                {idx === formData.members.length - 1 && formData.members.length < 4 && (
-                                                    <button type="button" onClick={addMember} className="flex items-center justify-center gap-2 border border-purple-500 text-purple-400 px-6 py-3 rounded-xl font-semibold hover:bg-purple-500/10 transition-colors">
-                                                        <UserPlus size={20} /> Add Member {idx + 2}
-                                                    </button>
-                                                )}
-                                                
                                                 <button type="submit" className="flex items-center justify-center gap-2 bg-gradient-to-r from-purple-500 to-pink-500 text-white px-6 py-3 rounded-xl font-semibold hover:opacity-90 transition-opacity">
                                                     {idx === formData.members.length - 1 ? 'Review Details' : `Next Member`} <ArrowRight size={20} />
                                                 </button>
