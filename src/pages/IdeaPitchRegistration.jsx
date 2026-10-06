@@ -371,6 +371,9 @@ const IdeaPitchRegistration = () => {
 
             {/* Developer Footer */}
             <div className="mt-auto pt-8 pb-8 flex flex-col items-center justify-center relative z-10 w-full">
+                <p className="text-slate-400 text-sm text-center mb-4">
+                    For any further queries or contact, mail to <a href="mailto:iedctech@cukerala.ac.in" className="text-purple-400 hover:text-purple-300 underline underline-offset-2">iedctech@cukerala.ac.in</a>
+                </p>
                 <p className="text-slate-500 text-sm text-center">
                     &copy; {new Date().getFullYear()} IEDC Central University of Kerala. All Rights Reserved.
                 </p>
