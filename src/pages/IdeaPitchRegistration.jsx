@@ -226,12 +226,17 @@ const IdeaPitchRegistration = () => {
                                     exit="exit"
                                     transition={{ type: "tween", duration: 0.3 }}
                                 >
-                                    <h3 className="text-2xl font-bold text-white mb-6 flex items-center gap-3">
-                                        <Lightbulb className="text-purple-400" /> Project Details
-                                    </h3>
+                                    <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-6 gap-2">
+                                        <h3 className="text-2xl font-bold text-white flex items-center gap-3">
+                                            <Lightbulb className="text-purple-400" /> Project Details
+                                        </h3>
+                                        <span className="text-xs text-slate-400 bg-slate-800/80 border border-slate-700/60 px-3 py-1 rounded-full w-fit">
+                                            Fields marked with <span className="text-pink-500 font-bold">*</span> are mandatory
+                                        </span>
+                                    </div>
                                     <FormField label="Team Name" value={formData.teamName} onChange={e => updateIdeaField('teamName', e.target.value)} required placeholder="Awesome Innovators" />
-                                    <FormField label="Idea Title" value={formData.ideaTitle} onChange={e => updateIdeaField('ideaTitle', e.target.value)} required placeholder="Smart IoT Solution" />
-                                    <FormField label="Brief Description of Idea" value={formData.ideaDescription} onChange={e => updateIdeaField('ideaDescription', e.target.value)} required multiline placeholder="Describe the problem and your solution..." />
+                                    <FormField label="Idea Title (Optional)" value={formData.ideaTitle} onChange={e => updateIdeaField('ideaTitle', e.target.value)} placeholder="Smart IoT Solution (Optional)" />
+                                    <FormField label="Brief Description of Idea (Optional)" value={formData.ideaDescription} onChange={e => updateIdeaField('ideaDescription', e.target.value)} multiline placeholder="Describe the problem and your solution (Optional)..." />
                                     
                                     <div className="mb-4">
                                         <label className="block text-sm font-medium text-slate-300 mb-1">
@@ -268,12 +273,15 @@ const IdeaPitchRegistration = () => {
                                         exit="exit"
                                         transition={{ type: "tween", duration: 0.3 }}
                                     >
-                                        <h3 className="text-2xl font-bold text-white mb-6 flex items-center justify-between">
-                                            <div className="flex items-center gap-3">
+                                        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-6 gap-2">
+                                            <h3 className="text-2xl font-bold text-white flex items-center gap-3">
                                                 <Users className={idx === 0 ? "text-purple-400" : "text-pink-400"} /> 
                                                 {idx === 0 ? "Team Leader" : `Member ${idx + 1}`}
-                                            </div>
-                                        </h3>
+                                            </h3>
+                                            <span className="text-xs text-slate-400 bg-slate-800/80 border border-slate-700/60 px-3 py-1 rounded-full w-fit">
+                                                Fields marked with <span className="text-pink-500 font-bold">*</span> are mandatory
+                                            </span>
+                                        </div>
                                         
                                         <FormField label="Full Name" value={member.name} onChange={e => updateMemberField(idx, 'name', e.target.value)} required placeholder="John Doe" />
                                         
@@ -334,8 +342,8 @@ const IdeaPitchRegistration = () => {
                                         <div className="bg-slate-800/40 p-4 rounded-xl border border-slate-700/50">
                                             <h4 className="text-purple-400 font-semibold mb-2 uppercase text-xs tracking-wider">Project Idea</h4>
                                             <p><span className="text-slate-400">Team Name:</span> <span className="font-medium text-white">{formData.teamName}</span></p>
-                                            <p><span className="text-slate-400">Title:</span> <span className="font-medium text-white">{formData.ideaTitle}</span></p>
-                                            <p className="mt-2 text-slate-300 whitespace-pre-wrap">{formData.ideaDescription}</p>
+                                            <p><span className="text-slate-400">Title:</span> <span className="font-medium text-white">{formData.ideaTitle || <span className="text-slate-500 italic">Not specified</span>}</span></p>
+                                            <p className="mt-2 text-slate-300 whitespace-pre-wrap">{formData.ideaDescription || <span className="text-slate-500 italic">No description provided.</span>}</p>
                                         </div>
 
                                         {formData.members.map((member, idx) => (
